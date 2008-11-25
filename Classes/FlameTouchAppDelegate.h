@@ -16,11 +16,9 @@
     
     NSNetServiceBrowser *metaBrowser;
     NSMutableArray *serviceBrowsers;
-    NSMutableArray *services;
     NSMutableArray *hosts;
 }
 
-- (NSMutableArray*)services;
 - (NSMutableArray*)hosts;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

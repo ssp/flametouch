@@ -16,8 +16,9 @@
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-	
-    services = [[NSMutableArray alloc] initWithCapacity: 100];
+
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     serviceBrowsers = [[NSMutableArray alloc] initWithCapacity: 20];
     hosts = [[NSMutableArray alloc] initWithCapacity: 20];
     
@@ -29,10 +30,6 @@
 	// Configure and show the window
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
-}
-
-- (NSMutableArray*)services {
-    return services;
 }
 
 - (NSMutableArray*)hosts {
@@ -55,22 +52,25 @@
         else
             fullType = [NSString stringWithFormat:@"%@._udp", [service name] ];
 
+        // Create a new NSNetService browser looking for services of this type,
+        // and start it looking. We'll have quite a lot of browsers running at
+        // once by the end of this.
         NSLog(@"Found new service type %@", fullType);
-
         NSNetServiceBrowser *browser = [[NSNetServiceBrowser alloc] init];
         [browser setDelegate:self];
         [browser searchForServicesOfType:fullType inDomain:@""];
-        [serviceBrowsers addObject:[browser autorelease]];
+        [serviceBrowsers addObject:browser];
+        [browser release];
         
     } else {
+        // This case is coming from one of the browsers created in the other
+        // branch of the conditional, and represents an actual service running
+        // somewhere. Tell the service to resolve itself, we'll display it in
+        // the resolver callback.
         NSLog(@"Found new service %@ :: %@", [service type], [service name]);
+        [service retain];
         [service setDelegate: self];
         [service resolve];
-        [services addObject:service];
-    }
-    if (!moreServicesComing) {
-        // we're done with this batch, signal the front end that it should update
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:nil];
     }
 }
 
@@ -78,23 +78,27 @@
     NSLog(@"removed service %@", netService);
 }
 
-- (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)netServiceBrowser {
-}
-
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
     NSLog(@"Resolved service %@ as %@", service, [service hostName] );
+    NSLog(@"hosts is %@", hosts);
+    Host *thehost = nil;
     for (Host* host in hosts) {
         if ( [[host hostname] isEqualToString:[service hostName]] ) {
             NSLog(@"Found existing host %@", host);
-            [ host addService:service ];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
-            return;
+            thehost = host;
         }
     }
-    Host *host = [[Host alloc] initWithHostname:[service hostName]];
-    NSLog(@"New host %@ created", host);
-    [host addService:service];
-    [hosts addObject: host];
+    if (thehost == nil) {
+        NSLog(@"Creating new host");
+        thehost = [[Host alloc] initWithHostname:[service hostName]];
+        [hosts addObject: thehost];
+        [thehost release];
+        NSLog(@"New host %@ created", thehost);
+    }
+    NSLog(@"Got host object %@", thehost);
+
+    [thehost addService:service];
+    [service release]; // we retained this before resolving it
     [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
 }
 
