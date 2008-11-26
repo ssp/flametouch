@@ -46,13 +46,30 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)] autorelease];
+        label.font = [UIFont systemFontOfSize:16.0];
+        label.textAlignment = UITextAlignmentLeft;
+        label.textColor = [UIColor blackColor];
+        label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+        label.tag = 1;
+        [cell.contentView addSubview:label];
+        
+        label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 20.0)] autorelease];
+        label.font = [UIFont systemFontOfSize:12.0];
+        label.textAlignment = UITextAlignmentLeft;
+        label.textColor = [UIColor grayColor];
+        label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+        label.tag = 2;
+        [cell.contentView addSubview:label];
+        
     }
     
     FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSMutableArray *hosts = [delegate hosts];
     Host *host = (Host*)[hosts objectAtIndex:indexPath.row];
-    // Set up the cell...
-    cell.text = [host name];
+    ((UILabel*)[cell viewWithTag:1]).text = [host name];
+    ((UILabel*)[cell viewWithTag:2]).text = [host hostname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

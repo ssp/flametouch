@@ -10,8 +10,8 @@
 #import "Host.h"
 
 @interface ServiceViewController : UITableViewController {
-
     Host *host;
+    NSDictionary *serviceNames;
 }
 
 - (id)initWithHost:(Host*)thehost;
