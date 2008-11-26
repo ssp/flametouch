@@ -24,5 +24,6 @@
 -(BOOL)hasService:(NSNetService*)service;
 -(void)removeService:(NSNetService*)service;
 -(int)serviceCount;
+-(int)sortByName:(Host*)host;
 
 @end

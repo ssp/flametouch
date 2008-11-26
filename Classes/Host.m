@@ -56,6 +56,10 @@
     [services removeObject:service];
 }
 
+-(int)sortByName:(Host*)host {
+    return [[self name] localizedCaseInsensitiveCompare:[host name]];
+}
+
 -(void)dealloc {
     [hostname release];
     [super dealloc];
