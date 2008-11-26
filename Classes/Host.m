@@ -24,6 +24,10 @@
     return hostname;
 }
 
+-(NSMutableArray*)services {
+    return services;
+}
+
 -(int)serviceCount {
     return [services count];
 }
@@ -32,16 +36,24 @@
     return hostname;
     if ( [services count] > 0 )
         return [[self serviceAtIndex:0] name];
-    return @"NO SERVICES (can't happen)";
+    return @"NO SERVICES"; // can't happen
 }
 
 -(NSNetService*)serviceAtIndex:(int)i {
     return (NSNetService*)[services objectAtIndex:i];
 }
 
+-(BOOL)hasService:(NSNetService*)service {
+    return [services containsObject:service];
+}
+
 -(void)addService:(NSNetService*)service {
     [services addObject:service];
 }
-    
+
+-(void)removeService:(NSNetService*)service {
+    NSLog(@"removing %@ from %@", service, services);
+    [services removeObject:service];
+}
 
 @end

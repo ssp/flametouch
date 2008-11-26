@@ -74,13 +74,20 @@
     }
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
-    NSLog(@"removed service %@", netService);
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreServicesComing {
+    for (Host* host in hosts) {
+        if ([host hasService: service]) {
+            NSLog(@"Host %@ has removed service %@", host, service);
+            [host removeService:service];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+            return;
+        }
+    }
+    NSLog(@"Ungrouped service %@ removed!", service);
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
     NSLog(@"Resolved service %@ as %@", service, [service hostName] );
-    NSLog(@"hosts is %@", hosts);
     Host *thehost = nil;
     for (Host* host in hosts) {
         if ( [[host hostname] isEqualToString:[service hostName]] ) {
@@ -89,13 +96,11 @@
         }
     }
     if (thehost == nil) {
-        NSLog(@"Creating new host");
         thehost = [[Host alloc] initWithHostname:[service hostName]];
         [hosts addObject: thehost];
         [thehost release];
         NSLog(@"New host %@ created", thehost);
     }
-    NSLog(@"Got host object %@", thehost);
 
     [thehost addService:service];
     [service release]; // we retained this before resolving it
