@@ -11,19 +11,20 @@
 
 @interface Host : NSObject {
     NSString *hostname;
+    NSString *ip;
     NSMutableArray *services;
 
 }
 
--(id)initWithHostname:(NSString*)hn;
-
+-(id)initWithHostname:(NSString*)hn ipAddress:(NSString*)ipAddress;
 -(NSString*)hostname;
+-(NSString*)ip;
 -(NSString*)name;
 -(NSNetService*)serviceAtIndex:(int)i;
 -(void)addService:(NSNetService*)service;
 -(BOOL)hasService:(NSNetService*)service;
 -(void)removeService:(NSNetService*)service;
 -(int)serviceCount;
--(int)sortByName:(Host*)host;
+-(int)compareByName:(Host*)host;
 
 @end

@@ -96,7 +96,7 @@
         }
     }
     if (thehost == nil) {
-        thehost = [[Host alloc] initWithHostname:[service hostName]];
+        thehost = [[Host alloc] initWithHostname:[service hostName] ipAddress:@"0.0.0.0"];
         [hosts addObject: thehost];
         [hosts sortUsingSelector:@selector(compareByName:)];
         [thehost release];

@@ -50,6 +50,30 @@
         ];
     
     host = thehost;
+
+    self.tableView.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 64.0)] autorelease];
+
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)] autorelease];
+    label.font = [UIFont systemFontOfSize:16.0];
+    label.textAlignment = UITextAlignmentLeft;
+    label.textColor = [UIColor blackColor];
+    label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    label.text = [host name];
+    [self.tableView.tableHeaderView addSubview:label];
+    
+    label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 40.0)] autorelease];
+    label.font = [UIFont systemFontOfSize:12.0];
+    label.textAlignment = UITextAlignmentLeft;
+    label.textColor = [UIColor grayColor];
+    label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    label.numberOfLines = 2;
+    label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", [host hostname], [host ip], [host serviceCount]];
+    [self.tableView.tableHeaderView addSubview:label];
+    
+    UIView *line = [[[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height - 1, 600, 1)] autorelease];
+    line.backgroundColor = [UIColor grayColor];
+    [self.tableView.tableHeaderView addSubview:line];
+    
     self.tableView.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
     self.title = [host name];
@@ -95,12 +119,12 @@
     
     NSNetService *service = [host serviceAtIndex:indexPath.row];
     // Set up the cell...
-    ((UILabel*)[cell viewWithTag:1]).text = [service name];
     NSString *text = [serviceNames objectForKey:[service type]];
     if (text == nil)
-        ((UILabel*)[cell viewWithTag:2]).text = [service type];
+        ((UILabel*)[cell viewWithTag:1]).text = [service type];
     else
-        ((UILabel*)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ (%@)", text, [service type]];
+        ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@)", text, [service type]];
+    ((UILabel*)[cell viewWithTag:2]).text = [service name];
 
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

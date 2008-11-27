@@ -10,11 +10,11 @@
 
 @implementation NSNetService (MySortingMethods)
 
--(int)sortByPriorityOrder:(NSNetService*)service {
+-(int)compareByPriority:(NSNetService*)service {
     
     // should not be here.
     NSArray *serviceOrder = [[[NSArray alloc]initWithObjects:
-                              @"_presence._tcp.", // ichat 1
+                              @"_presence._tcp.", // ichat 2
                               @"_ichat._tcp.", 
                               @"_ssh._tcp.", 
                               @"_sftp._tcp.", 

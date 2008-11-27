@@ -11,10 +11,11 @@
 
 @implementation Host
 
--(id)initWithHostname:(NSString*)hn {
+-(id)initWithHostname:(NSString*)hn ipAddress:(NSString*)ipAddress {
     if ([super init] == nil) return nil;
     
     hostname = [hn retain];
+    ip = [ipAddress retain];
     services = [[NSMutableArray alloc] initWithCapacity:10];
 
     return self;
@@ -23,6 +24,11 @@
 -(NSString*)hostname {
     return hostname;
 }
+
+-(NSString*)ip {
+    return ip;
+}
+
 
 -(NSMutableArray*)services {
     return services;
