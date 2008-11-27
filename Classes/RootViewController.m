@@ -69,7 +69,7 @@
     NSMutableArray *hosts = [delegate hosts];
     Host *host = (Host*)[hosts objectAtIndex:indexPath.row];
     ((UILabel*)[cell viewWithTag:1]).text = [host name];
-    ((UILabel*)[cell viewWithTag:2]).text = [host hostname];
+    ((UILabel*)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ (%@)", [host hostname], [host ip]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

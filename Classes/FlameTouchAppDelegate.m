@@ -9,6 +9,11 @@
 #import "FlameTouchAppDelegate.h"
 #import "RootViewController.h"
 
+// socket resolving/nasty C-level things
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+
 @implementation FlameTouchAppDelegate
 
 @synthesize window;
@@ -55,7 +60,6 @@
         // Create a new NSNetService browser looking for services of this type,
         // and start it looking. We'll have quite a lot of browsers running at
         // once by the end of this.
-        NSLog(@"Found new service type %@", fullType);
         NSNetServiceBrowser *browser = [[NSNetServiceBrowser alloc] init];
         [browser setDelegate:self];
         [browser searchForServicesOfType:fullType inDomain:@""];
@@ -67,7 +71,6 @@
         // branch of the conditional, and represents an actual service running
         // somewhere. Tell the service to resolve itself, we'll display it in
         // the resolver callback.
-        NSLog(@"Found new service %@ :: %@", [service type], [service name]);
         [service retain];
         [service setDelegate: self];
         [service resolve];
@@ -77,8 +80,11 @@
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreServicesComing {
     for (Host* host in hosts) {
         if ([host hasService: service]) {
-            NSLog(@"Host %@ has removed service %@", host, service);
             [host removeService:service];
+            if ([host serviceCount] == 0) {
+                NSLog(@"No services remaining on host, removing");
+                [hosts removeObject:host];
+            }
             [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
             return;
         }
@@ -87,20 +93,20 @@
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
-    NSLog(@"Resolved service %@ as %@", service, [service hostName] );
     Host *thehost = nil;
+    struct sockaddr_in* sock = (struct sockaddr_in*)[((NSData*)[[service addresses] objectAtIndex:0]) bytes];
+    NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
+    
     for (Host* host in hosts) {
         if ( [[host hostname] isEqualToString:[service hostName]] ) {
-            NSLog(@"Found existing host %@", host);
             thehost = host;
         }
     }
     if (thehost == nil) {
-        thehost = [[Host alloc] initWithHostname:[service hostName] ipAddress:@"0.0.0.0"];
+        thehost = [[Host alloc] initWithHostname:[service hostName] ipAddress:ip];
         [hosts addObject: thehost];
         [hosts sortUsingSelector:@selector(compareByName:)];
         [thehost release];
-        NSLog(@"New host %@ created", thehost);
     }
 
     [thehost addService:service];

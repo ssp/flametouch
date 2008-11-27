@@ -118,32 +118,14 @@
     }
     
     NSNetService *service = [host serviceAtIndex:indexPath.row];
-    // Set up the cell...
     NSString *text = [serviceNames objectForKey:[service type]];
     if (text == nil)
-        ((UILabel*)[cell viewWithTag:1]).text = [service type];
+        ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@:%i", [service type], [service port]];
     else
-        ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@)", text, [service type]];
+        ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@:%i)", text, [service type], [service port]];
     ((UILabel*)[cell viewWithTag:2]).text = [service name];
-
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
-
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   NSNetService *service = [host serviceAtIndex:indexPath.row];
-
-   // Navigation logic may go here. Create and push another view controller.
-    FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSMutableArray *hosts = [delegate hosts];
-    Host *host = (Host*)[hosts objectAtIndex:indexPath.row];
-    
-    ServiceViewController *svc = [[ServiceViewController alloc] initWithHost:host];
-	[self.navigationController pushViewController:svc animated:TRUE];
-	[svc release];
-}
-*/
 
 - (void)dealloc {
     [serviceNames release];
