@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSNetService (Sortable)
--(int)sortByPriorityOrder:(NSNetService*)service;
+-(int)compareByPriority:(NSNetService*)service;
 @end

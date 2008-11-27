@@ -98,7 +98,7 @@
     if (thehost == nil) {
         thehost = [[Host alloc] initWithHostname:[service hostName]];
         [hosts addObject: thehost];
-        [hosts sortUsingSelector:@selector(sortByName:)];
+        [hosts sortUsingSelector:@selector(compareByName:)];
         [thehost release];
         NSLog(@"New host %@ created", thehost);
     }

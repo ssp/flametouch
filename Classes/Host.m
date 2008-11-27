@@ -7,7 +7,7 @@
 //
 
 #import "Host.h"
-
+#import "NSNetService+Sortable.h"
 
 @implementation Host
 
@@ -48,7 +48,7 @@
 
 -(void)addService:(NSNetService*)service {
     [services addObject:service];
-    [services sortUsingSelector:@selector(sortByPriorityOrder:)];
+    [services sortUsingSelector:@selector(compareByPriority:)];
 }
 
 -(void)removeService:(NSNetService*)service {
@@ -56,7 +56,7 @@
     [services removeObject:service];
 }
 
--(int)sortByName:(Host*)host {
+-(int)compareByName:(Host*)host {
     return [[self name] localizedCaseInsensitiveCompare:[host name]];
 }
 
