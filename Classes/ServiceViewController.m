@@ -49,7 +49,7 @@
         nil
         ];
     
-    host = thehost;
+    host = [thehost retain];
 
     self.tableView.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 64.0)] autorelease];
 
@@ -67,6 +67,8 @@
     label.textColor = [UIColor grayColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     label.numberOfLines = 2;
+    
+    // TODO - don't hard-code the service count here, it can change dynamically.
     label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", [host hostname], [host ip], [host serviceCount]];
     [self.tableView.tableHeaderView addSubview:label];
     
@@ -129,6 +131,7 @@
 
 - (void)dealloc {
     [serviceNames release];
+    [host release];
     [super dealloc];
 }
 
