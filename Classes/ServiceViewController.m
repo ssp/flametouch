@@ -46,6 +46,7 @@
         @"Xgrid distributed computing", @"_beep._tcp.", 
         @"NetNewsWire shared feed list", @"_feed-sharing._tcp.", 
         @"Airport Express printer sharing", @"_riousbprint._tcp.", 
+        @"Safari Web page", @"_webbookmark._tcp.",
         nil
         ];
     
@@ -121,12 +122,29 @@
     
     NSNetService *service = [host serviceAtIndex:indexPath.row];
     NSString *text = [serviceNames objectForKey:[service type]];
-    if (text == nil)
+    if (text == nil) {
         ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@:%i", [service type], [service port]];
-    else
+    } else {
         ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@:%i)", text, [service type], [service port]];
+    }
     ((UILabel*)[cell viewWithTag:2]).text = [service name];
+
+    NSURL *anURL = [NSURL URLWithString:[service name]];
+    if (anURL && [service name]) {
+        if ([[service name] rangeOfString:@":"].location != NSNotFound) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+    }
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UILabel * URLLabel = (UILabel*)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:2];
+    if (URLLabel.text != nil) {
+        NSURL *theURL = [NSURL URLWithString:URLLabel.text];
+        [[UIApplication sharedApplication] openURL:theURL];
+    }	
 }
 
 - (void)dealloc {

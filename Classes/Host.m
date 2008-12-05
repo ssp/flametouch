@@ -39,6 +39,7 @@
 }
 
 -(NSString*)name {
+    // TODO - strip everything after the last apostrophe to get username
     if ( [services count] > 0 )
         return [[self serviceAtIndex:0] name];
     return hostname;
