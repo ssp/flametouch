@@ -136,22 +136,37 @@
   }
   ((UILabel*)[cell viewWithTag:2]).text = [service name];
   
-  NSURL *anURL = [NSURL URLWithString:[service name]];
-  if (anURL && [service name]) {
-    if ([[service name] rangeOfString:@":"].location != NSNotFound) {
-      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+  if ([self urlForService:service]) {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   
   return cell;
 }
 
+-(NSURL*)urlForService:(NSNetService*)service {
+  NSLog(@"service type is %@", [service type]);
+  
+  if ( [[service type] isEqualToString:@"xxx"] ) { // TODO - sven's thing
+    return [NSURL URLWithString:[service name]];
+
+  } else if ( [[service type] isEqualToString:@"_http._tcp."] ) {
+    NSString *url;
+    if ([service port] == 80) {
+      url = [NSString stringWithFormat:@"http://%@/", host.ip];
+    } else {
+      url = [NSString stringWithFormat:@"http://%@:%i/", host.ip, [service port]];
+    }
+    return [NSURL URLWithString:url];
+  }
+  return nil;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  UILabel * URLLabel = (UILabel*)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:2];
-  if (URLLabel.text != nil) {
-    NSURL *theURL = [NSURL URLWithString:URLLabel.text];
-    [[UIApplication sharedApplication] openURL:theURL];
-  }	
+  NSNetService *service = [host serviceAtIndex:indexPath.row];
+  NSURL *url = [self urlForService:service];
+  if (url) {
+    [[UIApplication sharedApplication] openURL:url];
+  }
 }
 
 - (void)dealloc {

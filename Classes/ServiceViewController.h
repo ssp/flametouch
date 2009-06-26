@@ -15,5 +15,6 @@
 }
 
 - (id)initWithHost:(Host*)thehost;
+- (NSURL*)urlForService:(NSNetService*)service;
 
 @end
