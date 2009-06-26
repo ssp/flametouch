@@ -52,35 +52,40 @@
     
     host = [thehost retain];
 
-    self.tableView.tableHeaderView = [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 64.0)] autorelease];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 64.0)];
 
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)];
     label.font = [UIFont systemFontOfSize:16.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     label.text = [host name];
-    [self.tableView.tableHeaderView addSubview:label];
+    [header addSubview:label];
+    [label release];
     
-    label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 40.0)] autorelease];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 40.0)];
     label.font = [UIFont systemFontOfSize:12.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor grayColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     label.numberOfLines = 2;
-    
     // TODO - don't hard-code the service count here, it can change dynamically.
-    label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", [host hostname], [host ip], [host serviceCount]];
-    [self.tableView.tableHeaderView addSubview:label];
-    
-    UIView *line = [[[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.tableHeaderView.frame.size.height - 1, 600, 1)] autorelease];
+    label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", host.hostname, host.ip, [host serviceCount]];
+    [header addSubview:label];
+
+    [label release];
+
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, header.frame.size.height - 1, 600, 1)];
     line.backgroundColor = [UIColor grayColor];
-    [self.tableView.tableHeaderView addSubview:line];
+    [header addSubview:line];
+    [line release];
     
+    self.tableView.tableHeaderView = header;
+    [header release];
+
     self.tableView.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
     self.title = [host name];
-    [self.tableView reloadData];
 
     return self;
 }
@@ -103,21 +108,23 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)];
         label.font = [UIFont systemFontOfSize:16.0];
         label.textAlignment = UITextAlignmentLeft;
         label.textColor = [UIColor blackColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         label.tag = 1;
         [cell.contentView addSubview:label];
+        [label release];
         
-        label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 20.0)] autorelease];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 20.0)];
         label.font = [UIFont systemFontOfSize:12.0];
         label.textAlignment = UITextAlignmentLeft;
         label.textColor = [UIColor grayColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         label.tag = 2;
         [cell.contentView addSubview:label];
+        [label release];
     }
     
     NSNetService *service = [host serviceAtIndex:indexPath.row];

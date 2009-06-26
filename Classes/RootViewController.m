@@ -37,8 +37,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSMutableArray *hosts = [delegate hosts];
-    return [hosts count];
+    return [delegate.hosts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -47,29 +46,30 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)];
         label.font = [UIFont systemFontOfSize:16.0];
         label.textAlignment = UITextAlignmentLeft;
         label.textColor = [UIColor blackColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         label.tag = 1;
         [cell.contentView addSubview:label];
-        
-        label = [[[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 20.0)] autorelease];
+        [label release];
+      
+        label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 20.0)];
         label.font = [UIFont systemFontOfSize:12.0];
         label.textAlignment = UITextAlignmentLeft;
         label.textColor = [UIColor grayColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         label.tag = 2;
         [cell.contentView addSubview:label];
+        [label release];
         
     }
     
     FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSMutableArray *hosts = [delegate hosts];
-    Host *host = (Host*)[hosts objectAtIndex:indexPath.row];
+    Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
     ((UILabel*)[cell viewWithTag:1]).text = [host name];
-    ((UILabel*)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ (%@)", [host hostname], [host ip]];
+    ((UILabel*)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ (%@)", host.hostname, host.ip];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -77,12 +77,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSMutableArray *hosts = [delegate hosts];
-    Host *host = (Host*)[hosts objectAtIndex:indexPath.row];
+    Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
     
     ServiceViewController *svc = [[ServiceViewController alloc] initWithHost:host];
-	[self.navigationController pushViewController:svc animated:TRUE];
-	[svc release];
+    [self.navigationController pushViewController:svc animated:TRUE];
+    [svc release];
 }
 
 - (void)dealloc {

@@ -11,56 +11,48 @@
 
 @implementation Host
 
+@synthesize hostname;
+@synthesize ip;
+@synthesize services;
+
 -(id)initWithHostname:(NSString*)hn ipAddress:(NSString*)ipAddress {
     if ([super init] == nil) return nil;
-    
-    hostname = [hn retain];
-    ip = [ipAddress retain];
-    services = [[NSMutableArray alloc] initWithCapacity:10];
-
+    self.hostname = hn;
+    self.ip = ipAddress;
+    self.services = [NSMutableArray arrayWithCapacity:10];
     return self;
 }
 
--(NSString*)hostname {
-    return hostname;
-}
-
--(NSString*)ip {
-    return ip;
-}
-
-
--(NSMutableArray*)services {
-    return services;
-}
-
 -(int)serviceCount {
-    return [services count];
+    return [self.services count];
 }
 
 -(NSString*)name {
     // TODO - strip everything after the last apostrophe to get username
-    if ( [services count] > 0 )
+    if ( [self.services count] > 0 )
         return [[self serviceAtIndex:0] name];
-    return hostname;
+    return self.hostname;
 }
 
 -(NSNetService*)serviceAtIndex:(int)i {
-    return (NSNetService*)[services objectAtIndex:i];
+    return (NSNetService*)[self.services objectAtIndex:i];
 }
 
 -(BOOL)hasService:(NSNetService*)service {
-    return [services containsObject:service];
+    return [self.services containsObject:service];
 }
 
 -(void)addService:(NSNetService*)service {
-    [services addObject:service];
-    [services sortUsingSelector:@selector(compareByPriority:)];
+    // TODO - if we have more than one active interface, you'll tend to see
+    // services appearing twice. This is not going to happen in the Real World,
+    // as iPhones only have one interface, but it makes the siulator confuing
+    [self.services addObject:service];
+    [self.services sortUsingSelector:@selector(compareByPriority:)];
 }
 
 -(void)removeService:(NSNetService*)service {
-    NSLog(@"removing %@ from %@", service, services);
-    [services removeObject:service];
+    NSLog(@"removing %@ from %@", service, self.services);
+    [self.services removeObject:service];
 }
 
 -(int)compareByName:(Host*)host {
@@ -69,6 +61,8 @@
 
 -(void)dealloc {
     [hostname release];
+    [ip release];
+    [services release];
     [super dealloc];
 }
 

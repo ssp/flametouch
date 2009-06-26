@@ -16,9 +16,12 @@
 
 }
 
+@property (nonatomic, retain) NSString *hostname;
+@property (nonatomic, retain) NSString *ip;
+@property (nonatomic, retain) NSMutableArray *services;
+
 -(id)initWithHostname:(NSString*)hn ipAddress:(NSString*)ipAddress;
--(NSString*)hostname;
--(NSString*)ip;
+
 -(NSString*)name;
 -(NSNetService*)serviceAtIndex:(int)i;
 -(void)addService:(NSNetService*)service;
@@ -26,5 +29,6 @@
 -(void)removeService:(NSNetService*)service;
 -(int)serviceCount;
 -(int)compareByName:(Host*)host;
+
 
 @end

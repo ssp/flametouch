@@ -18,27 +18,24 @@
 
 @synthesize window;
 @synthesize navigationController;
-
+@synthesize hosts;
+@synthesize serviceBrowsers;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    serviceBrowsers = [[NSMutableArray alloc] initWithCapacity: 20];
-    hosts = [[NSMutableArray alloc] initWithCapacity: 20];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+    self.serviceBrowsers = [[[NSMutableArray alloc] initWithCapacity: 40] autorelease];
+    self.hosts = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
     
     // meta-discovery
-    metaBrowser = [[NSNetServiceBrowser alloc]init];
+    metaBrowser = [[NSNetServiceBrowser alloc] init];
     [metaBrowser setDelegate:self];
     [metaBrowser searchForServicesOfType:@"_services._dns-sd._udp." inDomain:@""];
 
-	// Configure and show the window
-	[window addSubview:[navigationController view]];
-	[window makeKeyAndVisible];
-}
-
-- (NSMutableArray*)hosts {
-    return hosts;
+    // Configure and show the window
+    [window addSubview:[navigationController view]];
+    [window makeKeyAndVisible];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didNotSearch:(NSDictionary *)errorInfo {
@@ -63,7 +60,7 @@
         NSNetServiceBrowser *browser = [[NSNetServiceBrowser alloc] init];
         [browser setDelegate:self];
         [browser searchForServicesOfType:fullType inDomain:@""];
-        [serviceBrowsers addObject:browser];
+        [self.serviceBrowsers addObject:browser];
         [browser release];
         
     } else {
@@ -71,25 +68,32 @@
         // branch of the conditional, and represents an actual service running
         // somewhere. Tell the service to resolve itself, we'll display it in
         // the resolver callback.
-        [service retain];
-        [service setDelegate: self];
+        [service retain]; // released in didResolveAddress / didNotResolve
+        [service setDelegate:self];
         [service resolve];
     }
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreServicesComing {
-    for (Host* host in hosts) {
-        if ([host hasService: service]) {
+    NSMutableArray *toRemove = [[NSMutableArray alloc] init];
+    for (Host* host in self.hosts) {
+        if ([host hasService:service]) {
             [host removeService:service];
             if ([host serviceCount] == 0) {
-                NSLog(@"No services remaining on host, removing");
-                [hosts removeObject:host];
+                [toRemove addObject:host];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
-            return;
+            break; // found it
         }
     }
-    NSLog(@"Ungrouped service %@ removed!", service);
+
+    // Can't mutate while iterating
+    for (Host *host in toRemove) {
+        NSLog(@"No services remaining on host %@, removing", host);
+        [self.hosts removeObject:host];
+    }
+    [toRemove release];
+  
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
@@ -97,15 +101,15 @@
     struct sockaddr_in* sock = (struct sockaddr_in*)[((NSData*)[[service addresses] objectAtIndex:0]) bytes];
     NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
     
-    for (Host* host in hosts) {
-        if ( [[host hostname] isEqualToString:[service hostName]] ) {
+    for (Host* host in self.hosts) {
+        if ( [host.hostname isEqualToString:[service hostName]] ) {
             thehost = host;
         }
     }
     if (thehost == nil) {
         thehost = [[Host alloc] initWithHostname:[service hostName] ipAddress:ip];
-        [hosts addObject: thehost];
-        [hosts sortUsingSelector:@selector(compareByName:)];
+        [self.hosts addObject: thehost];
+        [self.hosts sortUsingSelector:@selector(compareByName:)];
         [thehost release];
     }
 
@@ -116,12 +120,16 @@
 
 - (void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict {
     NSLog(@"Did not resolve service %@: %@", service, errorDict);
+    //[service release]; // we retained this before resolving it
 }
 
 - (void)dealloc {
-	[navigationController release];
-	[window release];
-	[super dealloc];
+    [navigationController release];
+    [window release];
+    [metaBrowser release];
+    [self.serviceBrowsers release];
+    [self.hosts release];
+    [super dealloc];
 }
 
 @end
