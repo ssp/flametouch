@@ -10,10 +10,10 @@
 
 
 @interface Host : NSObject {
-    NSString *hostname;
-    NSString *ip;
-    NSMutableArray *services;
-
+  NSString *hostname;
+  NSString *ip;
+  NSMutableArray *services;
+  
 }
 
 @property (nonatomic, retain) NSString *hostname;

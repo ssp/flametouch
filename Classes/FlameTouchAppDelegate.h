@@ -10,13 +10,13 @@
 #import "Host.h"
 
 @interface FlameTouchAppDelegate : NSObject <UIApplicationDelegate> {
-    
-    UIWindow *window;
-    UINavigationController *navigationController;
-    
-    NSNetServiceBrowser *metaBrowser;
-    NSMutableArray *serviceBrowsers;
-    NSMutableArray *hosts;
+  
+  UIWindow *window;
+  UINavigationController *navigationController;
+  
+  NSNetServiceBrowser *metaBrowser;
+  NSMutableArray *serviceBrowsers;
+  NSMutableArray *hosts;
 }
 
 - (NSMutableArray*)hosts;
