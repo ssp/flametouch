@@ -12,7 +12,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		E60D15190EDDC2EB0054FB36 /* NSNetService+Sortable.m in Sources */ = {isa = PBXBuildFile; fileRef = E60D15180EDDC2EB0054FB36 /* NSNetService+Sortable.m */; };
@@ -29,7 +28,6 @@
 		1D6058910D05DD3D006BFB54 /* Flame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2899E55F0DE3E45000AC0155 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		28A0AAE50D9B0CCF005BE974 /* FlameTouch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlameTouch_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -63,14 +61,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
-				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				1D3623240D0F684500981E51 /* FlameTouchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlameTouchAppDelegate.m */,
-				E6761B6E0EDB15F600E40B14 /* Host.h */,
-				E6761B6F0EDB15F600E40B14 /* Host.m */,
+				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
+				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				E6761BB40EDB1A9A00E40B14 /* ServiceViewController.h */,
 				E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */,
+				E6761B6F0EDB15F600E40B14 /* Host.m */,
+				E6761B6E0EDB15F600E40B14 /* Host.h */,
 				E60D15170EDDC2EB0054FB36 /* NSNetService+Sortable.h */,
 				E60D15180EDDC2EB0054FB36 /* NSNetService+Sortable.m */,
 			);
@@ -111,7 +109,6 @@
 			children = (
 				E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */,
 				E6761B710EDB169700E40B14 /* flame_128x128.png */,
-				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
@@ -178,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
-				2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */,
 				E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */,
 				E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */,
 			);
