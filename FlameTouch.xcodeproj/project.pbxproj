@@ -19,13 +19,14 @@
 		E6761B700EDB15F600E40B14 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761B6F0EDB15F600E40B14 /* Host.m */; };
 		E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E6761B710EDB169700E40B14 /* flame_128x128.png */; };
 		E6761BB60EDB1A9A00E40B14 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */; };
+		E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* FlameTouchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlameTouchAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* FlameTouchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlameTouchAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* FlameTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlameTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Flame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2899E55F0DE3E45000AC0155 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 		E6761B710EDB169700E40B14 /* flame_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame_128x128.png; sourceTree = "<group>"; };
 		E6761BB40EDB1A9A00E40B14 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +80,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* FlameTouch.app */,
+				1D6058910D05DD3D006BFB54 /* Flame.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +109,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */,
 				E6761B710EDB169700E40B14 /* flame_128x128.png */,
 				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -128,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* FlameTouch */ = {
+		1D6058900D05DD3D006BFB54 /* Flame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "FlameTouch" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flame" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -140,9 +143,9 @@
 			);
 			dependencies = (
 			);
-			name = FlameTouch;
+			name = Flame;
 			productName = FlameTouch;
-			productReference = 1D6058910D05DD3D006BFB54 /* FlameTouch.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Flame.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -164,7 +167,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* FlameTouch */,
+				1D6058900D05DD3D006BFB54 /* Flame */,
 			);
 		};
 /* End PBXProject section */
@@ -177,6 +180,7 @@
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */,
 				E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */,
+				E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +213,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FlameTouch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = FlameTouch;
+				PRODUCT_NAME = Flame;
 			};
 			name = Debug;
 		};
@@ -217,11 +221,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FlameTouch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = FlameTouch;
+				PRODUCT_NAME = Flame;
 			};
 			name = Release;
 		};
@@ -253,13 +258,41 @@
 			};
 			name = Release;
 		};
+		E6BBD9B10FF4DA6400077E5E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tom Insam";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1C312475-FA89-4E87-8EF9-B83EE92A6372";
+				SDKROOT = iphoneos2.2.1;
+			};
+			name = AdHoc;
+		};
+		E6BBD9B20FF4DA6400077E5E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FlameTouch_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = Flame;
+			};
+			name = AdHoc;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "FlameTouch" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
+				E6BBD9B20FF4DA6400077E5E /* AdHoc */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -269,6 +302,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
+				E6BBD9B10FF4DA6400077E5E /* AdHoc */,
 				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
