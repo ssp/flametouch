@@ -80,7 +80,7 @@
     [cell.contentView addSubview:label];
     [label release];
     
-    label = [[UILabel alloc] initWithFrame:CGRectMake(100.0, 1.0, 150.0, cell.frame.size.height - 3)];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(100.0, 1.0, cell.frame.size.width - 130, cell.frame.size.height - 3)];
     label.font = [UIFont systemFontOfSize:14.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor grayColor];
