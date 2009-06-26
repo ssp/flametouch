@@ -18,6 +18,8 @@
 		E6761B700EDB15F600E40B14 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761B6F0EDB15F600E40B14 /* Host.m */; };
 		E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E6761B710EDB169700E40B14 /* flame_128x128.png */; };
 		E6761BB60EDB1A9A00E40B14 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */; };
+		E6AAAFCE0FF521BF0042220A /* ServiceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AAAFCD0FF521BF0042220A /* ServiceDetailViewController.m */; };
+		E6AAB0A40FF529850042220A /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AAB0A30FF529850042220A /* Utility.m */; };
 		E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,10 @@
 		E6761B710EDB169700E40B14 /* flame_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame_128x128.png; sourceTree = "<group>"; };
 		E6761BB40EDB1A9A00E40B14 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		E6AAAFCC0FF521BF0042220A /* ServiceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailViewController.h; sourceTree = "<group>"; };
+		E6AAAFCD0FF521BF0042220A /* ServiceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailViewController.m; sourceTree = "<group>"; };
+		E6AAB0A20FF529850042220A /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		E6AAB0A30FF529850042220A /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,14 +67,18 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E6AAB0A20FF529850042220A /* Utility.h */,
+				E6AAB0A30FF529850042220A /* Utility.m */,
 				1D3623240D0F684500981E51 /* FlameTouchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlameTouchAppDelegate.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				E6761BB40EDB1A9A00E40B14 /* ServiceViewController.h */,
 				E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */,
-				E6761B6F0EDB15F600E40B14 /* Host.m */,
+				E6AAAFCC0FF521BF0042220A /* ServiceDetailViewController.h */,
+				E6AAAFCD0FF521BF0042220A /* ServiceDetailViewController.m */,
 				E6761B6E0EDB15F600E40B14 /* Host.h */,
+				E6761B6F0EDB15F600E40B14 /* Host.m */,
 				E60D15170EDDC2EB0054FB36 /* NSNetService+Sortable.h */,
 				E60D15180EDDC2EB0054FB36 /* NSNetService+Sortable.m */,
 			);
@@ -193,6 +203,8 @@
 				E6761B700EDB15F600E40B14 /* Host.m in Sources */,
 				E6761BB60EDB1A9A00E40B14 /* ServiceViewController.m in Sources */,
 				E60D15190EDDC2EB0054FB36 /* NSNetService+Sortable.m in Sources */,
+				E6AAAFCE0FF521BF0042220A /* ServiceDetailViewController.m in Sources */,
+				E6AAB0A40FF529850042220A /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,10 +11,10 @@
 
 @interface ServiceViewController : UITableViewController {
   Host *host;
-  NSDictionary *serviceNames;
 }
 
+@property (nonatomic, retain) Host* host;
+
 - (id)initWithHost:(Host*)thehost;
-- (NSURL*)urlForService:(NSNetService*)service;
 
 @end
