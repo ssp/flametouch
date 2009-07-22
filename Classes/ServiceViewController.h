@@ -16,5 +16,6 @@
 @property (nonatomic, retain) Host* host;
 
 - (id)initWithHost:(Host*)thehost;
+-(void) setCaption;
 
 @end

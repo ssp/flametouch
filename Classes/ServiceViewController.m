@@ -12,6 +12,8 @@
 
 @implementation ServiceViewController
 
+#define LABEL_TAG 1
+
 @synthesize host;
 
 - (id)initWithHost:(Host*)thehost {
@@ -31,15 +33,13 @@
   [label release];
   
   label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, 300.0, 40.0)];
+  label.tag = LABEL_TAG;
   label.font = [UIFont systemFontOfSize:12.0];
   label.textAlignment = UITextAlignmentLeft;
   label.textColor = [UIColor grayColor];
   label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
   label.numberOfLines = 2;
-  // TODO - don't hard-code the service count here, it can change dynamically.
-  label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", self.host.hostname, self.host.ip, [self.host serviceCount]];
   [header addSubview:label];
-  
   [label release];
   
   UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, header.frame.size.height - 1, 600, 1)];
@@ -53,12 +53,19 @@
   self.tableView.delegate = self;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
   self.title = [self.host name];
+  [self setCaption];
   
   return self;
 }
 
+-(void) setCaption {
+  UILabel *label = (UILabel*)[self.view viewWithTag:LABEL_TAG];
+  label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", self.host.hostname, self.host.ip, [self.host serviceCount]];
+}
+
 -(void) newServices:(id)whatever {
   [self.tableView reloadData];
+  [self setCaption];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

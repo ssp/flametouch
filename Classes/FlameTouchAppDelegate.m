@@ -22,20 +22,20 @@
 @synthesize serviceBrowsers;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-  
+  // TODO - we're always doing something. So spin. But... I dont like it.
   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   
   self.serviceBrowsers = [[[NSMutableArray alloc] initWithCapacity: 40] autorelease];
   self.hosts = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
+
+  // Configure and show the window
+  [window addSubview:[navigationController view]];
+  [window makeKeyAndVisible];
   
   // meta-discovery
   metaBrowser = [[NSNetServiceBrowser alloc] init];
   [metaBrowser setDelegate:self];
   [metaBrowser searchForServicesOfType:@"_services._dns-sd._udp." inDomain:@""];
-  
-  // Configure and show the window
-  [window addSubview:[navigationController view]];
-  [window makeKeyAndVisible];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didNotSearch:(NSDictionary *)errorInfo {
@@ -72,6 +72,7 @@
     [service setDelegate:self];
     [service resolve];
   }
+  
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreServicesComing {
@@ -94,6 +95,7 @@
   [toRemove release];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
@@ -116,6 +118,10 @@
   [thehost addService:service];
   [service release]; // we retained this before resolving it
   [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+
+  // We're now displaying at least one thing. Stop the spinner, as there's now
+  // other activity to indicate that we did something.
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict {
