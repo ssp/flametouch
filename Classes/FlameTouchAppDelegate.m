@@ -14,6 +14,7 @@
 #include <arpa/inet.h>
 
 
+
 @implementation FlameTouchAppDelegate
 
 @synthesize window;
@@ -36,6 +37,16 @@
   metaBrowser = [[NSNetServiceBrowser alloc] init];
   [metaBrowser setDelegate:self];
   [metaBrowser searchForServicesOfType:@"_services._dns-sd._udp." inDomain:@""];
+  
+  // in a couple of seconds, report if we have no wifi
+  [self performSelector:@selector(checkWifi) withObject:nil afterDelay:2];
+  
+}
+
+- (void)checkWifi {
+  if (![[Reachability sharedReachability] localWiFiConnectionStatus]) {
+    [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"Yeah." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease] show];
+  }
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didNotSearch:(NSDictionary *)errorInfo {

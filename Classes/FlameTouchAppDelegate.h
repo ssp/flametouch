@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Host.h"
 
+// to detect network reachability
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "Reachability.h"
+
 @interface FlameTouchAppDelegate : NSObject <UIApplicationDelegate> {
   
   UIWindow *window;
@@ -17,6 +21,7 @@
   NSNetServiceBrowser *metaBrowser;
   NSMutableArray *serviceBrowsers;
   NSMutableArray *hosts;
+
 }
 
 - (NSMutableArray*)hosts;
