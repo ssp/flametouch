@@ -116,7 +116,7 @@
   if (url && [url scheme] && [url host]) {
     [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
   } else {
-    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
+    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor grayColor] ];
   }
 
   return cell;
