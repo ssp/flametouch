@@ -39,13 +39,13 @@
   [metaBrowser searchForServicesOfType:@"_services._dns-sd._udp." inDomain:@""];
   
   // in a couple of seconds, report if we have no wifi
-  [self performSelector:@selector(checkWifi) withObject:nil afterDelay:2];
+  [self performSelector:@selector(checkWifi) withObject:nil afterDelay:5.0];
   
 }
 
 - (void)checkWifi {
   if (![[Reachability sharedReachability] localWiFiConnectionStatus]) {
-    [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"Yeah." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease] show];
+    [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease] show];
   }
 }
 

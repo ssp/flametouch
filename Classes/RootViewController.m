@@ -10,7 +10,7 @@
 #import "ServiceViewController.h"
 #import "FlameTouchAppDelegate.h"
 #import "Host.h"
-
+#import "AboutViewController.h"
 
 @implementation RootViewController
 
@@ -18,6 +18,18 @@
   [super viewWillAppear:animated];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
   self.title = @"Servers";
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+  UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:@"About" style:UIBarButtonItemStylePlain target:self action:@selector(showAboutPane)];
+  [self.navigationItem setRightBarButtonItem:aboutButton];
+  [aboutButton release];
+}
+
+-(void)showAboutPane {
+  AboutViewController *avc = [[AboutViewController alloc] init];
+  [self.navigationController pushViewController:avc animated:TRUE];
+  [avc release];
 }
 
 -(void) newServices:(id)whatever {
