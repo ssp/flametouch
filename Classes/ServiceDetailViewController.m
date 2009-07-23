@@ -21,7 +21,6 @@
   self.host = hst;
   self.service = srv;
   self.other = [NSNetService dictionaryFromTXTRecordData:[self.service TXTRecordData]];
-  NSLog(@"service other data is %@ from %@", other, [self.service TXTRecordData]);
 
   UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 64.0)];
   
@@ -114,8 +113,10 @@
   // clickable. Make it blue. I'd like it underlined as well, but that
   // seems to be lots harder.
   NSURL *url = [NSURL URLWithString:value];
-  if (url) {
+  if (url && [url scheme] && [url host]) {
     [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+  } else {
+    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
   }
 
   return cell;
@@ -146,7 +147,7 @@
       NSString *caption = [[other allKeys] objectAtIndex:indexPath.row - 3];
       NSString *value = [[[NSString alloc] initWithData:[other objectForKey:caption] encoding:NSUTF8StringEncoding] autorelease];
       NSURL *url = [NSURL URLWithString:value];
-      if (url) {
+      if (url && [url scheme] && [url host]) {
         [[UIApplication sharedApplication] openURL:url];
         return;
       }
