@@ -13,7 +13,7 @@
 -(id)init {
   self = [super init];
   if (!self) return nil;
-  self.title = @"About";
+  self.title = @"Flame for iPhone";
 
   theWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:theWebView];

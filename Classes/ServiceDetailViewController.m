@@ -109,7 +109,15 @@
   if (value == nil) value = @"";
   ((UILabel*)[cell viewWithTag:1]).text = caption;
   ((UILabel*)[cell viewWithTag:2]).text = value;
-  
+
+  // try to parse the value as an url - if we can, then this cell is
+  // clickable. Make it blue. I'd like it underlined as well, but that
+  // seems to be lots harder.
+  NSURL *url = [NSURL URLWithString:value];
+  if (url) {
+    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+  }
+
   return cell;
 }
 
