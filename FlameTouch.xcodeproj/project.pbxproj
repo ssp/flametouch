@@ -239,7 +239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "perl -ne 's/#\\{BUILD_DATE\\}/`date -u \"+%Y-%m-%dT%H:%M:%SZ\"`/e; print' < ${PROJECT_DIR}/about_template.html > ${PROJECT_DIR}/about.html\n\n";
+			shellScript = "perl -ne 's/#\\{BUILD_DATE\\}/`date -u \"+%Y-%m-%dT%H:%M:%SZ\"`/e; print' < ${PROJECT_DIR}/about_template.html > ${PROJECT_DIR}/about.html\n\ntouch ${PROJECT_DIR}/about.html\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
