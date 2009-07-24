@@ -23,7 +23,7 @@
 @synthesize serviceBrowsers;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-  // TODO - we're always doing something. So spin. But... I dont like it.
+  // Start the spinner on a blank app screen to indicate that we're thinking..
   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   
   self.serviceBrowsers = [[[NSMutableArray alloc] initWithCapacity: 40] autorelease];
@@ -45,7 +45,7 @@
 
 - (void)checkWifi {
   if (![[Reachability sharedReachability] localWiFiConnectionStatus]) {
-    [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] autorelease] show];
+    [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
   }
 }
 
