@@ -43,6 +43,31 @@
   
 }
 
+-(void)refreshList {
+
+  // destroy arrays and discovery services
+  for (NSNetServiceBrowser* browser in self.serviceBrowsers) {
+    [browser setDelegate:nil];
+  }
+  self.serviceBrowsers = nil;
+  self.hosts = nil;
+  [metaBrowser setDelegate:nil];
+  [metaBrowser release];
+
+  // rebuild arrays
+  self.serviceBrowsers = [[[NSMutableArray alloc] initWithCapacity: 40] autorelease];
+  self.hosts = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
+
+  // report blank lists.
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+
+  // restart metabrowser
+  metaBrowser = [[NSNetServiceBrowser alloc] init];
+  [metaBrowser setDelegate:self];
+  [metaBrowser searchForServicesOfType:@"_services._dns-sd._udp." inDomain:@""];
+
+}
+
 - (void)checkWifi {
   if (![[Reachability sharedReachability] localWiFiConnectionStatus]) {
     [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];

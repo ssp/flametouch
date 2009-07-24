@@ -17,10 +17,15 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
-  self.title = @"Servers";
+  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
+  self.title = [NSString stringWithFormat:@"%d servers", [delegate.hosts count]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+  UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList)];
+  [self.navigationItem setLeftBarButtonItem:refreshButton];
+  [refreshButton release];
+
   UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:@"About" style:UIBarButtonItemStylePlain target:self action:@selector(showAboutPane)];
   [self.navigationItem setRightBarButtonItem:aboutButton];
   [aboutButton release];
@@ -32,8 +37,15 @@
   [avc release];
 }
 
+-(void)refreshList {
+  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [delegate refreshList];
+}
+
 -(void) newServices:(id)whatever {
   [self.tableView reloadData];
+  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
+  self.title = [NSString stringWithFormat:@"%d servers", [delegate.hosts count]];
 }
 
 - (void)didReceiveMemoryWarning {
