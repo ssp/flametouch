@@ -14,12 +14,13 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		E6055249101A1D0400E70AB4 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = E6055248101A1D0400E70AB4 /* about.html */; };
 		E60D15190EDDC2EB0054FB36 /* NSNetService+Sortable.m in Sources */ = {isa = PBXBuildFile; fileRef = E60D15180EDDC2EB0054FB36 /* NSNetService+Sortable.m */; };
 		E6613AF510177E3500EA7A4A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E6613AF410177E3500EA7A4A /* Default.png */; };
 		E6613B911017996800EA7A4A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6613B901017996800EA7A4A /* SystemConfiguration.framework */; };
 		E6613BA710179C8100EA7A4A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E6613BA610179C8100EA7A4A /* Reachability.m */; };
 		E6613C9D10183F2800EA7A4A /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6613C9C10183F2800EA7A4A /* AboutViewController.m */; };
-		E6613C9F10183F6100EA7A4A /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = E6613C9E10183F6100EA7A4A /* about.html */; };
+		E6613C9F10183F6100EA7A4A /* about_template.html in Resources */ = {isa = PBXBuildFile; fileRef = E6613C9E10183F6100EA7A4A /* about_template.html */; };
 		E6761B700EDB15F600E40B14 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761B6F0EDB15F600E40B14 /* Host.m */; };
 		E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E6761B710EDB169700E40B14 /* flame_128x128.png */; };
 		E6761BB60EDB1A9A00E40B14 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */; };
@@ -41,6 +42,7 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6055248101A1D0400E70AB4 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		E60D15170EDDC2EB0054FB36 /* NSNetService+Sortable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNetService+Sortable.h"; sourceTree = "<group>"; };
 		E60D15180EDDC2EB0054FB36 /* NSNetService+Sortable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNetService+Sortable.m"; sourceTree = "<group>"; };
 		E6613AF410177E3500EA7A4A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -49,7 +51,7 @@
 		E6613BA610179C8100EA7A4A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Vendor/Reachability.m; sourceTree = "<group>"; };
 		E6613C9B10183F2800EA7A4A /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		E6613C9C10183F2800EA7A4A /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		E6613C9E10183F6100EA7A4A /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
+		E6613C9E10183F6100EA7A4A /* about_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about_template.html; sourceTree = "<group>"; };
 		E6761B6E0EDB15F600E40B14 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
 		E6761B6F0EDB15F600E40B14 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Host.m; sourceTree = "<group>"; };
 		E6761B710EDB169700E40B14 /* flame_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame_128x128.png; sourceTree = "<group>"; };
@@ -138,7 +140,8 @@
 				E6761B710EDB169700E40B14 /* flame_128x128.png */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				E6613C9E10183F6100EA7A4A /* about.html */,
+				E6055248101A1D0400E70AB4 /* about.html */,
+				E6613C9E10183F6100EA7A4A /* about_template.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flame" */;
 			buildPhases = (
+				E605517A101A18A200E70AB4 /* ShellScript */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -216,11 +220,28 @@
 				E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */,
 				E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */,
 				E6613AF510177E3500EA7A4A /* Default.png in Resources */,
-				E6613C9F10183F6100EA7A4A /* about.html in Resources */,
+				E6613C9F10183F6100EA7A4A /* about_template.html in Resources */,
+				E6055249101A1D0400E70AB4 /* about.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E605517A101A18A200E70AB4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "perl -ne 's/#\\{BUILD_DATE\\}/`date -u \"+%Y-%m-%dT%H:%M:%SZ\"`/e; print' < ${PROJECT_DIR}/about_template.html > ${PROJECT_DIR}/about.html\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
