@@ -137,7 +137,7 @@
     [label release];
 
   }
-  ((UILabel*)[cell viewWithTag:1]).text = @"Open in browser";
+  ((UILabel*)[cell viewWithTag:1]).text = @"Open service";
   return cell;
 }
 
@@ -154,11 +154,19 @@
     }
   } else {
     if (indexPath.row == 0) {
+      NSLog(@"Opening URL %@", [self externalURL]);
+      // in a couple of seconds, report if we have no wifi
+      [self performSelector:@selector(complainAboutProtocolHandler) withObject:nil afterDelay:2.0];
       [[UIApplication sharedApplication] openURL:[self externalURL]];
       return;
     }
   }
   
+}
+
+-(void)complainAboutProtocolHandler {
+  NSString* message = [NSString stringWithFormat:@"I can't open this service, you don't seem to have an app installed that can cope with the url\n%@", [self externalURL]];
+  [[[[UIAlertView alloc] initWithTitle:@"No handler" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
 }
 
 -(NSURL*)externalURL {
@@ -171,6 +179,16 @@
       url = [NSString stringWithFormat:@"http://%@/", host.ip];
     } else {
       url = [NSString stringWithFormat:@"http://%@:%i/", host.ip, [service port]];
+    }
+    return [NSURL URLWithString:url];
+
+  
+  } else if ( [[service type] isEqualToString:@"_ssh._tcp."] ) {
+    NSString *url;
+    if ([service port] == 22) {
+      url = [NSString stringWithFormat:@"ssh://%@/", host.ip];
+    } else {
+      url = [NSString stringWithFormat:@"ssh://%@:%i/", host.ip, [service port]];
     }
     return [NSURL URLWithString:url];
   }
