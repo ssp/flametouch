@@ -7,6 +7,7 @@
 //
 
 #import "NSNetService+Sortable.h"
+#import "Utility.h"
 
 @implementation NSNetService (MySortingMethods)
 
@@ -57,4 +58,17 @@
     return NSOrderedDescending;
 }
 
+
+-(NSComparisonResult) compareByName:(NSNetService*)service {
+	NSString* myName = [[Utility sharedInstance].serviceNames objectForKey:self.type];
+	if (myName == nil && [self.type length] > 0) {
+		myName = [self.type substringFromIndex:1];
+	}
+	NSString* theirName = [[Utility sharedInstance].serviceNames objectForKey:service.type];
+	if (theirName == nil && [service.type length] > 0) {
+		theirName = [service.type substringFromIndex:1];
+	}
+	
+	return [myName localizedCaseInsensitiveCompare:theirName];
+}
 @end

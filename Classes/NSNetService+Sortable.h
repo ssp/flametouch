@@ -10,4 +10,5 @@
 
 @interface NSNetService (Sortable)
 -(int)compareByPriority:(NSNetService*)service;
+-(NSComparisonResult)compareByName:(NSNetService*)service;
 @end
