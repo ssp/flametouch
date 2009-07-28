@@ -70,8 +70,8 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, tableView.frame.size.width - 30.0, 25.0)];
-    label.font = [UIFont systemFontOfSize:16.0];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, tableView.frame.size.width - 30.0, 25.0)];
+    label.font = [UIFont boldSystemFontOfSize:16.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
@@ -79,7 +79,7 @@
     [cell.contentView addSubview:label];
     [label release];
   
-    label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 22.0, tableView.frame.size.width - 30.0, 20.0)];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, tableView.frame.size.width - 30.0, 20.0)];
     label.font = [UIFont systemFontOfSize:12.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor grayColor];
