@@ -21,8 +21,8 @@
   
   self.host = thehost;
   
-  UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 44.0)];
-  
+  UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 25.0)];
+  /*
   UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, 300.0, 25.0)];
   label.font = [UIFont systemFontOfSize:16.0];
   label.textAlignment = UITextAlignmentLeft;
@@ -31,11 +31,12 @@
   label.text = [self.host name];
   [header addSubview:label];
   [label release];
-  
-  label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, 300.0, 20.0)];
+  */
+	
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, 292.0, 20.0)];
   label.tag = LABEL_TAG;
   label.font = [UIFont systemFontOfSize:12.0];
-  label.textAlignment = UITextAlignmentLeft;
+  label.textAlignment = UITextAlignmentCenter;
   label.textColor = [UIColor grayColor];
   label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
   label.numberOfLines = 2;
