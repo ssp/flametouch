@@ -93,7 +93,7 @@
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
   Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
   ((UILabel*)[cell viewWithTag:1]).text = [host name];
-  ((UILabel*)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ (%@)", host.hostname, host.ip];
+  ((UILabel*)[cell viewWithTag:2]).text = [host details];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }

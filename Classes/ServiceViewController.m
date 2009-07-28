@@ -60,7 +60,7 @@
 
 -(void) setCaption {
   UILabel *label = (UILabel*)[self.view viewWithTag:LABEL_TAG];
-  label.text = [NSString stringWithFormat:@"%@ (%@)\n%d services", self.host.hostname, self.host.ip, [self.host serviceCount]];
+  label.text = host.details;
 }
 
 -(void) newServices:(id)whatever {

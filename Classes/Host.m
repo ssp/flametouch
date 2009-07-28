@@ -29,9 +29,25 @@
 
 -(NSString*)name {
   // TODO - strip everything after the last apostrophe to get username
-  if ( [self.services count] > 0 )
-    return [[self serviceAtIndex:0] name];
-  return self.hostname;
+  NSString* result = self.hostname;
+  NSRange dotLocalRange = [self.hostname rangeOfString:@".local." options:NSAnchoredSearch | NSBackwardsSearch];
+  if (dotLocalRange.location != NSNotFound) {
+    result = [self.hostname substringToIndex:dotLocalRange.location];
+  }
+  return result;
+}
+
+-(NSString*) details {
+	NSUInteger serviceCount = self.services.count;
+	NSString * serviceCountString = @"";
+	if (serviceCount == 1) {
+		serviceCountString = NSLocalizedString(@"1 service", @"String appended to Host description when a single service is present on the Host");
+	}
+	else if (serviceCount > 1) {
+		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i services", @"String appended to Host description when %i (with %i > 1) services are present on Host"), serviceCount];
+	}
+	NSString* details = [NSString stringWithFormat:@"%@ (%@) – %@", self.hostname, self.ip, serviceCountString];
+	return details;
 }
 
 -(NSNetService*)serviceAtIndex:(int)i {

@@ -23,6 +23,7 @@
 -(id)initWithHostname:(NSString*)hn ipAddress:(NSString*)ipAddress;
 
 -(NSString*)name;
+-(NSString*)details;
 -(NSNetService*)serviceAtIndex:(int)i;
 -(void)addService:(NSNetService*)service;
 -(BOOL)hasService:(NSNetService*)service;
