@@ -59,11 +59,10 @@
 }
 
 -(void)addService:(NSNetService*)service {
-  // TODO - if we have more than one active interface, you'll tend to see
-  // services appearing twice. This is not going to happen in the Real World,
-  // as iPhones only have one interface, but it makes the siulator confuing
-  [self.services addObject:service];
-  [self.services sortUsingSelector:@selector(compareByPriority:)];
+	if (![self hasService:service]) {
+		[self.services addObject:service];
+	}
+	[self.services sortUsingSelector:@selector(compareByName:)];
 }
 
 -(void)removeService:(NSNetService*)service {
