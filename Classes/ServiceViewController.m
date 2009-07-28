@@ -115,7 +115,6 @@
 		  protocolName = service.type;
 	  }
 	  
-	  NSString* serviceName = [service type];
     ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@:%i)", text, protocolName, [service port]];
   }
   ((UILabel*)[cell viewWithTag:2]).text = [service name];
