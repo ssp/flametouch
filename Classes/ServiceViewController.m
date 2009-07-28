@@ -106,7 +106,17 @@
   if (text == nil) {
     ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@:%i", [service type], [service port]];
   } else {
-    ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@:%i)", text, [service type], [service port]];
+	  NSRange firstDot = [service.type rangeOfString:@"." options:NSLiteralSearch];
+	  NSString * protocolName;
+	  if (firstDot.location != NSNotFound && firstDot.location > 0) {
+		  protocolName = [service.type substringWithRange:NSMakeRange(1, firstDot.location - 1)];
+	  }
+	  else {
+		  protocolName = service.type;
+	  }
+	  
+	  NSString* serviceName = [service type];
+    ((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ (%@:%i)", text, protocolName, [service port]];
   }
   ((UILabel*)[cell viewWithTag:2]).text = [service name];
   
