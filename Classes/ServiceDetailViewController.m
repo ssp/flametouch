@@ -7,7 +7,7 @@
 //
 
 #import "ServiceDetailViewController.h"
-
+#import "NSNetService+FlameExtras.h"
 
 @implementation ServiceDetailViewController
 
@@ -38,89 +38,135 @@
   
   self.tableView.delegate = self;
 
-  self.title = [[Utility sharedInstance] nameForService:self.service];
+  self.title = self.service.humanReadableType;
   
   return self;
 }
 
+
+/*
+ Split up table in three parts:
+ 1. General information in 3 or 4 rows: Host, Port, Type[, Human Readable Type]
+ 2. If available: Actionable button to open URL for the service
+ 3. TXT record keys and values
+*/
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  if ([self externalURL])
-    return 2;
-  return 1;
+	NSInteger result = 1;
+	if (self.service.humanReadableTypeIsDistinct) result++;
+	if ([self externalURL]) result ++;
+	return result;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  if (section == 0) {
-    return 3 + [other count];
-  } else {
-    return 1;
-  }
+	NSInteger result = 0;
+	
+	if (section == 0) { // section for general information
+		if (self.service.humanReadableTypeIsDistinct) result = 4;
+		else result = 3;
+	} 
+	else if ([self externalURL] && section == 1) { // section for URL button
+		if ([self externalURL]) result = 1;
+	}
+	else  { // section for TXT record
+		result = [self.other count];
+	}
+	
+	return result;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.section == 0) {
-    return [self propertyCellForRow:indexPath.row];
-  } else {
-    return [self actionCellForRow:indexPath.row];
-  }
+	UITableViewCell * cell = nil;
+	
+	if (indexPath.section == 0) {
+		cell = [self standardPropertyCellForRow:indexPath.row];
+	} else if ([self externalURL] && indexPath.section == 1) {
+		cell = [self actionCellForRow:indexPath.row];
+	} else  {
+		cell =  [self TXTRecordPropertyCellForRow:indexPath.row];  
+	}
+	
+	return cell;
 }
 
--(UITableViewCell *)propertyCellForRow:(int)row {
-  static NSString *CellIdentifier = @"PropertyCell";
-  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
-    label.font = [UIFont systemFontOfSize:14.0];
-    label.textAlignment = UITextAlignmentRight;
-    label.textColor = [UIColor blackColor];
-    label.tag = 1;
-    [cell.contentView addSubview:label];
-    [label release];
-    
-    label = [[UILabel alloc] initWithFrame:CGRectMake(100.0, 1.0, cell.frame.size.width - 130, cell.frame.size.height - 3)];
-    label.font = [UIFont systemFontOfSize:14.0];
-    label.textAlignment = UITextAlignmentLeft;
-    label.textColor = [UIColor grayColor];
-    label.tag = 2;
-    [cell.contentView addSubview:label];
-    [label release];
-  }
-  
-  NSString *caption;
-  NSString *value;
-  if (row == 0) {
-    caption = @"host";
-    value = [[Utility sharedInstance] hostnameForService:self.service];
-  } else if (row == 1) {
-    caption = @"port";
-    value = [NSString stringWithFormat:@"%i", [service port]];
-  } else if (row == 2) {
-    caption = @"description";
-    value = [[Utility sharedInstance] nameForService:self.service];
-  } else {
-    caption = [[other allKeys] objectAtIndex:row - 3];
-    value = [[[NSString alloc] initWithData:[other objectForKey:caption] encoding:NSUTF8StringEncoding] autorelease];
-  }
-  
-  if (caption == nil) caption = @"";
-  if (value == nil) value = @"";
-  ((UILabel*)[cell viewWithTag:1]).text = caption;
-  ((UILabel*)[cell viewWithTag:2]).text = value;
 
-  // try to parse the value as an url - if we can, then this cell is
-  // clickable. Make it blue. I'd like it underlined as well, but that
-  // seems to be lots harder.
-  NSURL *url = [NSURL URLWithString:value];
-  if (url && [url scheme] && [url host]) {
-    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
-  } else {
-    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor grayColor] ];
-  }
+-(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value {
+	static NSString *CellIdentifier = @"PropertyCell";
+	UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		
+		UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
+		cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
+		cellLabel.textAlignment = UITextAlignmentRight;
+		cellLabel.textColor = [UIColor grayColor];
+		cellLabel.highlightedTextColor = [UIColor whiteColor];
+		cellLabel.tag = 1;
+		[cell.contentView addSubview:cellLabel];
+		[cellLabel release];
+		
+		cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
+		cellLabel.font = [UIFont systemFontOfSize:14.0];
+		cellLabel.textAlignment = UITextAlignmentLeft;
+		cellLabel.highlightedTextColor = [UIColor whiteColor];
+		cellLabel.tag = 2;
+		[cell.contentView addSubview:cellLabel];
+		[cellLabel release];
+	}
+  
+	NSString * myLabel = label;
+	NSString * myValue = value;
+	if (nil == myLabel) myLabel = @"";
+	if (nil == myValue) myValue = @"";
+	((UILabel*)[cell viewWithTag:1]).text = myLabel;
+	((UILabel*)[cell viewWithTag:2]).text = myValue;
 
-  return cell;
+	// try to parse the value as an url - if we can, then this cell is
+	// clickable. Make it blue. I'd like it underlined as well, but that
+	// seems to be lots harder.
+	NSURL *url = [NSURL URLWithString:myValue];
+	if (url && [url scheme] && [url host]) {
+		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+	} else {
+		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
+	}
+	
+	return cell;
 }
+
+
+-(UITableViewCell*) standardPropertyCellForRow: (int) row {
+	NSString *label;
+	NSString *value;
+
+	if (row == 0) {
+		label = NSLocalizedString(@"Host", @"Service Details: Label for host name");
+		value = self.service.hostnamePlus;
+	} else if (row == 1) {
+		label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
+		value = [NSString stringWithFormat:@"%i", [self.service port]];
+	} else if (row == 2) {
+		label = NSLocalizedString(@"Type", @"Service Details: Label for type");
+		value = self.service.type;
+	} else if (row == 3) {
+		label = NSLocalizedString(@"Description", @"Service Details: Label for human readable description");
+		value = self.service.humanReadableType;
+	} 
+
+	UITableViewCell * cell = [self propertyCellWithLabel: label andValue: value];
+	return cell;
+}
+
+
+-(UITableViewCell*) TXTRecordPropertyCellForRow: (int) row {
+	NSString * label = [[other allKeys] objectAtIndex:row];
+	NSString * value = [[[NSString alloc] initWithData:[other objectForKey:label] encoding:NSUTF8StringEncoding] autorelease];
+	
+	UITableViewCell * cell = [self propertyCellWithLabel: label andValue: value];
+	return cell;
+}
+
 
 -(UITableViewCell *)actionCellForRow:(int)row {
   static NSString *CellIdentifier = @"ActionCell";
@@ -140,6 +186,7 @@
   ((UILabel*)[cell viewWithTag:1]).text = @"Open service";
   return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0) {
@@ -170,7 +217,7 @@
 }
 
 -(NSURL*)externalURL {
-  if ( [[service type] isEqualToString:@"xxx"] ) { // TODO - sven's thing
+  if ( [[service type] isEqualToString:@"_webbookmark._tcp.***"] ) { // TODO - sven's thing
     return [NSURL URLWithString:[service name]];
     
   } else if ( [[service type] isEqualToString:@"_http._tcp."] ) {
