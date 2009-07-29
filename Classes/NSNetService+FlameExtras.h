@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSNetService (Sortable)
+@interface NSNetService (FlameExtras)
+
 -(int)compareByPriority:(NSNetService*)service;
 -(NSComparisonResult)compareByName:(NSNetService*)service;
+
+@property (readonly) NSString * humanReadableType;
+@property (readonly) BOOL humanReadableTypeIsDistinct;
+@property (readonly) NSString * hostnamePlus;
+@property (readonly) NSString * detailedPortInfo;
+
 @end
