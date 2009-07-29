@@ -7,15 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Host.h"
 
-@interface ServiceViewController : UITableViewController {
-  Host *host;
+#define LABEL_TAG 1
+
+@interface DetailListController : UITableViewController {
 }
 
-@property (nonatomic, retain) Host* host;
-
-- (id)initWithHost:(Host*)thehost;
--(void) setCaption;
+- (void) newServices: (id) sender;
 
 @end
+
+
+@class Host;
+@interface ServiceViewController : DetailListController {
+  Host *host;
+}
+@property (nonatomic, retain) Host* host;
+- (id)initWithHost:(Host*)thehost;
+@end
+
+
+@class ServiceType;
+@interface HostViewController : DetailListController {
+	ServiceType * serviceType;
+}
+@property (nonatomic, retain) ServiceType * serviceType;
+- (id)initWithServiceType:(ServiceType*) theServiceType;
+@end
+

@@ -8,7 +8,7 @@
 
 #import "FlameTouchAppDelegate.h"
 #import "RootViewController.h"
-
+#import "ServiceType.h"
 // socket resolving/nasty C-level things
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -20,6 +20,7 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize hosts;
+@synthesize serviceTypes;
 @synthesize serviceBrowsers;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -28,6 +29,7 @@
   
   self.serviceBrowsers = [[[NSMutableArray alloc] initWithCapacity: 40] autorelease];
   self.hosts = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
+  self.serviceTypes = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
 
   // Configure and show the window
   [window addSubview:[navigationController view]];
@@ -51,12 +53,14 @@
   }
   self.serviceBrowsers = nil;
   self.hosts = nil;
+	self.serviceTypes = nil;
   [metaBrowser setDelegate:nil];
   [metaBrowser release];
 
   // rebuild arrays
   self.serviceBrowsers = [[[NSMutableArray alloc] initWithCapacity: 40] autorelease];
   self.hosts = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
+	self.serviceTypes = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
 
   // report blank lists.
   [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
@@ -122,13 +126,27 @@
       break; // found it
     }
   }
-  
-  // Can't mutate while iterating
-  for (Host *host in toRemove) {
-    NSLog(@"No services remaining on host %@, removing", host);
-    [self.hosts removeObject:host];
-  }
-  [toRemove release];
+	// Can't mutate while iterating
+	for (Host *host in toRemove) {
+		NSLog(@"No services remaining on host %@, removing", host);
+		[self.hosts removeObject:host];
+	}
+	[toRemove release];
+		
+
+	ServiceType * serviceType;
+	for (serviceType in self.serviceTypes) {
+		NSUInteger index = [self.serviceTypes indexOfObject:service];
+		if (index != NSNotFound) {
+			[self.serviceTypes removeObjectAtIndex:index];
+			break;
+		}
+	}
+	
+	if ([serviceType.services count] == 0) {
+		[self.serviceTypes removeObject:serviceType];
+	}
+	
   
   [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
 
@@ -152,25 +170,70 @@
   }
   
   [thehost addService:service];
-  [service release]; // we retained this before resolving it
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
 
+	ServiceType * theServiceType = nil;
+	for (ServiceType * serviceType in self.serviceTypes) {
+		if ([serviceType.name isEqualToString:[service type]]) {
+			theServiceType = serviceType;
+			break;
+		}
+	}
+	if (theServiceType == nil) {
+		theServiceType = [ServiceType serviceTypeForService:service];
+		[self.serviceTypes addObject:theServiceType];
+		[self.serviceTypes sortUsingSelector:@selector(compareByName:)];
+	}
+	[theServiceType addService:service];	
+	
+	[service release]; // we retained this before resolving it
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+	
+	
   // We're now displaying at least one thing. Stop the spinner, as there's now
   // other activity to indicate that we did something.
   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
+
 
 - (void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict {
   NSLog(@"Did not resolve service %@: %@", service, errorDict);
   //[service release]; // we retained this before resolving it
 }
 
+
+- (Host*) hostForService: (NSNetService*) service {
+	Host * result = nil;
+	for (Host * host in self.hosts) {
+		if ([host.services containsObject:service]) {
+			result = host;
+			break;
+		}
+	}
+	return result;
+}
+
+
+- (NSInteger) displayMode {
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"display mode"];
+}
+
+- (void) setDisplayMode: (NSInteger) newDisplayMode {
+	if (self.displayMode != newDisplayMode) {
+		[[NSUserDefaults standardUserDefaults] setInteger:newDisplayMode forKey:@"display mode"];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+	}
+}
+
+
+
+
 - (void)dealloc {
   [navigationController release];
   [window release];
   [metaBrowser release];
-  [self.serviceBrowsers release];
-  [self.hosts release];
+  self.serviceBrowsers = nil;
+  self.hosts = nil;
+  self.serviceTypes = nil;
   [super dealloc];
 }
 

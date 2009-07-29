@@ -13,6 +13,10 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "Reachability.h"
 
+#define SHOWSERVERS 0
+#define SHOWSERVICES 1
+
+
 @interface FlameTouchAppDelegate : NSObject <UIApplicationDelegate> {
   
   UIWindow *window;
@@ -21,16 +25,17 @@
   NSNetServiceBrowser *metaBrowser;
   NSMutableArray *serviceBrowsers;
   NSMutableArray *hosts;
-
+	NSMutableArray *serviceTypes;
 }
 
-- (NSMutableArray*)hosts;
 - (void)refreshList;
+- (Host*) hostForService: (NSNetService*) service;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) NSMutableArray* hosts;
+@property (nonatomic, retain) NSMutableArray* serviceTypes;
 @property (nonatomic, retain) NSMutableArray* serviceBrowsers;
-
+@property NSInteger displayMode;
 @end
 
