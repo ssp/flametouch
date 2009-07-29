@@ -152,7 +152,8 @@
   }
   
   [thehost addService:service];
-  [service release]; // we retained this before resolving it
+  [service setDelegate:nil]; // avoid circular memory loops
+  [service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback
   [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
 
   // We're now displaying at least one thing. Stop the spinner, as there's now
