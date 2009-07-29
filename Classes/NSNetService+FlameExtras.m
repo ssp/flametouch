@@ -1,5 +1,5 @@
 //
-//  NSNetService+Sortable.m
+//  NSNetService+FlameExtras.m
 //  FlameTouch
 //
 //  Created by Tom Insam on 26/11/2008.
