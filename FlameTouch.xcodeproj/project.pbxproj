@@ -27,6 +27,7 @@
 		E6AAAFCE0FF521BF0042220A /* ServiceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AAAFCD0FF521BF0042220A /* ServiceDetailViewController.m */; };
 		E6AAB0A40FF529850042220A /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AAB0A30FF529850042220A /* Utility.m */; };
 		E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */; };
+		E6F2B8601020F7390084D25B /* service_list_builder.rb in Resources */ = {isa = PBXBuildFile; fileRef = E6F2B85F1020F7390084D25B /* service_list_builder.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		E6AAB0A20FF529850042220A /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		E6AAB0A30FF529850042220A /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		E6F2B85F1020F7390084D25B /* service_list_builder.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = service_list_builder.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				28A0AAE50D9B0CCF005BE974 /* FlameTouch_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				E6F2B85F1020F7390084D25B /* service_list_builder.rb */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				E6613AF510177E3500EA7A4A /* Default.png in Resources */,
 				E6613C9F10183F6100EA7A4A /* about_template.html in Resources */,
 				E6055249101A1D0400E70AB4 /* about.html in Resources */,
+				E6F2B8601020F7390084D25B /* service_list_builder.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
