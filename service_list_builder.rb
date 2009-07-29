@@ -15,6 +15,6 @@ lines = data.split(/[\r\n]+/)
 for line in lines
     match = line.match(/^<b>(.*?)<\/b>\s+(.*)/)
     if match
-        puts "                       @\"#{match[2].gsub(/"/,"\\\"")}\", @\"_#{match[1]}._tcp.\","
+        puts "                       @\"#{match[2].gsub(/"/,"\\\"").gsub(/<.*?>/,'')}\", @\"_#{match[1]}._tcp.\","
     end
 end
