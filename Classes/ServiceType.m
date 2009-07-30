@@ -58,7 +58,9 @@
 		for (NSNetService * netService in self.services) {
 			[nameList appendFormat:@"“%@”, ", [netService name]];
 		}
-		[nameList replaceCharactersInRange:NSMakeRange([nameList length] - 2, 2) withString:@"."];
+    if ([nameList length] >= 2) {
+      [nameList replaceCharactersInRange:NSMakeRange([nameList length] - 2, 2) withString:@"."];
+    }
 		result = [NSString stringWithFormat:NSLocalizedString(@"%i Instances: %@", @"service information in Service Type list when more than one instance of the service is available. %i is the number of occurrences of the Services, %@ is a string with a list of all service names"), [self.services count], nameList];
 	}
 	return result;
