@@ -136,9 +136,9 @@
 
 	ServiceType * serviceType;
 	for (serviceType in self.serviceTypes) {
-		NSUInteger index = [self.serviceTypes indexOfObject:service];
+		NSUInteger index = [serviceType.services indexOfObject:service];
 		if (index != NSNotFound) {
-			[self.serviceTypes removeObjectAtIndex:index];
+			[serviceType.services removeObjectAtIndex:index];
 			break;
 		}
 	}
