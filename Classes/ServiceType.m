@@ -58,7 +58,9 @@
 		for (NSNetService * netService in self.services) {
 			[nameList appendFormat:@"“%@”, ", [netService name]];
 		}
-		[nameList replaceCharactersInRange:NSMakeRange([nameList length] - 2, 2) withString:@"."];
+    if ([nameList length] >= 2) {
+      [nameList replaceCharactersInRange:NSMakeRange([nameList length] - 2, 2) withString:@"."];
+    }
 		result = [NSString stringWithFormat:NSLocalizedString(@"%i Instances: %@", @"service information in Service Type list when more than one instance of the service is available. %i is the number of occurrences of the Services, %@ is a string with a list of all service names"), [self.services count], nameList];
 	}
 	return result;
@@ -75,7 +77,7 @@
 		result = NSLocalizedString(@"Announced twice.", @"Heading for Service Type List when exactly two occurrences of the selected service are announced.");
 	}
 	else {
-		result = NSLocalizedString(@"Announced %i times.", @"Heading for Service Type List when %i occurrences of the selected service are announced. For %i > 2.");
+		result = [NSString stringWithFormat:NSLocalizedString(@"Announced %i times.", @"Heading for Service Type List when %i occurrences of the selected service are announced. For %i > 2."), [self.services count]];
 	}
 	
 	return result;

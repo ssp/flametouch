@@ -14,7 +14,8 @@
 
 @synthesize host;
 @synthesize service;
-@synthesize other;
+@synthesize TXTRecordKeys;
+@synthesize TXTRecordValues;
 
 #define STANDARD_ROWS 4
 
@@ -23,8 +24,10 @@
   
   self.host = hst;
   self.service = srv;
-  self.other = [NSNetService dictionaryFromTXTRecordData:[self.service TXTRecordData]];
-
+  NSDictionary * TXTRecordDict = [NSNetService dictionaryFromTXTRecordData:[self.service TXTRecordData]];
+  self.TXTRecordKeys = [[TXTRecordDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+  self.TXTRecordValues = [TXTRecordDict objectsForKeys:self.TXTRecordKeys notFoundMarker:@""];
+  
 /*
   UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 100.0)];
   
@@ -93,7 +96,7 @@
 		if ([self externalURL]) result = 1;
 }
 	else  { // section for TXT record
-		result = [self.other count];
+		result = [self.TXTRecordKeys count];
 	}
 
 	return result;
@@ -185,8 +188,8 @@
 
 
 -(UITableViewCell*) TXTRecordPropertyCellForRow: (int) row {
-	NSString * label = [[other allKeys] objectAtIndex:row];
-	NSString * value = [[[NSString alloc] initWithData:[other objectForKey:label] encoding:NSUTF8StringEncoding] autorelease];
+	NSString * label = [self.TXTRecordKeys objectAtIndex:row];
+	NSString * value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:row] encoding:NSUTF8StringEncoding] autorelease];
 	
 	UITableViewCell * cell = [self propertyCellWithLabel: label andValue: value];
 	return cell;
@@ -216,8 +219,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0) {
     if (indexPath.row > STANDARD_ROWS) {
-      NSString *caption = [[other allKeys] objectAtIndex:indexPath.row - STANDARD_ROWS];
-      NSString *value = [[[NSString alloc] initWithData:[other objectForKey:caption] encoding:NSUTF8StringEncoding] autorelease];
+      NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
       NSURL *url = [NSURL URLWithString:value];
       if (url && [url scheme] && [url host]) {
         [[UIApplication sharedApplication] openURL:url];

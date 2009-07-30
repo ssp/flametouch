@@ -12,12 +12,14 @@
 @interface ServiceDetailViewController : UITableViewController {
   Host *host;
   NSNetService *service;
-  NSDictionary *other;
+  NSArray * TXTRecordKeys;
+  NSArray * TXTRecordValues;  
 }
 
 @property (nonatomic, retain) Host* host;
 @property (nonatomic, retain) NSNetService* service;
-@property (nonatomic, retain) NSDictionary *other;
+@property (nonatomic, retain) NSArray* TXTRecordKeys;
+@property (nonatomic, retain) NSArray* TXTRecordValues;
 
 -(id)initWithHost:(Host*)host service:(NSNetService*)service;
 
