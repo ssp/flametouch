@@ -65,7 +65,7 @@
 		self.title = self.service.humanReadableType;
 	}
 	else {
-		self.title = self.service.hostnamePlus;
+		self.title = self.service.name;
 	}
   
   return self;
@@ -136,6 +136,7 @@
     
 		cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
 		cellLabel.font = [UIFont systemFontOfSize:14.0];
+    cellLabel.adjustsFontSizeToFitWidth = YES;
 		cellLabel.textAlignment = UITextAlignmentLeft;
 		cellLabel.highlightedTextColor = [UIColor whiteColor];
 		cellLabel.tag = 2;
