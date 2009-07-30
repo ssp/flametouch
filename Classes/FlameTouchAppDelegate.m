@@ -106,7 +106,7 @@
     // the resolver callback.
     [service retain]; // released in didResolveAddress / didNotResolve
     [service setDelegate:self];
-    [service resolve];
+    [service resolveWithTimeout:20]; // in seconds
   }
   
 }
@@ -152,6 +152,8 @@
   }
   
   [thehost addService:service];
+
+  [service stop];
   [service setDelegate:nil]; // avoid circular memory loops
   [service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback
   [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
