@@ -75,7 +75,7 @@
 		result = NSLocalizedString(@"Announced twice.", @"Heading for Service Type List when exactly two occurrences of the selected service are announced.");
 	}
 	else {
-		result = NSLocalizedString(@"Announced %i times.", @"Heading for Service Type List when %i occurrences of the selected service are announced. For %i > 2.");
+		result = [NSString stringWithFormat:NSLocalizedString(@"Announced %i times.", @"Heading for Service Type List when %i occurrences of the selected service are announced. For %i > 2."), [self.services count]];
 	}
 	
 	return result;
