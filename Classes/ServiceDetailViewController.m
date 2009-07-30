@@ -15,6 +15,8 @@
 @synthesize service;
 @synthesize other;
 
+#define STANDARD_ROWS 4
+
 -(id)initWithHost:(Host*)hst service:(NSNetService*)srv {
   if ([super initWithStyle:UITableViewStyleGrouped] == nil) return nil;
   
@@ -22,23 +24,40 @@
   self.service = srv;
   self.other = [NSNetService dictionaryFromTXTRecordData:[self.service TXTRecordData]];
 
-  UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 64.0)];
+  UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 100.0)];
   
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 25.0)];
-  label.font = [UIFont systemFontOfSize:16.0];
+  // header cell to contain word-wrapped version of full text description
+  // of the service. This is here because it's the only place you'll otherwise
+  // see the full description, as most of them are quite long.
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 5.0, self.tableView.frame.size.width - 20, 100.0)];
+  label.font = [UIFont systemFontOfSize:14.0];
   label.textAlignment = UITextAlignmentLeft;
   label.textColor = [UIColor blackColor];
+  label.lineBreakMode = UILineBreakModeWordWrap;
+  label.numberOfLines = 0;
+  label.backgroundColor = [UIColor clearColor];
   label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-  label.text = [host name];
+  label.text = [[Utility sharedInstance] nameForService:self.service];
+
+  // resize label and header frame to just enclose the text.
+  CGSize maximumLabelSize = CGSizeMake(self.tableView.frame.size.width - 20, 1000);
+  CGSize expectedLabelSize = [label.text sizeWithFont:label.font constrainedToSize:maximumLabelSize lineBreakMode:label.lineBreakMode]; 
+  CGRect newFrame = label.frame;
+  newFrame.size.height = expectedLabelSize.height;
+  label.frame = newFrame;
+  header.frame = newFrame;
+  
   [header addSubview:label];
   [label release];
   
-  //self.tableView.tableHeaderView = header;
+  self.tableView.tableHeaderView = header;
   [header release];
   
   self.tableView.delegate = self;
 
-  self.title = [[Utility sharedInstance] nameForService:self.service];
+  // the name just tends to be too long for the large title font.
+  // [[Utility sharedInstance] nameForService:self.service];
+  self.title = [self.service type];
   
   return self;
 }
@@ -51,7 +70,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0) {
-    return 3 + [other count];
+    return STANDARD_ROWS + [other count];
   } else {
     return 1;
   }
@@ -97,10 +116,13 @@
     caption = @"port";
     value = [NSString stringWithFormat:@"%i", [service port]];
   } else if (row == 2) {
+    caption = @"service type";
+    value = [self.service type];
+  } else if (row == 3) {
     caption = @"description";
     value = [[Utility sharedInstance] nameForService:self.service];
   } else {
-    caption = [[other allKeys] objectAtIndex:row - 3];
+    caption = [[other allKeys] objectAtIndex:row - STANDARD_ROWS];
     value = [[[NSString alloc] initWithData:[other objectForKey:caption] encoding:NSUTF8StringEncoding] autorelease];
   }
   
@@ -143,8 +165,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0) {
-    if (indexPath.row > 3) {
-      NSString *caption = [[other allKeys] objectAtIndex:indexPath.row - 3];
+    if (indexPath.row > STANDARD_ROWS) {
+      NSString *caption = [[other allKeys] objectAtIndex:indexPath.row - STANDARD_ROWS];
       NSString *value = [[[NSString alloc] initWithData:[other objectForKey:caption] encoding:NSUTF8StringEncoding] autorelease];
       NSURL *url = [NSURL URLWithString:value];
       if (url && [url scheme] && [url host]) {
