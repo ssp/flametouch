@@ -136,9 +136,9 @@
 
 	ServiceType * serviceType;
 	for (serviceType in self.serviceTypes) {
-		NSUInteger index = [self.serviceTypes indexOfObject:service];
+		NSUInteger index = [serviceType.services indexOfObject:service];
 		if (index != NSNotFound) {
-			[self.serviceTypes removeObjectAtIndex:index];
+			[serviceType.services removeObjectAtIndex:index];
 			break;
 		}
 	}
@@ -185,9 +185,6 @@
 	}
 	[theServiceType addService:service];	
 	
-	[service setDelegate:nil]; // avoid circular memory loops
-	[service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback
-
   [service stop];
   [service setDelegate:nil]; // avoid circular memory loops
   [service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback
