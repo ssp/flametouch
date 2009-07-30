@@ -7,7 +7,7 @@
 //
 
 #import "Host.h"
-#import "NSNetService+Sortable.h"
+#import "NSNetService+FlameExtras.h"
 
 @implementation Host
 
@@ -44,9 +44,9 @@
 		serviceCountString = NSLocalizedString(@"1 service", @"String appended to Host description when a single service is present on the Host");
 	}
 	else if (serviceCount > 1) {
-		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i services", @"String appended to Host description when %i (with %i > 1) services are present on Host"), serviceCount];
+		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i Services", @"String appended to Host description when %i (with %i > 1) services are present on Host"), serviceCount];
 	}
-	NSString* details = [NSString stringWithFormat:@"%@ (%@) – %@", self.hostname, self.ip, serviceCountString];
+	NSString* details = [NSString stringWithFormat:@"%@ (%@) – %@.", self.hostname, self.ip, serviceCountString];
 	return details;
 }
 
@@ -61,8 +61,8 @@
 -(void)addService:(NSNetService*)service {
 	if (![self hasService:service]) {
 		[self.services addObject:service];
+		[self.services sortUsingSelector:@selector(compareByName:)];
 	}
-	[self.services sortUsingSelector:@selector(compareByName:)];
 }
 
 -(void)removeService:(NSNetService*)service {

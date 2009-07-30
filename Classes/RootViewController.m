@@ -10,6 +10,7 @@
 #import "ServiceViewController.h"
 #import "FlameTouchAppDelegate.h"
 #import "Host.h"
+#import "ServiceType.h"
 #import "AboutViewController.h"
 
 @implementation RootViewController
@@ -17,8 +18,6 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
-  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-  self.title = [NSString stringWithFormat:@"%d servers", [delegate.hosts count]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -26,10 +25,24 @@
   [self.navigationItem setLeftBarButtonItem:refreshButton];
   [refreshButton release];
 
-  UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:@"About" style:UIBarButtonItemStylePlain target:self action:@selector(showAboutPane)];
+  UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", @"String in 'About' button in the top bar") style:UIBarButtonItemStylePlain target:self action:@selector(showAboutPane)];
   [self.navigationItem setRightBarButtonItem:aboutButton];
   [aboutButton release];
+	
+	NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Servers", @"Title of Segmented Control item for selecting the Server list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
+	UISegmentedControl * segmentedControl = [[[UISegmentedControl alloc] initWithItems:segmentedControlItems] autorelease];
+	[segmentedControl addTarget:self action:@selector(changeDisplayMode:) forControlEvents:UIControlEventValueChanged];
+	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	segmentedControl.selectedSegmentIndex = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode;
+	self.navigationItem.titleView = segmentedControl;
 }
+
+
+-(void) changeDisplayMode:(id) sender {
+	NSInteger selection = [(UISegmentedControl*) sender selectedSegmentIndex];
+	((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode = selection;
+}
+
 
 -(void)showAboutPane {
   AboutViewController *avc = [[AboutViewController alloc] init];
@@ -45,7 +58,12 @@
 -(void) newServices:(id)whatever {
   [self.tableView reloadData];
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-  self.title = [NSString stringWithFormat:@"%d servers", [delegate.hosts count]];
+	if (delegate.displayMode == SHOWSERVERS) {
+		self.title = [NSString stringWithFormat:NSLocalizedString(@"Servers", @"Button to get back to the Servers list"), [delegate.hosts count]];
+	}
+	else {
+		self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Button to get back to the Services list"), [delegate.serviceTypes count]];		
+	}
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,8 +78,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-  return [delegate.hosts count];
+	FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
+	NSInteger result; 
+
+	if (delegate.displayMode == SHOWSERVERS) {
+		result = [delegate.hosts count];
+	}
+	else {
+		result = [delegate.serviceTypes count];
+	}
+
+	return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,25 +118,37 @@
   }
   
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-  Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
-  ((UILabel*)[cell viewWithTag:1]).text = [host name];
-  ((UILabel*)[cell viewWithTag:2]).text = [host details];
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	if (delegate.displayMode == SHOWSERVERS) {
+		Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
+		((UILabel*)[cell viewWithTag:1]).text = [host name];
+		((UILabel*)[cell viewWithTag:2]).text = [host details];
+	}
+	else {
+		ServiceType * serviceType = (ServiceType*) [delegate.serviceTypes objectAtIndex:indexPath.row];
+		((UILabel*)[cell viewWithTag:1]).text = serviceType.humanReadableType;
+		((UILabel*)[cell viewWithTag:2]).text = [serviceType details];
+	}
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   // Navigation logic may go here. Create and push another view controller.
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-  Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
   
-  ServiceViewController *svc = [[ServiceViewController alloc] initWithHost:host];
-  [self.navigationController pushViewController:svc animated:TRUE];
-  [svc release];
-}
+	DetailListController * dlc = nil;
+	if (delegate.displayMode == SHOWSERVERS) {
+		Host * host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
+		dlc = [[ServiceViewController alloc] initWithHost:host];
+	}
+	else {
+		ServiceType * serviceType = [delegate.serviceTypes objectAtIndex:indexPath.row];
+		dlc = [[HostViewController alloc] initWithServiceType: serviceType];
+	}
 
-- (void)dealloc {
-  [super dealloc];
+	[self.navigationController pushViewController:dlc animated:TRUE];
+  [dlc release];
 }
 
 

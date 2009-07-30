@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Host.h"
-#import "Utility.h"
 
 @interface ServiceDetailViewController : UITableViewController {
   Host *host;
@@ -21,7 +20,10 @@
 @property (nonatomic, retain) NSDictionary *other;
 
 -(id)initWithHost:(Host*)host service:(NSNetService*)service;
--(UITableViewCell *)propertyCellForRow:(int)r;
+
+-(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value;
+-(UITableViewCell*) standardPropertyCellForRow: (int) row;
+-(UITableViewCell*) TXTRecordPropertyCellForRow: (int) row;
 -(UITableViewCell *)actionCellForRow:(int)r;
 -(NSURL*)externalURL;
 
