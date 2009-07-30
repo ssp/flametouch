@@ -65,6 +65,22 @@
 }
 
 
+- (NSString *) summary {
+	NSString * result = @"";
+	
+	if ([self.services count] == 1) {
+		result = NSLocalizedString(@"Announced once.", @"Heading for Service Type List when exactly one occurrence of the selected service is announced.");
+	}
+	else if ([self.services count] == 2) {
+		result = NSLocalizedString(@"Announced twice.", @"Heading for Service Type List when exactly two occurrences of the selected service are announced.");
+	}
+	else {
+		result = NSLocalizedString(@"Announced %i times.", @"Heading for Service Type List when %i occurrences of the selected service are announced. For %i > 2.");
+	}
+	
+	return result;
+}
+
 
 - (NSComparisonResult) compareByName:(ServiceType*) serviceType {
 	NSString* myName = self.humanReadableType;

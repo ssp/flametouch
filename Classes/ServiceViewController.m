@@ -20,7 +20,7 @@
 
 	UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 25.0)];
 
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, 292.0, 20.0)];
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, 292.0, 18.0)];
 	label.tag = LABEL_TAG;
 	label.font = [UIFont systemFontOfSize:12.0];
 	label.textAlignment = UITextAlignmentCenter;
@@ -187,7 +187,7 @@
 
 -(void) setCaption {
 	UILabel *label = (UILabel*)[self.view viewWithTag:LABEL_TAG];
-	label.text = serviceType.details;
+	label.text = serviceType.summary;
 }
 
 

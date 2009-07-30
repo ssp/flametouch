@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString * humanReadableType;
 @property (nonatomic, retain) NSMutableArray * services;
 @property (readonly) NSString * details;
+@property (readonly) NSString * summary;
 
 + (id) serviceTypeForService: (NSNetService*) netService;
 
