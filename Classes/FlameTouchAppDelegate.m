@@ -184,7 +184,7 @@
 		[self.serviceTypes sortUsingSelector:@selector(compareByName:)];
 	}
 	[theServiceType addService:service];	
-	
+
   [service stop];
   [service setDelegate:nil]; // avoid circular memory loops
   [service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback

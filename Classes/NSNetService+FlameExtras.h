@@ -10,7 +10,6 @@
 
 @interface NSNetService (FlameExtras)
 
--(int)compareByPriority:(NSNetService*)service;
 -(NSComparisonResult)compareByName:(NSNetService*)service;
 
 @property (readonly) NSString * humanReadableType;
