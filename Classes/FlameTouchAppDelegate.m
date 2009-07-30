@@ -110,7 +110,7 @@
     // the resolver callback.
     [service retain]; // released in didResolveAddress / didNotResolve
     [service setDelegate:self];
-    [service resolve];
+    [service resolveWithTimeout:20]; // in seconds
   }
   
 }
@@ -126,13 +126,13 @@
       break; // found it
     }
   }
-	// Can't mutate while iterating
-	for (Host *host in toRemove) {
-		NSLog(@"No services remaining on host %@, removing", host);
-		[self.hosts removeObject:host];
-	}
-	[toRemove release];
-		
+  // Can't mutate while iterating
+  for (Host *host in toRemove) {
+    NSLog(@"No services remaining on host %@, removing", host);
+    [self.hosts removeObject:host];
+  }
+  [toRemove release];
+  
 
 	ServiceType * serviceType;
 	for (serviceType in self.serviceTypes) {
@@ -187,8 +187,12 @@
 	
 	[service setDelegate:nil]; // avoid circular memory loops
 	[service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
-	
+
+  [service stop];
+  [service setDelegate:nil]; // avoid circular memory loops
+  [service autorelease]; // we retained this before resolving it, but I don't want to release it in its own callback
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"newServices" object:self];
+
 	
   // We're now displaying at least one thing. Stop the spinner, as there's now
   // other activity to indicate that we did something.

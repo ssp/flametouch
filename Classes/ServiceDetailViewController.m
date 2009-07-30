@@ -55,7 +55,7 @@
   self.tableView.tableHeaderView = header;
   [header release];
 */  
- 
+  
   self.tableView.delegate = self;
 
 	if (((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode == SHOWSERVERS) {
@@ -88,14 +88,14 @@
 	if (section == 0) { // section for general information
 		if (self.service.humanReadableTypeIsDistinct) result = 4;
 		else result = 3;
-	} 
+  }
 	else if ([self externalURL] && section == 1) { // section for URL button
 		if ([self externalURL]) result = 1;
-	}
+}
 	else  { // section for TXT record
 		result = [self.other count];
 	}
-	
+
 	return result;
 }
 
@@ -103,25 +103,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = nil;
 	
-	if (indexPath.section == 0) {
+  if (indexPath.section == 0) {
 		cell = [self standardPropertyCellForRow:indexPath.row];
 	} else if ([self externalURL] && indexPath.section == 1) {
 		cell = [self actionCellForRow:indexPath.row];
-	} else  {
+  } else {
 		cell =  [self TXTRecordPropertyCellForRow:indexPath.row];  
-	}
+  }
 	
 	return cell;
 }
 
 
 -(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value {
-	static NSString *CellIdentifier = @"PropertyCell";
-	UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  static NSString *CellIdentifier = @"PropertyCell";
+  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
-	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-		
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+    
 		UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
 		cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
 		cellLabel.textAlignment = UITextAlignmentRight;
@@ -130,7 +130,7 @@
 		cellLabel.tag = 1;
 		[cell.contentView addSubview:cellLabel];
 		[cellLabel release];
-		
+    
 		cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
 		cellLabel.font = [UIFont systemFontOfSize:14.0];
 		cellLabel.textAlignment = UITextAlignmentLeft;
@@ -138,26 +138,26 @@
 		cellLabel.tag = 2;
 		[cell.contentView addSubview:cellLabel];
 		[cellLabel release];
-	}
- 
+  }
+  
 	NSString * myLabel = label;
 	NSString * myValue = value;
 	if (nil == myLabel) myLabel = @"";
 	if (nil == myValue) myValue = @"";
 	((UILabel*)[cell viewWithTag:1]).text = myLabel;
 	((UILabel*)[cell viewWithTag:2]).text = myValue;
-
-	// try to parse the value as an url - if we can, then this cell is
-	// clickable. Make it blue. I'd like it underlined as well, but that
-	// seems to be lots harder.
+  
+  // try to parse the value as an url - if we can, then this cell is
+  // clickable. Make it blue. I'd like it underlined as well, but that
+  // seems to be lots harder.
 	NSURL *url = [NSURL URLWithString:myValue];
-	if (url && [url scheme] && [url host]) {
-		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
-	} else {
+  if (url && [url scheme] && [url host]) {
+    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+  } else {
 		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
-	}
-	
-	return cell;
+  }
+
+  return cell;
 }
 
 
