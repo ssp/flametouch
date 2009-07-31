@@ -101,6 +101,7 @@
     label.font = [UIFont boldSystemFontOfSize:16.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor blackColor];
+		label.highlightedTextColor = [UIColor whiteColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     label.tag = 1;
     [cell.contentView addSubview:label];
@@ -110,6 +111,7 @@
     label.font = [UIFont systemFontOfSize:12.0];
     label.textAlignment = UITextAlignmentLeft;
     label.textColor = [UIColor grayColor];
+		label.highlightedTextColor = [UIColor whiteColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     label.tag = 2;
     [cell.contentView addSubview:label];
