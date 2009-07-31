@@ -42,7 +42,7 @@
 - (void) addService:(NSNetService*) service {
 	if (![self.services containsObject:service]) {
 		[self.services addObject:service];
-		[self.services sortUsingSelector:@selector(compareByName:)];
+		[self.services sortUsingSelector:@selector(compareByHostAndTitle:)];
 	}
 }
 

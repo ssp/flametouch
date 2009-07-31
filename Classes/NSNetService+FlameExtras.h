@@ -11,6 +11,7 @@
 @interface NSNetService (FlameExtras)
 
 -(NSComparisonResult)compareByName:(NSNetService*)service;
+-(NSComparisonResult) compareByHostAndTitle: (NSNetService*) service;
 
 @property (readonly) NSString * humanReadableType;
 @property (readonly) BOOL humanReadableTypeIsDistinct;

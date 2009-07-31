@@ -26,6 +26,15 @@
 }
 
 
+-(NSComparisonResult) compareByHostAndTitle: (NSNetService*) service {
+  NSComparisonResult result = [self.hostnamePlus compare:service.hostnamePlus options:NSLiteralSearch];
+  if (result == NSOrderedSame) {
+    result = [self.name compare:service.name options:NSCaseInsensitiveSearch];
+  }
+  return result;
+}
+
+
 -(NSString*) humanReadableType {
 	NSString * result = [[NSBundle mainBundle] localizedStringForKey:[self type] value:nil table:@"ServiceNames"];
 	return result;
