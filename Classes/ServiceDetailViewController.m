@@ -249,29 +249,35 @@
 }
 
 -(NSURL*)externalURL {
-  if ( [[service type] isEqualToString:@"_webbookmark._tcp.***"] ) { // TODO - sven's thing
-    return [NSURL URLWithString:[service name]];
-    
-  } else if ( [[service type] isEqualToString:@"_http._tcp."] ) {
-    NSString *url;
-    if ([service port] == 80) {
-      url = [NSString stringWithFormat:@"http://%@/", host.ip];
-    } else {
-      url = [NSString stringWithFormat:@"http://%@:%i/", host.ip, [service port]];
-    }
-    return [NSURL URLWithString:url];
-
+  NSString * URLString = nil;
   
-  } else if ( [[service type] isEqualToString:@"_ssh._tcp."] ) {
-    NSString *url;
-    if ([service port] == 22) {
-      url = [NSString stringWithFormat:@"ssh://%@/", host.ip];
-    } else {
-      url = [NSString stringWithFormat:@"ssh://%@:%i/", host.ip, [service port]];
+  if ( [[service type] isEqualToString:@"_urlbookmark._tcp."] ) {
+    NSInteger index = [self.TXTRecordKeys indexOfObject:@"URL"];
+    if (index != NSNotFound) {
+      NSData * URLData = [self.TXTRecordValues objectAtIndex:index];
+      URLString = [[[NSString alloc] initWithData:URLData encoding:NSUTF8StringEncoding] autorelease];
     }
-    return [NSURL URLWithString:url];
+
+  } else if ( [[service type] isEqualToString:@"_http._tcp."] ) {
+    if ([service port] == 80) {
+      URLString = [NSString stringWithFormat:@"http://%@/", host.ip];
+    } else {
+      URLString = [NSString stringWithFormat:@"http://%@:%i/", host.ip, [service port]];
+    }
+
+  } else if ( [[service type] isEqualToString:@"_ssh._tcp."] ) {
+    if ([service port] == 22) {
+      URLString = [NSString stringWithFormat:@"ssh://%@/", host.ip];
+    } else {
+      URLString = [NSString stringWithFormat:@"ssh://%@:%i/", host.ip, [service port]];
+    }
   }
-  return nil;
+  
+  NSURL * result = nil;
+  if (URLString != nil) {
+    result = [NSURL URLWithString:URLString];
+  }
+  return result;
 }
 
 
