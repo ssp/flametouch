@@ -140,6 +140,7 @@
     cellLabel.minimumFontSize = 10.0;
 		cellLabel.textAlignment = UITextAlignmentLeft;
 		cellLabel.highlightedTextColor = [UIColor whiteColor];
+    cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		cellLabel.tag = 2;
 		[cell.contentView addSubview:cellLabel];
 		[cellLabel release];
@@ -207,10 +208,12 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 1.0, cell.frame.size.width - 60, cell.frame.size.height - 3)];
-    label.font = [UIFont systemFontOfSize:14.0];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 1.0, cell.frame.size.width - 40, cell.frame.size.height - 3)];
+    label.font = [UIFont boldSystemFontOfSize:14.0];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor blackColor];
+    label.highlightedTextColor = [UIColor whiteColor];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.tag = 1;
     [cell.contentView addSubview:label];
     [label release];
@@ -281,10 +284,16 @@
 }
 
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES; 
+}
+
 
 - (void)dealloc {
-  [self.host release];
-  [self.service release];
+  self.host = nil;
+  self.service = nil;
+  self.TXTRecordKeys = nil;
+  self.TXTRecordValues = nil;
   [super dealloc];
 }
 

@@ -18,20 +18,22 @@
 - (id) init {
 	if ([super initWithStyle:UITableViewStylePlain] == nil) return nil;
 
-	UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 600.0, 25.0)];
+	UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 25.0)];
+  header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, 292.0, 18.0)];
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, self.tableView.frame.size.width -8.0, 18.0)];
 	label.tag = LABEL_TAG;
 	label.font = [UIFont systemFontOfSize:12.0];
 	label.textAlignment = UITextAlignmentCenter;
 	label.textColor = [UIColor grayColor];
-	label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+	label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	label.numberOfLines = 2;
 	[header addSubview:label];
 	[label release];
 	
-	UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, header.frame.size.height - 1, 600, 1)];
+	UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, header.frame.size.height - 1.0, self.tableView.frame.size.width, 1.0)];
 	line.backgroundColor = [UIColor grayColor];
+  line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	[header addSubview:line];
 	[line release];
 	
@@ -65,22 +67,22 @@
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 		
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, tableView.frame.size.width - 30.0, 25.0)];
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, tableView.frame.size.width - 8.0, 25.0)];
 		label.font = [UIFont boldSystemFontOfSize:16.0];
 		label.textAlignment = UITextAlignmentLeft;
 		label.textColor = [UIColor blackColor];
 		label.highlightedTextColor = [UIColor whiteColor];
-		label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		label.tag = 1;
 		[cell.contentView addSubview:label];
 		[label release];
 		
-		label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, tableView.frame.size.width - 30.0, 20.0)];
+		label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, tableView.frame.size.width - 8.0, 20.0)];
 		label.font = [UIFont systemFontOfSize:12.0];
 		label.textAlignment = UITextAlignmentLeft;
 		label.textColor = [UIColor grayColor];
 		label.highlightedTextColor = [UIColor whiteColor];
-		label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		label.tag = 2;
 		[cell.contentView addSubview:label];
 		[label release];
@@ -255,6 +257,12 @@
 	[self.navigationController pushViewController:sdvc animated:TRUE];
 	[sdvc release];
 }
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES; 
+}
+
 
 - (void)dealloc {
 	self.serviceType = nil;
