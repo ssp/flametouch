@@ -89,8 +89,8 @@
 	NSInteger result = 0;
 	
 	if (section == 0) { // section for general information
-		if (self.service.humanReadableTypeIsDistinct) result = 4;
-		else result = 3;
+		if (self.service.humanReadableTypeIsDistinct) result = 5;
+		else result = 4;
   }
 	else if ([self externalURL] && section == 1) { // section for URL button
 		if ([self externalURL]) result = 1;
@@ -173,12 +173,15 @@
 		label = NSLocalizedString(@"Host", @"Service Details: Label for host name");
 		value = self.service.hostnamePlus;
 	} else if (row == 1) {
+		label = NSLocalizedString(@"Name", @"Service Details: Name of the service");
+		value = [self.service name];
+	} else if (row == 2) {
 		label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
 		value = [NSString stringWithFormat:@"%i", [self.service port]];
-	} else if (row == 2) {
+	} else if (row == 3) {
 		label = NSLocalizedString(@"Type", @"Service Details: Label for type");
 		value = self.service.type;
-	} else if (row == 3) {
+	} else if (row == 4) {
 		label = NSLocalizedString(@"Description", @"Service Details: Label for human readable description");
 		value = self.service.humanReadableType;
 	} 
