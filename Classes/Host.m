@@ -40,11 +40,14 @@
 -(NSString*) details {
 	NSUInteger serviceCount = self.services.count;
 	NSString * serviceCountString = @"";
+  if (serviceCount == 0) {
+    serviceCountString = NSLocalizedString(@"No Services", @"String indicating that no service is advertised on the Host");
+  }
 	if (serviceCount == 1) {
-		serviceCountString = NSLocalizedString(@"1 service", @"String appended to Host description when a single service is present on the Host");
+		serviceCountString = NSLocalizedString(@"1 Service", @"String indicating that single service is advertised on the Host");
 	}
 	else if (serviceCount > 1) {
-		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i Services", @"String appended to Host description when %i (with %i > 1) services are present on Host"), serviceCount];
+		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i Services", @"String indicating that %i (with %i > 1) services are advertised on Host"), serviceCount];
 	}
 	NSString* details = [NSString stringWithFormat:@"%@ (%@) – %@.", self.hostname, self.ip, serviceCountString];
 	return details;
@@ -66,7 +69,7 @@
 }
 
 -(void)removeService:(NSNetService*)service {
-  NSLog(@"removing %@ from %@", service, self.services);
+  // NSLog(@"removing %@ from %@", service, self.services);
   [self.services removeObject:service];
 }
 

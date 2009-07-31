@@ -219,7 +219,7 @@
     [label release];
 
   }
-  ((UILabel*)[cell viewWithTag:1]).text = @"Open service";
+  ((UILabel*)[cell viewWithTag:1]).text = NSLocalizedString(@"Open Service", @"Label of button to open the relevant service on Service Details page");
   return cell;
 }
 
@@ -247,8 +247,10 @@
 }
 
 -(void)complainAboutProtocolHandler {
-  NSString* message = [NSString stringWithFormat:@"I can't open this service, you don't seem to have an app installed that can cope with the url\n%@", [self externalURL]];
-  [[[[UIAlertView alloc] initWithTitle:@"No handler" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
+  NSString* title = NSLocalizedString(@"No handler", @"Title of dialogue warning that no application which can open the URL is present");
+  NSString* message = [NSString stringWithFormat:NSLocalizedString(@"I can't open this service, you don't seem to have an app installed that can cope with the url\n%@", @"Message of dialogue warning that no application which can open the URL is present. %@ is replaced by the URL in question"), [self externalURL]];
+  NSString* button = NSLocalizedString(@"OK", @"OK button in dialogue warning that no application which can open the URL is present");
+  [[[[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:button otherButtonTitles:nil] autorelease] show];
 }
 
 -(NSURL*)externalURL {

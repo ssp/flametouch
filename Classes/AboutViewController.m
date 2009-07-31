@@ -13,7 +13,7 @@
 -(id)init {
   self = [super init];
   if (!self) return nil;
-  self.title = @"Flame for iPhone";
+  self.title = NSLocalizedString(@"Flame for iPhone", @"Full application name");
 
   theWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:theWebView];

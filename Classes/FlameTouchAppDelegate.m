@@ -74,7 +74,10 @@
 
 - (void)checkWifi {
   if (![[Reachability sharedReachability] localWiFiConnectionStatus]) {
-    [[[[UIAlertView alloc] initWithTitle:@"No WiFi connection" message:@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
+    NSString * title = NSLocalizedString(@"No WiFi connection", @"Title of No WiFi Connection error message");
+    NSString * message = NSLocalizedString(@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful.", @"Message of No WiFi Connection error message");
+    NSString * button = NSLocalizedString(@"OK", @"");
+    [[[[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:button otherButtonTitles:nil] autorelease] show];
   }
 }
 
