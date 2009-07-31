@@ -225,23 +225,21 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.section == 0) {
-    if (indexPath.row > STANDARD_ROWS) {
-      NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
-      NSURL *url = [NSURL URLWithString:value];
-      if (url && [url scheme] && [url host]) {
-        [[UIApplication sharedApplication] openURL:url];
-        return;
-      }
-    }
-  } else {
-    if (indexPath.row == 0) {
-      NSLog(@"Opening URL %@", [self externalURL]);
-      // in a couple of seconds, report if we have no wifi
-      [self performSelector:@selector(complainAboutProtocolHandler) withObject:nil afterDelay:2.0];
-      [[UIApplication sharedApplication] openURL:[self externalURL]];
+  if (([self externalURL] && indexPath.section == 2) || (![self externalURL] && indexPath.section == 1)) {
+    // Pressed one of the TXT Record cells
+    NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
+    NSURL *url = [NSURL URLWithString:value];
+    if (url && [url scheme] && [url host]) {
+      [[UIApplication sharedApplication] openURL:url];
       return;
     }
+  } else if ([self externalURL] && indexPath.section == 1) {
+    // Pressed the Open Service cell 
+    NSLog(@"Opening URL %@", [self externalURL]);
+    // in a couple of seconds, report if we have no wifi
+    [self performSelector:@selector(complainAboutProtocolHandler) withObject:nil afterDelay:2.0];
+    [[UIApplication sharedApplication] openURL:[self externalURL]];
+    return;
   }
   
 }
