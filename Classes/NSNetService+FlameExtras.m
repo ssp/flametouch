@@ -12,7 +12,7 @@
 
 @implementation NSNetService (FlameExtras)
 
--(NSComparisonResult) compareByName:(NSNetService*)service {
+-(NSComparisonResult) compareByType:(NSNetService*)service {
 	NSString* myName = self.humanReadableType;
 	if ([myName rangeOfString:@"_" options:NSLiteralSearch | NSAnchoredSearch].location == 0) {
 		myName = [myName substringFromIndex:1];
@@ -26,10 +26,19 @@
 }
 
 
+-(NSComparisonResult) compareByTypeAndName:(NSNetService*)service {
+  NSComparisonResult result = [self compareByType:service];
+  if (result == NSOrderedSame) {
+    result = [[self name] localizedCaseInsensitiveCompare:[service name]];
+  }
+  return result;
+}
+
+
 -(NSComparisonResult) compareByHostAndTitle: (NSNetService*) service {
   NSComparisonResult result = [self.hostnamePlus compare:service.hostnamePlus options:NSLiteralSearch];
   if (result == NSOrderedSame) {
-    result = [self.name compare:service.name options:NSCaseInsensitiveSearch];
+    result = [self.name localizedCaseInsensitiveCompare:service.name];
   }
   return result;
 }
