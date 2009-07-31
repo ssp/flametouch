@@ -84,6 +84,15 @@
 }
 
 
+- (BOOL) isEqual: (id) otherObject {
+  BOOL result = NO;
+  if ([otherObject isKindOfClass:[self class]]) {
+    result = [((ServiceType*)otherObject).type isEqualToString:self.type];
+  }
+  return result;
+}
+
+
 - (NSComparisonResult) compareByName:(ServiceType*) serviceType {
 	NSString* myName = self.humanReadableType;
 	if ([myName rangeOfString:@"_" options:NSLiteralSearch | NSAnchoredSearch].location == 0) {

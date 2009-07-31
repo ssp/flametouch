@@ -70,6 +70,16 @@
   [self.services removeObject:service];
 }
 
+
+- (BOOL) isEqual: (id) otherObject {
+  BOOL result = NO;
+  if ([otherObject isKindOfClass:[self class]]) {
+    result = [((Host*)otherObject).hostname isEqualToString:self.hostname];
+  }
+  return result;
+}
+
+
 -(int)compareByName:(Host*)host {
   return [[self name] localizedCaseInsensitiveCompare:[host name]];
 }
