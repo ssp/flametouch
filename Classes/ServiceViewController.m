@@ -21,7 +21,7 @@
 	UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 25.0)];
   header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, self.tableView.frame.size.width -8.0, 18.0)];
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 3.0, self.tableView.frame.size.width -16.0, 18.0)];
 	label.tag = LABEL_TAG;
 	label.font = [UIFont systemFontOfSize:12.0];
 	label.textAlignment = UITextAlignmentCenter;
