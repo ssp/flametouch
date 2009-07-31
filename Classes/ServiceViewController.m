@@ -94,6 +94,9 @@
 }
 
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES; 
+}
 
 @end
 
@@ -256,11 +259,6 @@
 	ServiceDetailViewController *sdvc = [[ServiceDetailViewController alloc] initWithHost:host service:service];
 	[self.navigationController pushViewController:sdvc animated:TRUE];
 	[sdvc release];
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-  return YES; 
 }
 
 
