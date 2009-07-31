@@ -48,8 +48,8 @@
 - (void) setCaption {}
 
 
--(void) newServices:(id)whatever {
-	[self.tableView reloadData];
+- (void) newServices:(id) sender {
+  [self.tableView reloadData];
 	[self setCaption];
 }
 
@@ -120,9 +120,28 @@
 }
 
 
+-(void) newServices:(id) sender {
+  if ([self.host.services count] == 0) {
+    // this Host stopped existing, check whether new services of the same kind appeared and, if so, replace our ServiceType with the new instance
+    FlameTouchAppDelegate * delegate = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]);
+    
+    for (Host * h in delegate.hosts) {
+      if ([h isEqual:self.host]) {
+        self.host = h;
+        break;
+      }
+    }
+    
+  }
+  
+  [super newServices:sender];
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return [self.host serviceCount];
 }
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -190,6 +209,24 @@
 -(void) setCaption {
 	UILabel *label = (UILabel*)[self.view viewWithTag:LABEL_TAG];
 	label.text = serviceType.summary;
+}
+
+
+-(void) newServices:(id) sender {
+  if ([self.serviceType.services count] == 0) {
+    // this ServiceType stopped existing, check whether new services of the same kind appeared and, if so, replace our ServiceType with the new instance
+    FlameTouchAppDelegate * delegate = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]);
+    
+    for (ServiceType * sT in delegate.serviceTypes) {
+      if ([sT isEqual:self.serviceType]) {
+        self.serviceType = sT;
+        break;
+      }
+    }
+    
+  }
+  
+  [super newServices:sender];
 }
 
 

@@ -13,6 +13,7 @@
 @interface DetailListController : UITableViewController {
 }
 
+- (void) setCaption;
 - (void) newServices: (id) sender;
 
 @end
