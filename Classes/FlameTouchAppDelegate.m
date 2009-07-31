@@ -173,7 +173,7 @@
 
 	ServiceType * theServiceType = nil;
 	for (ServiceType * serviceType in self.serviceTypes) {
-		if ([serviceType.name isEqualToString:[service type]]) {
+		if ([serviceType.type isEqualToString:[service type]]) {
 			theServiceType = serviceType;
 			break;
 		}

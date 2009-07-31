@@ -10,13 +10,13 @@
 
 
 @interface ServiceType : NSObject {
-	NSString * name;
+	NSString * type;
 	NSString * humanReadableType;
 	
 	NSMutableArray * services;
 }
 
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSString * humanReadableType;
 @property (nonatomic, retain) NSMutableArray * services;
 @property (readonly) NSString * details;

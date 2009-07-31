@@ -10,7 +10,7 @@
 #import "NSNetService+FlameExtras.h"
 
 @implementation ServiceType
-@synthesize name;
+@synthesize type;
 @synthesize humanReadableType;
 @synthesize services;
 
@@ -23,7 +23,7 @@
 
 + (id) serviceTypeForService: (NSNetService*) netService {
 	ServiceType * newServiceType = [[[ServiceType alloc] init] autorelease];
-	newServiceType.name = [netService type];
+	newServiceType.type = [netService type];
 	newServiceType.humanReadableType = netService.humanReadableType;
 
 	return newServiceType;
@@ -32,7 +32,7 @@
 
 - (void) dealloc {
 	self.services = nil;
-	self.name = nil;
+	self.type = nil;
 	self.humanReadableType = nil;
 	[super dealloc];
 }
