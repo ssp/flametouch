@@ -10,7 +10,7 @@
 
 #define LABEL_TAG 1
 
-@interface DetailListController : UITableViewController {
+@interface ServiceViewController : UITableViewController {
 }
 
 - (void) setCaption;
@@ -20,7 +20,7 @@
 
 
 @class Host;
-@interface ServiceViewController : DetailListController {
+@interface ServiceByHostViewController : ServiceViewController {
   Host *host;
 }
 @property (nonatomic, retain) Host* host;
@@ -29,7 +29,7 @@
 
 
 @class ServiceType;
-@interface HostViewController : DetailListController {
+@interface ServiceByTypeViewController : ServiceViewController {
 	ServiceType * serviceType;
 }
 @property (nonatomic, retain) ServiceType * serviceType;

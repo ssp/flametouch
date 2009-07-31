@@ -13,7 +13,7 @@
 #import "ServiceType.h"
 #import "FlameTouchAppDelegate.h"
 
-@implementation DetailListController
+@implementation ServiceViewController
 
 - (id) init {
 	if ([super initWithStyle:UITableViewStylePlain] == nil) return nil;
@@ -98,7 +98,7 @@
 
 
 
-@implementation ServiceViewController
+@implementation ServiceByHostViewController
 
 @synthesize host;
 
@@ -190,7 +190,7 @@
 
 
 
-@implementation HostViewController
+@implementation ServiceByTypeViewController
 
 @synthesize serviceType;
 

@@ -139,14 +139,14 @@
   // Navigation logic may go here. Create and push another view controller.
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
   
-	DetailListController * dlc = nil;
+  ServiceViewController * dlc = nil;
 	if (delegate.displayMode == SHOWSERVERS) {
 		Host * host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
-		dlc = [[ServiceViewController alloc] initWithHost:host];
+		dlc = [[ServiceByHostViewController alloc] initWithHost:host];
 	}
 	else {
 		ServiceType * serviceType = [delegate.serviceTypes objectAtIndex:indexPath.row];
-		dlc = [[HostViewController alloc] initWithServiceType: serviceType];
+		dlc = [[ServiceByTypeViewController alloc] initWithServiceType: serviceType];
 	}
 
 	[self.navigationController pushViewController:dlc animated:TRUE];
