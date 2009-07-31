@@ -274,7 +274,7 @@
 "_ofocus-conf._tcp." = "OmniFocus Setting Configuration";
 "_ofocus-sync._tcp." = "OmniFocus Document Synchronization";
 "_olpc-activity1._tcp." = "OLPC activity";
-"_omni-bookmark._tcp." = "OmniWeb";
+"_omni-bookmark._tcp." = "OmniWeb Bookmarks";
 "_openbase._tcp." = "OpenBase SQL";
 "_opencu._tcp." = "Conferencing";
 "_oprofile._tcp." = "oprofile server";
@@ -492,4 +492,4 @@
 "_WorldBook2004ST._tcp." = "World Book Encyclopedia";
 
 
-"_webbookmark._tcp." = "Safari Web Page";
+"_urlbookmark._tcp." = "Safari Web Page";
