@@ -137,6 +137,7 @@
 		cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
 		cellLabel.font = [UIFont systemFontOfSize:14.0];
     cellLabel.adjustsFontSizeToFitWidth = YES;
+    cellLabel.minimumFontSize = 10.0;
 		cellLabel.textAlignment = UITextAlignmentLeft;
 		cellLabel.highlightedTextColor = [UIColor whiteColor];
 		cellLabel.tag = 2;
