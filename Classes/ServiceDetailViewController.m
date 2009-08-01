@@ -16,8 +16,8 @@
 @synthesize service;
 @synthesize TXTRecordKeys;
 @synthesize TXTRecordValues;
+@synthesize externalURL;
 
-#define STANDARD_ROWS 4
 
 -(id)initWithHost:(Host*)hst service:(NSNetService*)srv {
   if ([super initWithStyle:UITableViewStyleGrouped] == nil) return nil;
@@ -27,6 +27,7 @@
   NSDictionary * TXTRecordDict = [NSNetService dictionaryFromTXTRecordData:[self.service TXTRecordData]];
   self.TXTRecordKeys = [[TXTRecordDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
   self.TXTRecordValues = [TXTRecordDict objectsForKeys:self.TXTRecordKeys notFoundMarker:@""];
+  [self setupExternalURL];
   
 /*
   UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 100.0)];
@@ -68,6 +69,8 @@
 		self.title = self.service.name;
 	}
   
+  
+  
   return self;
 }
 
@@ -80,10 +83,23 @@
 */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	NSInteger result = 1;
-	if (self.service.humanReadableTypeIsDistinct) result++;
-	if ([self externalURL]) result ++;
+	if (self.hasOpenServiceButton) result ++;
+  if ([self.TXTRecordKeys count] != 0) result ++;
 	return result;
 }
+
+
+- (BOOL) hasOpenServiceButton {
+  BOOL result = NO;
+  NSURL * URL = self.externalURL;
+  if (URL != nil) {
+    if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+      result = YES;
+    }
+  }
+  return result;
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	NSInteger result = 0;
@@ -92,9 +108,9 @@
 		if (self.service.humanReadableTypeIsDistinct) result = 5;
 		else result = 4;
   }
-	else if ([self externalURL] && section == 1) { // section for URL button
-		if ([self externalURL]) result = 1;
-}
+	else if (section == 1 && self.hasOpenServiceButton) { // section for URL button
+    result = 1;
+  }
 	else  { // section for TXT record
 		result = [self.TXTRecordKeys count];
 	}
@@ -108,7 +124,7 @@
 	
   if (indexPath.section == 0) {
 		cell = [self standardPropertyCellForRow:indexPath.row];
-	} else if ([self externalURL] && indexPath.section == 1) {
+	} else if (indexPath.section == 1 && self.hasOpenServiceButton) {
 		cell = [self actionCellForRow:indexPath.row];
   } else {
 		cell =  [self TXTRecordPropertyCellForRow:indexPath.row];  
@@ -157,10 +173,12 @@
   // clickable. Make it blue. I'd like it underlined as well, but that
   // seems to be lots harder.
 	NSURL *url = [NSURL URLWithString:myValue];
-  if (url && [url scheme] && [url host]) {
+  if (url && [url scheme] && [url host] && [[UIApplication sharedApplication] canOpenURL:url]) {
     [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   } else {
 		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
 
   return cell;
@@ -225,7 +243,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (([self externalURL] && indexPath.section == 2) || (![self externalURL] && indexPath.section == 1)) {
+  if ((self.hasOpenServiceButton && indexPath.section == 2) || (!self.hasOpenServiceButton && indexPath.section == 1)) {
     // Pressed one of the TXT Record cells
     NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
     NSURL *url = [NSURL URLWithString:value];
@@ -233,25 +251,18 @@
       [[UIApplication sharedApplication] openURL:url];
       return;
     }
-  } else if ([self externalURL] && indexPath.section == 1) {
+  } else if (self.hasOpenServiceButton && indexPath.section == 1) {
     // Pressed the Open Service cell 
-    NSLog(@"Opening URL %@", [self externalURL]);
+    NSLog(@"Opening URL %@", self.externalURL);
     // in a couple of seconds, report if we have no wifi
-    [self performSelector:@selector(complainAboutProtocolHandler) withObject:nil afterDelay:2.0];
-    [[UIApplication sharedApplication] openURL:[self externalURL]];
+    [[UIApplication sharedApplication] openURL:self.externalURL];
     return;
   }
   
 }
 
--(void)complainAboutProtocolHandler {
-  NSString* title = NSLocalizedString(@"No handler", @"Title of dialogue warning that no application which can open the URL is present");
-  NSString* message = [NSString stringWithFormat:NSLocalizedString(@"I can't open this service, you don't seem to have an app installed that can cope with the url\n%@", @"Message of dialogue warning that no application which can open the URL is present. %@ is replaced by the URL in question"), [self externalURL]];
-  NSString* button = NSLocalizedString(@"OK", @"OK button in dialogue warning that no application which can open the URL is present");
-  [[[[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:button otherButtonTitles:nil] autorelease] show];
-}
 
--(NSURL*)externalURL {
+-(void)setupExternalURL {
   NSString * URLString = nil;
   
   if ( [[service type] isEqualToString:@"_urlbookmark._tcp."] ) {
@@ -280,7 +291,8 @@
   if (URLString != nil) {
     result = [NSURL URLWithString:URLString];
   }
-  return result;
+  
+  self.externalURL = result;
 }
 
 
@@ -294,6 +306,7 @@
   self.service = nil;
   self.TXTRecordKeys = nil;
   self.TXTRecordValues = nil;
+  self.externalURL = nil;
   [super dealloc];
 }
 
