@@ -121,7 +121,7 @@
 
 -(void) setCaption {
 	UILabel *label = (UILabel*)[self.view viewWithTag:LABEL_TAG];
-	label.text = host.details;
+	label.text = [host detailsWithCount];
 }
 
 

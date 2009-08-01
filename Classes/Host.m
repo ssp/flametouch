@@ -8,6 +8,7 @@
 
 #import "Host.h"
 #import "NSNetService+FlameExtras.h"
+#import "ServiceType.h"
 
 @implementation Host
 
@@ -38,6 +39,20 @@
 }
 
 -(NSString*) details {
+  NSString * result;
+  if (self.services.count == 1) {
+    NSString * serviceName = ((ServiceType*)[self.services objectAtIndex:0]).humanReadableType;
+    result = [NSString stringWithFormat:@"%@ (%@) – “%@”", self.hostname, self.ip, serviceName];
+  }
+  else {
+    result = [self detailsWithCount];
+  }
+  
+  return result;
+  
+}
+
+-(NSString*) detailsWithCount {
 	NSUInteger serviceCount = self.services.count;
 	NSString * serviceCountString = @"";
   if (serviceCount == 0) {

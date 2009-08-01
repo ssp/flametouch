@@ -24,6 +24,7 @@
 
 -(NSString*)name;
 -(NSString*)details;
+-(NSString*)detailsWithCount;
 -(NSNetService*)serviceAtIndex:(int)i;
 -(void)addService:(NSNetService*)service;
 -(BOOL)hasService:(NSNetService*)service;
