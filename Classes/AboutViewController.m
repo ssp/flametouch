@@ -16,6 +16,7 @@
   self.title = NSLocalizedString(@"Flame for iPhone", @"Full application name");
 
   theWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+  [theWebView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
   [self.view addSubview:theWebView];
   [theWebView setDelegate:self];
   
@@ -45,5 +46,8 @@
   [super dealloc];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES; 
+}
 
 @end
