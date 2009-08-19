@@ -141,25 +141,27 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
     
-		UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
-		cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
-		cellLabel.textAlignment = UITextAlignmentRight;
-		cellLabel.textColor = [UIColor grayColor];
-		cellLabel.highlightedTextColor = [UIColor whiteColor];
-		cellLabel.tag = 1;
-		[cell.contentView addSubview:cellLabel];
-		[cellLabel release];
-    
-		cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
-		cellLabel.font = [UIFont systemFontOfSize:14.0];
+    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
+    cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
     cellLabel.adjustsFontSizeToFitWidth = YES;
     cellLabel.minimumFontSize = 10.0;
-		cellLabel.textAlignment = UITextAlignmentLeft;
-		cellLabel.highlightedTextColor = [UIColor whiteColor];
+    cellLabel.textAlignment = UITextAlignmentRight;
+    cellLabel.textColor = [UIColor grayColor];
+    cellLabel.highlightedTextColor = [UIColor whiteColor];
+    cellLabel.tag = 1;
+    [cell.contentView addSubview:cellLabel];
+    [cellLabel release];
+    
+    cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
+    cellLabel.font = [UIFont systemFontOfSize:14.0];
+    cellLabel.adjustsFontSizeToFitWidth = YES;
+    cellLabel.minimumFontSize = 10.0;
+    cellLabel.textAlignment = UITextAlignmentLeft;
+    cellLabel.highlightedTextColor = [UIColor whiteColor];
     cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		cellLabel.tag = 2;
-		[cell.contentView addSubview:cellLabel];
-		[cellLabel release];
+    cellLabel.tag = 2;
+    [cell.contentView addSubview:cellLabel];
+    [cellLabel release];
   }
   
 	NSString * myLabel = label;
