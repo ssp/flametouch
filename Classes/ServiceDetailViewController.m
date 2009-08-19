@@ -196,7 +196,12 @@
 		label = NSLocalizedString(@"Name", @"Service Details: Name of the service");
 		value = [self.service name];
 	} else if (row == 2) {
-		label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
+    if ([self.service.protocolType isEqualToString:@"TCP"]) {
+      label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
+    }
+    else {
+      label = [NSString stringWithFormat:NSLocalizedString(@"%@ Port", @"Service Details: Label for port number. %@ indicates the protocol type, e.g. UDP."), self.service.protocolType];
+    }
 		value = [NSString stringWithFormat:@"%i", [self.service port]];
 	} else if (row == 3) {
 		label = NSLocalizedString(@"Type", @"Service Details: Label for type");

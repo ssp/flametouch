@@ -51,7 +51,7 @@
 	NSString * result;
 	if ([self.services count] == 1) {
 		NSNetService * netService = [self.services objectAtIndex:0];
-		result = [NSString stringWithFormat:NSLocalizedString(@"1 Instance named “%@”.", @"service information in Service Type list when a single service of that type is available. %@ is the Service name."), [netService name]];
+		result = [NSString stringWithFormat:NSLocalizedString(@"1 Instance: “%@”", @"service information in Service Type list when a single service of that type is available. %@ is the Service name."), [netService name]];
 	}
 	else {
 		NSMutableString * nameList = [NSMutableString stringWithCapacity:[self.services count] * 30];
@@ -59,7 +59,7 @@
 			[nameList appendFormat:@"“%@”, ", [netService name]];
 		}
     if ([nameList length] >= 2) {
-      [nameList replaceCharactersInRange:NSMakeRange([nameList length] - 2, 2) withString:@"."];
+      [nameList deleteCharactersInRange:NSMakeRange([nameList length] - 2, 2)];
     }
 		result = [NSString stringWithFormat:NSLocalizedString(@"%i Instances: %@", @"service information in Service Type list when more than one instance of the service is available. %i is the number of occurrences of the Services, %@ is a string with a list of all service names"), [self.services count], nameList];
 	}

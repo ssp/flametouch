@@ -59,10 +59,10 @@
   [self.tableView reloadData];
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (delegate.displayMode == SHOWSERVERS) {
-		self.title = [NSString stringWithFormat:NSLocalizedString(@"Servers", @"Button to get back to the Servers list"), [delegate.hosts count]];
+		self.title = [NSString stringWithFormat:NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list"), [delegate.hosts count]];
 	}
 	else {
-		self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Button to get back to the Services list"), [delegate.serviceTypes count]];		
+		self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Title of Button to get back to the Services list"), [delegate.serviceTypes count]];		
 	}
 }
 

@@ -65,10 +65,29 @@
 }
 
 
-- (NSString*) detailedPortInfo {
-	NSRange protocolRange = NSMakeRange([self.type length] - 4 , 3);
+/*
+ Returns all-caps protocol type, e.g. TCP in most cases.
+*/
+- (NSString*) protocolType {
+  NSRange protocolRange = NSMakeRange([self.type length] - 4 , 3);
 	NSString* protocolType = [[self.type substringWithRange:protocolRange] uppercaseString];
-	NSString* portInfo = [NSString stringWithFormat:NSLocalizedString(@"%@ port %i", @"format for strings like 'TCP port 80'"), protocolType, [self port]];
+  return protocolType;
+}
+
+
+/*
+ Returns a string with the port number for TCP ports.
+ Returns a string with the protocol and the port number for non-TCP ports.
+*/
+- (NSString*) portInfo {
+	NSString* portInfo;
+  if ([self.protocolType isEqualToString:@"TCP"]) {
+    // don't mention the TCP protocol
+    portInfo = [NSString stringWithFormat:NSLocalizedString(@"%i", @"format for printing the port number"), [self port]];
+  }
+  else {
+    portInfo = [NSString stringWithFormat:NSLocalizedString(@"%@ %i", @"format for printing the protocol type and port number"), self.protocolType, [self port]];
+  }
 	return portInfo;
 }
 
