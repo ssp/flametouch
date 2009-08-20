@@ -42,7 +42,7 @@
   NSString * result;
   if (self.services.count == 1) {
     NSString * serviceName = ((ServiceType*)[self.services objectAtIndex:0]).humanReadableType;
-    result = [NSString stringWithFormat:@"%@ (%@) – “%@”", self.hostname, self.ip, serviceName];
+    result = [NSString stringWithFormat:@"%@ (%@) – %@", self.hostname, self.ip, serviceName];
   }
   else {
     result = [self detailsWithCount];
@@ -64,7 +64,7 @@
 	else if (serviceCount > 1) {
 		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i Services", @"String indicating that %i (with %i > 1) services are advertised on Host"), serviceCount];
 	}
-	NSString* details = [NSString stringWithFormat:@"%@ (%@) – %@.", self.hostname, self.ip, serviceCountString];
+	NSString* details = [NSString stringWithFormat:@"%@ (%@) – %@", self.hostname, self.ip, serviceCountString];
 	return details;
 }
 

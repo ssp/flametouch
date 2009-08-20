@@ -1,0 +1,118 @@
+﻿/* APP DELEGATE */
+
+/* Title of No WiFi Connection error message */
+"No WiFi connection" = "Keine Wi-Fi Verbindung";
+
+/* Message of No WiFi Connection error message */
+"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." = "Flame kann ausschließlich Bonjour Dienste lokalen Wi-Fi Netzwerk finden. Ohne eine solche Verbindung wird das Programm nicht nützlich sein.";
+
+/* OK Button */
+"OK" = "OK";
+
+
+
+
+/* ROOT VIEW */
+
+/* 
+  Title of Segmented Control item for selecting the Hosts list 
+  Title of Button to get back to the Hosts list from Services list
+*/
+"Hosts" = "Geräte";
+
+/*
+  Title of Segmented Control item for selecting the Service list 
+  Title of Button to get back to the Service Type list from Services list
+*/
+"Services" = "Dienste";
+
+
+
+
+/* SERVICE DETAIL VIEW */
+
+/* Service Details: Label for host name */
+"Host" = "Gerät";
+
+/* Service Details: Name of the service */
+"Name" = "Name";
+
+/* Service Details: Label for port number */
+"Port" = "Port";
+
+/* Service Details: Label for port number. %@ indicates the protocol type, e.g. UDP. */
+"%@ Port" = "%@ Port";
+
+/* Service Details: Label for type */
+"Type" = "Art";
+
+/* Service Details: Label for human readable description */
+"Description" = "Beschreibung";
+
+/* Label of button to open the relevant service on Service Details page */
+"Open Service" = "Dienst öffnen";
+
+
+
+
+
+
+/* HOSTs */
+
+/* String indicating that no service is advertised on the Host */
+"No Services" = "Keine Dienste";
+
+/* String indicating that a single service is advertised on the Host */
+"1 Service" = "1 Dienst";
+
+/* String indicating that %i (with %i > 1) services are advertised on the Host */
+"%i Services" = "%i Dienste";
+
+
+
+
+/* SERVICE TYPES */
+
+/* String %@ in quotation marks */
+"“%@”" = "„%@“";
+
+/* List Item separator, e.g. comma space */
+", " = ", "; 
+
+/* Service information in Service Type list when a single service of that type is available. %@ is the Service name. */
+"1 Instance: “%@”" = "1 Dienst: „%@“";
+
+/* Service information in Service Type list when more than one instance of the service is available. %i is the number of occurrences of the Service, %@ is a string with a list of all service names */
+"%i Instances: %@" = "%1$i Dienste: %2$@";
+
+
+/* Heading for Service Type List when exactly one occurrence of the selected service is announced. */
+"Announced once." = "Einmal angekündigt.";
+
+/* Heading for Service Type List when exactly two occurrences of the selected service are announced. */
+"Announced twice." = "Zweimal angekündigt.";
+
+/* Heading for Service Type List when %i occurrences of the selected service are announced. For %i > 2. */
+"Announced %i times." = "%i Mal angekündigt.";
+
+
+
+
+
+/* NSNetService EXTRAS */
+
+/* format for printing the port number */
+"%i" = "%i";
+
+/* format for printing the protocol type and port number */
+"%@ %i" = "%1$@ %2$i";
+
+
+
+
+
+/* ABOUT */
+
+/* Full application name */
+"Flame for iPhone" = "Flame Touch";
+

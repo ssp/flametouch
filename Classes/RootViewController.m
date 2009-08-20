@@ -25,11 +25,13 @@
   [self.navigationItem setLeftBarButtonItem:refreshButton];
   [refreshButton release];
 
-  UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", @"String in 'About' button in the top bar") style:UIBarButtonItemStylePlain target:self action:@selector(showAboutPane)];
+  UIButton * myAboutButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+  myAboutButton.frame = CGRectMake(0.0,0.0,20.0,20.0);
+  [myAboutButton addTarget:self action:@selector(showAboutPane) forControlEvents:UIControlEventTouchUpInside];
+  UIBarButtonItem * aboutButton = [[[UIBarButtonItem alloc] initWithCustomView:myAboutButton] autorelease];
   [self.navigationItem setRightBarButtonItem:aboutButton];
-  [aboutButton release];
-	
-	NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Servers", @"Title of Segmented Control item for selecting the Server list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
+
+	NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Hosts", @"Title of Segmented Control item for selecting the Hosts list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
 	UISegmentedControl * segmentedControl = [[[UISegmentedControl alloc] initWithItems:segmentedControlItems] autorelease];
 	[segmentedControl addTarget:self action:@selector(changeDisplayMode:) forControlEvents:UIControlEventValueChanged];
 	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -59,10 +61,10 @@
   [self.tableView reloadData];
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (delegate.displayMode == SHOWSERVERS) {
-		self.title = [NSString stringWithFormat:NSLocalizedString(@"Servers", @"Button to get back to the Servers list"), [delegate.hosts count]];
+		self.title = [NSString stringWithFormat:NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list"), [delegate.hosts count]];
 	}
 	else {
-		self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Button to get back to the Services list"), [delegate.serviceTypes count]];		
+		self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Title of Button to get back to the Services list"), [delegate.serviceTypes count]];		
 	}
 }
 

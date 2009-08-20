@@ -148,29 +148,36 @@
 }
 
 
-
+/*
+ Sets text in the cell as follows: 
+ If we have a human readable name for the service: title = human readable name / subtitle = service name + port + raw name
+ without a pretty name: title = raw name / subtitle = service name + port
+*/
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+	NSString * title;
+  NSString * subtitle;
+  
+  NSNetService *service = [self.host serviceAtIndex:indexPath.row];
 	
-	NSNetService *service = [self.host serviceAtIndex:indexPath.row];
-	NSString *text = service.humanReadableType;
-	if ([text isEqualToString:service.type]) {
-		((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@", [service type]];
-	} else {
+  if ([service.humanReadableType isEqualToString:service.type]) {
+    title = service.type;
+    subtitle = [NSString stringWithFormat:@"%@ – [%i]", [service name], service.portInfo];
+  } 
+  else {
 		NSRange firstDot = [service.type rangeOfString:@"." options:NSLiteralSearch];
-		NSString * protocolName;
+		NSString * protocolName = service.type;
 		if (firstDot.location != NSNotFound && firstDot.location > 0) {
-			protocolName = [service.type substringWithRange:NSMakeRange(1, firstDot.location - 1)];
+			protocolName = [protocolName substringWithRange:NSMakeRange(1, firstDot.location - 1)];
 		}
-		else {
-			protocolName = service.type;
-		}
-		
-		((UILabel*)[cell viewWithTag:1]).text = [NSString stringWithFormat:@"%@ [%@]", text, protocolName];
-	}
-	NSString* portInfo = service.detailedPortInfo;
-	((UILabel*)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ – %@", [service name], portInfo];
-	
+    
+    title = service.humanReadableType;
+    subtitle = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
+  }
+
+  ((UILabel*)[cell viewWithTag:1]).text = title;
+  ((UILabel*)[cell viewWithTag:2]).text = subtitle;
+  
 	return cell;
 }
 
@@ -246,7 +253,7 @@
 	NSNetService *service = [self.serviceType.services objectAtIndex:indexPath.row];
 	((UILabel*)[cell viewWithTag:1]).text = [service name];
 
-	NSString * details = [NSString stringWithFormat:@"%@, %@", service.hostnamePlus, service.detailedPortInfo];
+	NSString * details = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
 	((UILabel*)[cell viewWithTag:2]).text = details;
 	
 	return cell;

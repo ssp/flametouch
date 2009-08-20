@@ -141,25 +141,27 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
     
-		UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
-		cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
-		cellLabel.textAlignment = UITextAlignmentRight;
-		cellLabel.textColor = [UIColor grayColor];
-		cellLabel.highlightedTextColor = [UIColor whiteColor];
-		cellLabel.tag = 1;
-		[cell.contentView addSubview:cellLabel];
-		[cellLabel release];
-    
-		cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
-		cellLabel.font = [UIFont systemFontOfSize:14.0];
+    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
+    cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
     cellLabel.adjustsFontSizeToFitWidth = YES;
     cellLabel.minimumFontSize = 10.0;
-		cellLabel.textAlignment = UITextAlignmentLeft;
-		cellLabel.highlightedTextColor = [UIColor whiteColor];
+    cellLabel.textAlignment = UITextAlignmentRight;
+    cellLabel.textColor = [UIColor grayColor];
+    cellLabel.highlightedTextColor = [UIColor whiteColor];
+    cellLabel.tag = 1;
+    [cell.contentView addSubview:cellLabel];
+    [cellLabel release];
+    
+    cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
+    cellLabel.font = [UIFont systemFontOfSize:14.0];
+    cellLabel.adjustsFontSizeToFitWidth = YES;
+    cellLabel.minimumFontSize = 10.0;
+    cellLabel.textAlignment = UITextAlignmentLeft;
+    cellLabel.highlightedTextColor = [UIColor whiteColor];
     cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		cellLabel.tag = 2;
-		[cell.contentView addSubview:cellLabel];
-		[cellLabel release];
+    cellLabel.tag = 2;
+    [cell.contentView addSubview:cellLabel];
+    [cellLabel release];
   }
   
 	NSString * myLabel = label;
@@ -196,7 +198,12 @@
 		label = NSLocalizedString(@"Name", @"Service Details: Name of the service");
 		value = [self.service name];
 	} else if (row == 2) {
-		label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
+    if ([self.service.protocolType isEqualToString:@"TCP"]) {
+      label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
+    }
+    else {
+      label = [NSString stringWithFormat:NSLocalizedString(@"%@ Port", @"Service Details: Label for port number. %@ indicates the protocol type, e.g. UDP."), self.service.protocolType];
+    }
 		value = [NSString stringWithFormat:@"%i", [self.service port]];
 	} else if (row == 3) {
 		label = NSLocalizedString(@"Type", @"Service Details: Label for type");

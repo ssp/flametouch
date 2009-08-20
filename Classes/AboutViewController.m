@@ -16,7 +16,7 @@
   self.title = NSLocalizedString(@"Flame for iPhone", @"Full application name");
 
   theWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-  [theWebView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+  theWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   [self.view addSubview:theWebView];
   [theWebView setDelegate:self];
   
@@ -33,6 +33,12 @@
   }
   return true;
 }
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES; 
+}
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
