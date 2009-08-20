@@ -52,8 +52,4 @@
   [super dealloc];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-  return YES; 
-}
-
 @end
