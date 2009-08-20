@@ -9,6 +9,7 @@
 #import "FlameTouchAppDelegate.h"
 #import "RootViewController.h"
 #import "ServiceType.h"
+#import "NSNetService+FlameExtras.h"
 // socket resolving/nasty C-level things
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -157,8 +158,6 @@
 
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
   Host *thehost = nil;
-  struct sockaddr_in* sock = (struct sockaddr_in*)[((NSData*)[[service addresses] objectAtIndex:0]) bytes];
-  NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
   
   for (Host* host in self.hosts) {
     if ( [host.hostname isEqualToString:[service hostName]] ) {
@@ -166,7 +165,7 @@
     }
   }
   if (thehost == nil) {
-    thehost = [[Host alloc] initWithHostname:[service hostName] ipAddress:ip];
+    thehost = [[Host alloc] initWithHostname:[service hostName] ipAddress:service.hostIPString];
     [self.hosts addObject: thehost];
     [self.hosts sortUsingSelector:@selector(compareByName:)];
     [thehost release];

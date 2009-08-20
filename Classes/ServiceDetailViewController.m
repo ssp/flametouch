@@ -16,7 +16,7 @@
 @synthesize service;
 @synthesize TXTRecordKeys;
 @synthesize TXTRecordValues;
-@synthesize externalURL;
+@synthesize hasOpenServiceButton;
 
 
 -(id)initWithHost:(Host*)hst service:(NSNetService*)srv {
@@ -27,8 +27,7 @@
   NSDictionary * TXTRecordDict = [NSNetService dictionaryFromTXTRecordData:[self.service TXTRecordData]];
   self.TXTRecordKeys = [[TXTRecordDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
   self.TXTRecordValues = [TXTRecordDict objectsForKeys:self.TXTRecordKeys notFoundMarker:@""];
-  [self setupExternalURL];
-  
+  self.hasOpenServiceButton = (self.service.openableExternalURL != nil);
 /*
   UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 100.0)];
   
@@ -88,17 +87,6 @@
 	return result;
 }
 
-
-- (BOOL) hasOpenServiceButton {
-  BOOL result = NO;
-  NSURL * URL = self.externalURL;
-  if (URL != nil) {
-    if ([[UIApplication sharedApplication] canOpenURL:URL]) {
-      result = YES;
-    }
-  }
-  return result;
-}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -260,46 +248,12 @@
     }
   } else if (self.hasOpenServiceButton && indexPath.section == 1) {
     // Pressed the Open Service cell 
-    NSLog(@"Opening URL %@", self.externalURL);
+    // NSLog(@"Opening URL %@", self.service.externalURL);
     // in a couple of seconds, report if we have no wifi
-    [[UIApplication sharedApplication] openURL:self.externalURL];
+    [[UIApplication sharedApplication] openURL:self.service.externalURL];
     return;
   }
   
-}
-
-
--(void)setupExternalURL {
-  NSString * URLString = nil;
-  
-  if ( [[service type] isEqualToString:@"_urlbookmark._tcp."] ) {
-    NSInteger index = [self.TXTRecordKeys indexOfObject:@"URL"];
-    if (index != NSNotFound) {
-      NSData * URLData = [self.TXTRecordValues objectAtIndex:index];
-      URLString = [[[NSString alloc] initWithData:URLData encoding:NSUTF8StringEncoding] autorelease];
-    }
-
-  } else if ( [[service type] isEqualToString:@"_http._tcp."] ) {
-    if ([service port] == 80) {
-      URLString = [NSString stringWithFormat:@"http://%@/", host.ip];
-    } else {
-      URLString = [NSString stringWithFormat:@"http://%@:%i/", host.ip, [service port]];
-    }
-
-  } else if ( [[service type] isEqualToString:@"_ssh._tcp."] ) {
-    if ([service port] == 22) {
-      URLString = [NSString stringWithFormat:@"ssh://%@/", host.ip];
-    } else {
-      URLString = [NSString stringWithFormat:@"ssh://%@:%i/", host.ip, [service port]];
-    }
-  }
-  
-  NSURL * result = nil;
-  if (URLString != nil) {
-    result = [NSURL URLWithString:URLString];
-  }
-  
-  self.externalURL = result;
 }
 
 
@@ -313,7 +267,6 @@
   self.service = nil;
   self.TXTRecordKeys = nil;
   self.TXTRecordValues = nil;
-  self.externalURL = nil;
   [super dealloc];
 }
 

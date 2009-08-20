@@ -178,6 +178,13 @@
   ((UILabel*)[cell viewWithTag:1]).text = title;
   ((UILabel*)[cell viewWithTag:2]).text = subtitle;
   
+  if (service.openableExternalURL == nil) {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
+  }
+  else {
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+  }
+  
 	return cell;
 }
 
@@ -187,6 +194,13 @@
   ServiceDetailViewController *sdvc = [[ServiceDetailViewController alloc] initWithHost:self.host service:service];
   [self.navigationController pushViewController:sdvc animated:TRUE];
   [sdvc release];
+}
+
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+  NSNetService *service = [self.host serviceAtIndex:indexPath.row];
+  NSURL * URL = service.openableExternalURL;
+  [[UIApplication sharedApplication] openURL:URL];
 }
 
 
@@ -256,6 +270,13 @@
 	NSString * details = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
 	((UILabel*)[cell viewWithTag:2]).text = details;
 	
+  if (service.openableExternalURL == nil) {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
+  }
+  else {
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+  }  
+  
 	return cell;
 }
 
@@ -266,6 +287,13 @@
 	ServiceDetailViewController *sdvc = [[ServiceDetailViewController alloc] initWithHost:host service:service];
 	[self.navigationController pushViewController:sdvc animated:TRUE];
 	[sdvc release];
+}
+
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+  NSNetService * service = [self.serviceType.services objectAtIndex:indexPath.row];
+  NSURL * URL = service.openableExternalURL;
+  [[UIApplication sharedApplication] openURL:URL];
 }
 
 

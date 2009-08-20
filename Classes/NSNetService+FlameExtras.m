@@ -55,6 +55,13 @@
 }
 
 
+-(NSString*) hostIPString {
+  struct sockaddr_in* sock = (struct sockaddr_in*)[((NSData*)[[self addresses] objectAtIndex:0]) bytes];
+  NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
+  return ip;
+}
+
+
 -(NSString*) hostnamePlus {
 	NSString * result = [self hostName];
 	if (result == nil) {
@@ -90,5 +97,62 @@
   }
 	return portInfo;
 }
+
+
+
+/*
+ Determines external URL of this service and returns it.
+ Returns nil if there is no URL
+*/ 
+-(NSURL*) externalURL {
+  NSString * URLString = nil;
+  NSString * myType = [self type];
+  
+  if ( [myType isEqualToString:@"_urlbookmark._tcp."] ) {
+    NSDictionary * TXTRecordDict = [NSNetService dictionaryFromTXTRecordData:[self TXTRecordData]];
+    NSData * URLData = [TXTRecordDict objectForKey:@"URL"];
+    if (URLData != nil) {
+      URLString = [[[NSString alloc] initWithData:URLData encoding:NSUTF8StringEncoding] autorelease];
+    }
+  } 
+  else if ( [myType isEqualToString:@"_http._tcp."] ) {
+    if ([self port] == 80) {
+      URLString = [NSString stringWithFormat:@"http://%@/", self.hostIPString];
+    } else {
+      URLString = [NSString stringWithFormat:@"http://%@:%i/", self.hostIPString, [self port]];
+    }
+  } 
+  else if ( [myType isEqualToString:@"_ssh._tcp."] ) {
+    if ([self port] == 22) {
+      URLString = [NSString stringWithFormat:@"ssh://%@/", self.hostIPString];
+    } else {
+      URLString = [NSString stringWithFormat:@"ssh://%@:%i/", self.hostIPString, [self port]];
+    }
+  }
+  
+  NSURL * result = nil;
+  if (URLString != nil) {
+    result = [NSURL URLWithString:URLString];
+  }
+  
+  return result;
+}
+
+
+
+/*
+ Determines external URL of this service and returns it if there is an application that can open it.
+ nil is returned otherwise
+ */ 
+-(NSURL*) openableExternalURL {
+  NSURL * URL = self.externalURL;
+  if (URL != nil) {
+    if (![[UIApplication sharedApplication] canOpenURL:URL]) {
+      URL = nil;
+    }
+  }
+  return URL;
+}
+
 
 @end

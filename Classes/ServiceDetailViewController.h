@@ -14,15 +14,14 @@
   NSNetService *service;
   NSArray * TXTRecordKeys;
   NSArray * TXTRecordValues;  
-  NSURL * externalURL;
+  BOOL hasOpenServiceButton;
 }
 
 @property (nonatomic, retain) Host* host;
 @property (nonatomic, retain) NSNetService* service;
 @property (nonatomic, retain) NSArray* TXTRecordKeys;
 @property (nonatomic, retain) NSArray* TXTRecordValues;
-@property (nonatomic, retain) NSURL* externalURL;
-@property (readonly) BOOL hasOpenServiceButton;
+@property BOOL hasOpenServiceButton;
 
 -(id)initWithHost:(Host*)host service:(NSNetService*)service;
 
@@ -30,6 +29,5 @@
 -(UITableViewCell*) standardPropertyCellForRow: (int) row;
 -(UITableViewCell*) TXTRecordPropertyCellForRow: (int) row;
 -(UITableViewCell *)actionCellForRow:(int)r;
--(void) setupExternalURL;
 
 @end
