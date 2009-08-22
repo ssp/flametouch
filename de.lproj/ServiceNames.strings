@@ -85,7 +85,7 @@
 "_dacp._tcp." = "iTunes Fernbedienung";
 "_device-info._tcp." = "DNS-SD Geräteinformation";
 "_difi._tcp." = "EyeHome";
-"_distcc._tcp." = "Verteilter Compiler";
+"_distcc._tcp." = "Verteiltes Compilieren";
 "_ditrios._tcp." = "Ditrios SOA Framework";
 "_divelogsync._tcp." = "Dive Log Data Sharing und Synchronisierung";
 "_dltimesync._udp." = "Local Area Dynamic Time Synchronisierung";
@@ -106,7 +106,7 @@
 "_edcp._udp." = "LaCie Ethernet Disk Configuration";
 "_eheap._tcp." = "Interactive Room Software Infrastructure (Event Sharing)";
 "_embrace._tcp." = "DataEnvoy";
-"_eppc._tcp." = "Remote AppleEvents";
+"_eppc._tcp." = "Entfernte AppleEvents";
 "_esp._tcp." = "Extensis Server";
 "_eventserver._tcp." = "Now Up-to-Date";
 "_ewalletsync._tcp." = "eWallet Synchronisierung";
@@ -266,7 +266,7 @@
 "_ntx._udp." = "Tenasys";
 "_obf._tcp." = "Observations Framework";
 "_objective._tcp." = "Objective";
-"_oce._tcp." = "Oce Common Exchange";
+"_oce._tcp." = "Océé Common Exchange";
 "_odabsharing._tcp." = "OD4Contact";
 "_odisk._tcp." = "DVD- oder CD-Sharing";
 "_ofocus-conf._tcp." = "OmniFocus Einstellungen";
@@ -403,7 +403,7 @@
 "_sybase-tds._tcp." = "Sybase";
 "_syncopation._tcp." = "Syncopation";
 "_syncqdea._tcp." = "Synchronize! X Plus 2.0";
-"_taccounting._tcp." = "Data Transmission and Synchronization";
+"_taccounting._tcp." = "Data Transmission and Synchronisation";
 "_tapinoma-ecs._tcp." = "Tapinoma Easycontact";
 "_taskcoachsync._tcp." = "Task Coach";
 "_tbricks._tcp." = "tbricks internal";

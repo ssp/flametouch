@@ -47,7 +47,7 @@
 "_auth._tcp." = "Authentication";
 "_b3d-convince._tcp." = "3M Unitek Digital Orthodontic System";
 "_bdsk._tcp." = "BibDesk Bibliography";
-"_beatpack._tcp." = "BeatPack Synchronization";
+"_beatpack._tcp." = "BeatPack Synchronisation";
 "_beep._tcp." = "Xgrid Distributed Computing";
 "_bfagent._tcp." = "BuildForge Agent";
 "_bigbangchess._tcp." = "Big Bang Chess";
@@ -61,7 +61,7 @@
 "_bousg._tcp." = "Bag Of Unusual Strategy Games";
 "_bri._tcp." = "RFID Reader Basic Reader Interface";
 "_bsqdea._tcp." = "Backup Simplicity";
-"_busycal._tcp." = "BusySync Calendar Synchronization";
+"_busycal._tcp." = "BusySync Calendar Synchronisation";
 "_caltalk._tcp." = "CalTalk";
 "_cardsend._tcp." = "Card Send";
 "_cheat._tcp." = "The Cheat";
@@ -85,9 +85,9 @@
 "_dacp._tcp." = "iTunes Remote Control";
 "_device-info._tcp." = "DNS-SD Device Info";
 "_difi._tcp." = "EyeHome";
-"_distcc._tcp." = "Verteiltes Kompilieren";
+"_distcc._tcp." = "Distributed Compiler";
 "_ditrios._tcp." = "Ditrios SOA Framework";
-"_divelogsync._tcp." = "Dive Log Data Sharing and Synchronization";
+"_divelogsync._tcp." = "Dive Log Data Sharing and Synchronisation";
 "_dltimesync._udp." = "Local Area Dynamic Time Synchronisation";
 "_dns-llq._udp." = "DNS Long-Lived Queries";
 "_dns-update._udp." = "DNS Dynamic Update";
@@ -95,7 +95,7 @@
 "_dossier._tcp." = "Vortimac Dossier";
 "_dpap._tcp." = "iPhoto Shared Photos";
 "_dropcopy._tcp." = "DropCopy";
-"_dsl-sync._tcp." = "Data Synchronization Protocol";
+"_dsl-sync._tcp." = "Data Synchronisation Protocol";
 "_dtrmtdesktop._tcp." = "Desktop Transporter Remote Desktop";
 "_dvbservdsc._tcp." = "DVB Service Discovery";
 "_earphoria._tcp." = "Earphoria";
@@ -106,7 +106,7 @@
 "_edcp._udp." = "LaCie Ethernet Disk Configuration";
 "_eheap._tcp." = "Interactive Room Software Infrastructure (Event Sharing)";
 "_embrace._tcp." = "DataEnvoy";
-"_eppc._tcp." = "Entfernte AppleEvents";
+"_eppc._tcp." = "Remote AppleEvents";
 "_esp._tcp." = "Extensis Server";
 "_eventserver._tcp." = "Now Up-to-Date";
 "_ewalletsync._tcp." = "eWallet Synchronisation";
@@ -170,7 +170,7 @@
 "_ichat._tcp." = "iChat 1 Presence";
 "_iconquer._tcp." = "iConquer";
 "_idata._tcp." = "Data Acquisition and Control";
-"_idsync._tcp." = "SplashID Synchronization";
+"_idsync._tcp." = "SplashID Synchronisation";
 "_ifolder._tcp." = "Published iFolder";
 "_ihouse._tcp." = "Idle Hands iHouse";
 "_ii-drills._tcp." = "Instant Interactive Drills";
@@ -240,7 +240,7 @@
 "_mimer._tcp." = "Mimer SQL Engine";
 "_mi-raysat._tcp." = "Mental Ray for Maya";
 "_modolansrv._tcp." = "modo LAN Services";
-"_moneysync._tcp." = "SplashMoney Synchronization";
+"_moneysync._tcp." = "SplashMoney Synchronisation";
 "_moneyworks._tcp." = "MoneyWorks";
 "_mother._tcp." = "Mother script server";
 "_mp3sushi._tcp." = "MP3 Sushi";
@@ -266,11 +266,11 @@
 "_ntx._udp." = "Tenasys";
 "_obf._tcp." = "Observations Framework";
 "_objective._tcp." = "Objective";
-"_oce._tcp." = "Oce Common Exchange";
+"_oce._tcp." = "Océ Common Exchange";
 "_odabsharing._tcp." = "OD4Contact";
 "_odisk._tcp." = "Optical Disk Sharing";
 "_ofocus-conf._tcp." = "OmniFocus Setting Configuration";
-"_ofocus-sync._tcp." = "OmniFocus Document Synchronization";
+"_ofocus-sync._tcp." = "OmniFocus Document Synchronisation";
 "_olpc-activity1._udp." = "OLPC activity";
 "_omni-bookmark._tcp." = "OmniWeb Bookmarks";
 "_openbase._tcp." = "OpenBase SQL";
@@ -281,7 +281,7 @@
 "_owhttpd._tcp." = "OWFS Web Server";
 "_owserver._tcp." = "OWFS Server";
 "_parentcontrol._tcp." = "Remote Parental Controls";
-"_passwordwallet._tcp." = "PasswordWallet Data Synchronization";
+"_passwordwallet._tcp." = "PasswordWallet Data Synchronisation";
 "_pcast._tcp." = "Mac OS X Podcast Producer Server";
 "_p2pchat._udp." = "Peer-to-Peer Chat";
 "_parliant._tcp." = "PhoneValet Anywhere";
@@ -293,7 +293,7 @@
 "_pgpkey-mailto._tcp." = "PGP Keyserver (SMTP)";
 "_photoparata._tcp." = "Photo Parata Event Photography Software";
 "_pictua._tcp." = "Pictua Intercommunication";
-"_piesync._tcp." = "pieSync Computer to Computer Synchronization";
+"_piesync._tcp." = "pieSync Computer to Computer Synchronisation";
 "_piu._tcp." = "Pedestal Interface Unit by RPM-PSI";
 "_poch._tcp." = "Parallel OperatiOn and Control Heuristic (Pooch)";
 "_pokeeye._tcp." = "“Poke Eye” Elgato EyeTV Remote";
@@ -365,7 +365,7 @@
 "_sftp-ssh._tcp." = "SFTP File Sharing";
 "_shipsgm._tcp." = "Swift Office Ships";
 "_shipsinvit._tcp." = "Swift Office Ships";
-"_shoppersync._tcp." = "SplashShopper Synchronization";
+"_shoppersync._tcp." = "SplashShopper Synchronisation";
 "_shoutcast._tcp." = "Nicecast";
 "_sip._udp." = "SIP VoIP signalling";
 "_sipuri._tcp." = "SIP VoIP signalling URI";
@@ -382,7 +382,7 @@
 "_spincrisis._tcp." = "Spin Crisis";
 "_spl-itunes._tcp." = "launchTunes";
 "_spr-itunes._tcp." = "netTunes";
-"_splashsync._tcp." = "SplashData Synchronization";
+"_splashsync._tcp." = "SplashData Synchronisation";
 "_ssh._tcp." = "SSH Remote Login";
 "_ssscreenshare._tcp." = "Screen Sharing";
 "_strateges._tcp." = "Strateges";
@@ -403,7 +403,7 @@
 "_sybase-tds._tcp." = "Sybase";
 "_syncopation._tcp." = "Syncopation";
 "_syncqdea._tcp." = "Synchronize! X Plus 2.0";
-"_taccounting._tcp." = "Data Transmission and Synchronization";
+"_taccounting._tcp." = "Data Transmission and Synchronisation";
 "_tapinoma-ecs._tcp." = "Tapinoma Easycontact";
 "_taskcoachsync._tcp." = "Task Coach";
 "_tbricks._tcp." = "tbricks internal";
@@ -474,7 +474,7 @@
 "_xsanserver._tcp." = "Xsan Server";
 "_xsansystem._tcp." = "Xsan System";
 "_xserveraid._tcp." = "XServe RAID";
-"_xsync._tcp." = "Xserve RAID Synchronization";
+"_xsync._tcp." = "Xserve RAID Synchronisation";
 "_xtimelicence._tcp." = "xTime License";
 "_xtshapro._tcp." = "xTime Project";
 "_xul-http._tcp." = "XUL over HTTP";
