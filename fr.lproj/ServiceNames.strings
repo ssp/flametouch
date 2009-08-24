@@ -260,7 +260,7 @@
 "_netrestore._tcp." = "NetRestore";
 "_newton-dock._tcp." = "Escale";
 "_nfs._tcp." = "Network File System";
-"_nssocketport._tcp." = "Distributed Objects (NSSocketPort)";
+"_nssocketport._tcp." = "Objets distribués (NSSocketPort)";
 "_ntlx-arch._tcp." = "American Dynamics Intellex Archive Management";
 "_ntlx-ent._tcp." = "American Dynamics Intellex Enterprise Management";
 "_ntlx-video._tcp." = "American Dynamics Intellex Video";
@@ -298,7 +298,7 @@
 "_piesync._tcp." = "pieSync Computer to Computer Synchronization";
 "_piu._tcp." = "Pedestal Interface Unit by RPM-PSI";
 "_poch._tcp." = "Parallel OperatiOn and Control Heuristic (Pooch)";
-"_pokeeye._tcp." = "« Poke Eye » Elgato EyeTV Remote";
+"_pokeeye._tcp." = "« Poke Eye » Elgato EyeTV Remote";
 "_pop3._tcp." = "Serveur E-Mail POP3";
 "_postgresql._tcp." = "Serveur PostgreSQL";
 "_powereasy-erp._tcp." = "PowerEasy ERP";

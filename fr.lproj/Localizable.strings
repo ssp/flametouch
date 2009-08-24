@@ -43,7 +43,7 @@
 "Open Service" = "Ouvrir le service";
 
 /* String indicating that no service is advertised on the Host */
-"No Services" = "Aucun service";
+"No Services" = "Aucun service";
 
 /* String indicating that a single service is advertised on the Host */
 "1 Service" = "1 service";
@@ -52,16 +52,18 @@
 "%i Services" = "%i services";
 
 /* String %@ in quotation marks */
-"“%@”" = "“%@”";
+/* Using U+2006 SIX-PER-EM SPACE here in French as that seems to look most reasonable. */
+"“%@”" = "« %@ »";
 
 /* List Item separator e.g. comma space */
 ", " = ", ";
 
 /* Service information in Service Type list when a single service of that type is available. %@ is the Service name. */
-"1 Instance: “%@”" = "1 instance : “%@”";
+/* Using U+2006 SIX-PER-EM SPACE here in French as that seems to look most reasonable. */
+"1 Instance: “%@”" = "1 instance : « %@ »";
 
 /* Service information in Service Type list when more than one instance of the service is available. %i is the number of occurrences of the Service, %@ is a string with a list of all service names */
-"%i Instances: %@" = "%1$i instances : %2$@";
+"%i Instances: %@" = "%1$i instances : %2$@";
 
 
 /* Heading for Service Type List when exactly one occurrence of the selected service is announced. */
