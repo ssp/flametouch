@@ -15,7 +15,7 @@ a:link {
 a[hreflang]:after {
 	content:"[" attr(hreflang) "]"; 
 	font-size:71%; 
-	margin-left:0.5em;
+	margin-left:0.2em;
 }
 
 p {
