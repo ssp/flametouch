@@ -33,7 +33,7 @@
 "_animobserver._tcp." = "Animo Batch";
 "_appelezvous._tcp." = "Appelezvous";
 "_apple-ausend._tcp." = "Unité audio Apple";
-"_apple-midi._upd." = "Apple MIDI";
+"_apple-midi._udp." = "Apple MIDI";
 "_apple-sasl._tcp." = "Apple Password Server";
 "_applerdbg._tcp." = "Apple Remote Debug Services";
 "_appletv._tcp." = "Apple TV";
