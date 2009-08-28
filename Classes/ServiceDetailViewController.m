@@ -176,8 +176,8 @@
 
 
 -(UITableViewCell*) standardPropertyCellForRow: (int) row {
-	NSString *label;
-	NSString *value;
+	NSString *label = nil;
+	NSString *value = nil;
 
 	if (row == 0) {
 		label = NSLocalizedString(@"Host", @"Service Details: Label for host name");
