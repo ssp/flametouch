@@ -31,18 +31,30 @@
   UIBarButtonItem * aboutButton = [[[UIBarButtonItem alloc] initWithCustomView:myAboutButton] autorelease];
   [self.navigationItem setRightBarButtonItem:aboutButton];
 
-	NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Hosts", @"Title of Segmented Control item for selecting the Hosts list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
-	UISegmentedControl * segmentedControl = [[[UISegmentedControl alloc] initWithItems:segmentedControlItems] autorelease];
-	[segmentedControl addTarget:self action:@selector(changeDisplayMode:) forControlEvents:UIControlEventValueChanged];
-	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	segmentedControl.selectedSegmentIndex = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode;
-	self.navigationItem.titleView = segmentedControl;
+  NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Hosts", @"Title of Segmented Control item for selecting the Hosts list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
+  UISegmentedControl * segmentedControl = [[[UISegmentedControl alloc] initWithItems:segmentedControlItems] autorelease];
+  [segmentedControl addTarget:self action:@selector(changeDisplayMode:) forControlEvents:UIControlEventValueChanged];
+  segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+  segmentedControl.selectedSegmentIndex = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode;
+  self.navigationItem.titleView = segmentedControl;
 }
 
 
+/*
+ action of the Hosts / Services segmented control
+ sets the display mode in the app delegate and updates the view's title accordingly 
+*/
 -(void) changeDisplayMode:(id) sender {
-	NSInteger selection = [(UISegmentedControl*) sender selectedSegmentIndex];
-	((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode = selection;
+  NSInteger selection = [(UISegmentedControl*) sender selectedSegmentIndex];
+
+  ((FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate]).displayMode = selection;
+
+	if (selection == SHOWSERVERS) {
+    self.title = [NSString stringWithFormat:NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list")];
+  }
+  else {
+    self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Title of Button to get back to the Services list")];		
+  }
 }
 
 
@@ -59,13 +71,6 @@
 
 -(void) newServices:(id)whatever {
   [self.tableView reloadData];
-  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (delegate.displayMode == SHOWSERVERS) {
-		self.title = [NSString stringWithFormat:NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list"), [delegate.hosts count]];
-	}
-	else {
-		self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Title of Button to get back to the Services list"), [delegate.serviceTypes count]];		
-	}
 }
 
 - (void)didReceiveMemoryWarning {
