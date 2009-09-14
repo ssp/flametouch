@@ -56,17 +56,29 @@
 
 
 -(NSString*) hostIPString {
-  struct sockaddr_in* sock = (struct sockaddr_in*)[((NSData*)[[self addresses] objectAtIndex:0]) bytes];
-  NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
-  return ip;
+  NSData *address = ((NSData*)[[self addresses] objectAtIndex:0]);
+  // I've seen this be nil. But I can't reproduce any more..
+  if (address) {
+    struct sockaddr_in* sock = (struct sockaddr_in*)[address bytes];
+    NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
+    return ip;
+  } else {
+    return @"-";
+  }
 }
 
 
 -(NSString*) hostnamePlus {
 	NSString * result = [self hostName];
 	if (result == nil) {
-		struct sockaddr_in* sock = (struct sockaddr_in*)[((NSData*)[[self addresses] objectAtIndex:0]) bytes];
-		result = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
+    NSData *address = ((NSData*)[[self addresses] objectAtIndex:0]);
+    // I've seen this be nil. But I can't reproduce any more..
+    if (address) {
+      struct sockaddr_in* sock = (struct sockaddr_in*)[address bytes];
+  		result = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
+    } else {
+      result = @"-";
+    }
 	}
 	return result;
 }
