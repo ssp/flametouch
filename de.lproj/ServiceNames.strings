@@ -486,8 +486,11 @@
 "_netmonitorserver._tcp." = "Net Monitor Server";
 "_presence_olpc._tcp." = "OLPC Presence";
 "_pop_2_ambrosia._tcp." = "Pop-Pop";
-"_profCastLicense._tcp." = "ProfCast";
+"_profCastLicense._tcp." = "ProfCast Lizenz";
 "_WorldBook2004ST._tcp." = "World Book Lexikon";
 
 
 "_urlbookmark._tcp." = "Safari Webseite";
+"_bbsn._udp." = "BBEdit Lizenz";
+"_home-sharing._tcp." = "iTunes Privatfreigabe";
+"_sleep-proxy._udp." = "Bonjour Sleep Proxy";

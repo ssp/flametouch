@@ -477,7 +477,7 @@
 "_xsansystem._tcp." = "Xsan System";
 "_xserveraid._tcp." = "XServe RAID";
 "_xsync._tcp." = "Synchronisation Xserve RAID";
-"_xtimelicence._tcp." = "xTime Licene";
+"_xtimelicence._tcp." = "Licence xTime";
 "_xtshapro._tcp." = "xTime Project";
 "_xul-http._tcp." = "XUL via HTTP";
 "_yakumo._udp." = "Yakumo iPhone OS Device Control";
@@ -488,8 +488,11 @@
 "_netmonitorserver._tcp." = "Serveur Net Monitor";
 "_presence_olpc._tcp." = "OLPC Presence";
 "_pop_2_ambrosia._tcp." = "Pop-Pop";
-"_profCastLicense._tcp." = "ProfCast";
+"_profCastLicense._tcp." = "Licence ProfCast";
 "_WorldBook2004ST._tcp." = "Encyclopédie World Book";
 
 
 "_urlbookmark._tcp." = "Page Web Safari";
+"_bbsn._udp." = "Licence BBEdit";
+"_home-sharing._tcp." = "Partage à domicile iTunes";
+"_sleep-proxy._udp." = "Bonjour Sleep Proxy";
