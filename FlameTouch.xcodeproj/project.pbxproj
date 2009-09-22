@@ -46,7 +46,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6C296B0D1042CF7A00D84978 /* about.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = about.css; sourceTree = "<group>"; };
 		6C36437D1040253D00DF2197 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ServiceNames.strings; sourceTree = "<group>"; };
-		6C9CB30C103DB97900D2FDEA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = fr; path = fr.lproj/about_template.html; sourceTree = "<group>"; };
 		6C9CB30D103DB98A00D2FDEA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C9CB33A103DBD3900D2FDEA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = fr; path = fr.lproj/about.html; sourceTree = "<group>"; };
 		6CA160111020BCA700ADCEB0 /* ServiceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceType.h; sourceTree = "<group>"; };
@@ -55,8 +54,6 @@
 		6CE234C2103C782700DAE0F3 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ServiceNames.strings; sourceTree = "<group>"; };
 		6CE235AD103C986600DAE0F3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CE235B2103C98A900DAE0F3 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6CE235E7103CAADD00DAE0F3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = en; path = en.lproj/about_template.html; sourceTree = "<group>"; };
-		6CE235E9103CAAF200DAE0F3 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = de; path = de.lproj/about_template.html; sourceTree = "<group>"; };
 		6CE235FE103CAD7400DAE0F3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = en; path = en.lproj/about.html; sourceTree = "<group>"; };
 		6CE23600103CAD7E00DAE0F3 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = de; path = de.lproj/about.html; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -159,7 +156,6 @@
 				E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				6CE235FD103CAD7400DAE0F3 /* about.html */,
-				6CE235E6103CAADD00DAE0F3 /* about_template.html */,
 				6CE235AC103C986600DAE0F3 /* Localizable.strings */,
 				6CE234BF103C781200DAE0F3 /* ServiceNames.strings */,
 				6C296B0D1042CF7A00D84978 /* about.css */,
@@ -194,7 +190,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flame" */;
 			buildPhases = (
-				E605517A101A18A200E70AB4 /* ShellScript */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -253,29 +248,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		E605517A101A18A200E70AB4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/en.lproj/about_template.html",
-				"$(SRCROOT)/de.lproj/about_template.html",
-				"$(SRCROOT)/fr.lproj/about_template.html",
-			);
-			outputPaths = (
-				"$(SRCROOT)/de.lproj/about.html",
-				"$(SRCROOT)/fr.lproj/about.html",
-				"$(SRCROOT)/en.lproj/about.html",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "perl -ne 's/#\\{BUILD_DATE\\}/`date -u \"+%s\"`/e; print' < ${PROJECT_DIR}/en.lproj/about_template.html > ${PROJECT_DIR}/en.lproj/about.html\n\ntouch ${PROJECT_DIR}/en.lproj/about.html\n\nperl -ne 's/#\\{BUILD_DATE\\}/`date -u \"+%s\"`/e; print' < ${PROJECT_DIR}/de.lproj/about_template.html > ${PROJECT_DIR}/de.lproj/about.html\n\ntouch ${PROJECT_DIR}/de.lproj/about.html\n\nperl -ne 's/#\\{BUILD_DATE\\}/`date -u \"+%s\"`/e; print' < ${PROJECT_DIR}/fr.lproj/about_template.html > ${PROJECT_DIR}/fr.lproj/about.html\n\ntouch ${PROJECT_DIR}/fr.lproj/about.html\n\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -315,16 +287,6 @@
 				6C9CB30D103DB98A00D2FDEA /* fr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		6CE235E6103CAADD00DAE0F3 /* about_template.html */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6CE235E7103CAADD00DAE0F3 /* en */,
-				6CE235E9103CAAF200DAE0F3 /* de */,
-				6C9CB30C103DB97900D2FDEA /* fr */,
-			);
-			name = about_template.html;
 			sourceTree = "<group>";
 		};
 		6CE235FD103CAD7400DAE0F3 /* about.html */ = {

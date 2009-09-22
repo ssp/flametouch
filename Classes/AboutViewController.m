@@ -20,7 +20,12 @@
   [self.view addSubview:theWebView];
   [theWebView setDelegate:self];
   
-  NSString *htmlString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+  NSMutableString *htmlString = [NSMutableString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+  
+  NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+
+  [htmlString replaceOccurrencesOfString:@"#{VERSION}" withString:version options:0 range:NSMakeRange(0, [htmlString length])];
+  
   [theWebView loadHTMLString: htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
   
   return self;
