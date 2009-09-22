@@ -1,6 +1,6 @@
 body {
   font-family: Helvetica, sans-serif;
-	line-height: 141%;
+  line-height: 141%;
   background: #fff;
   color: #000;
   text-align: center;
@@ -8,28 +8,35 @@ body {
 }
 
 a:link {
-	text-decoration: none; color:#109;
+  text-decoration: none; color:#109;
 }
 
 a[hreflang]:after {
-	content:"[" attr(hreflang) "]"; 
-	font-size:71%; 
-	margin-left:0.2em;
+  content:"[" attr(hreflang) "]"; 
+  font-size:71%; 
+  margin-left:0.2em;
 }
 
 p {
-	margin: 0; padding: 7px 0 7px 0;
+  margin: 0; 
+  padding: 7px 0 7px 0;
+}
+
+p.version {
+  color: #777;
+  font-size: 12px;
 }
 
 span.attribution {
-	text-align:right; display:block; margin-top:0.5em;
+  text-align:right; display:block; margin-top:0.5em;
 }
 
 span.attribution:before {
-	content:"— ";
+  content:"— ";
 }
+
 q {
-	font-style: italic;
+  font-style: italic;
 }
 
 q:before {
