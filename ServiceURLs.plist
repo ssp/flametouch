@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_http._tcp.</key>
+	<string>http:80</string>
+	<key>_https._tcp.</key>
+	<string>https:443</string>
+	<key>_ssh._tcp.</key>
+	<string>ssh:23</string>
+	<key>_afp._tcp.</key>
+	<string>afp:548</string>
+	<key>_smb._tcp.</key>
+	<array>
+		<string>smb</string>
+		<string>cifs</string>
+	</array>
+	<key>_ftp._tcp.</key>
+	<string>ftp:21</string>
+	<key>_sftp-ssh._tcp.</key>
+	<array>
+		<string>sftp:22</string>
+		<string>ftps:22</string>
+	</array>
+	<key>_see._tcp.</key>
+	<string>see</string>
+	<key>_rtsp._tcp.</key>
+	<string>rtsp</string>
+	<key>_svn._tcp.</key>
+	<string>svn</string>
+	<key>_telnet._tcp.</key>
+	<string>telnet:23</string>
+	<key>_vnc._tcp</key>
+	<array>
+		<string>vnc</string>
+		<string>rfb</string>
+	</array>
+	<key>_skype._tcp.</key>
+	<string>skype</string>
+	<key>_xmpp-client._tcp.</key>
+	<string>xmpp</string>
+	<key>_xmpp-server._tcp.</key>
+	<string>xmpp</string>
+	<key>_rfb._tcp.</key>
+	<array>
+		<string>rfb</string>
+		<string>vnc</string>
+	</array>
+</dict>
+</plist>

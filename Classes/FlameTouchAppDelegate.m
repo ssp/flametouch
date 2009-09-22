@@ -46,6 +46,7 @@
 @synthesize hosts;
 @synthesize serviceTypes;
 @synthesize serviceBrowsers;
+@synthesize serviceURLs;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
   // Start the spinner on a blank app screen to indicate that we're thinking..
@@ -63,6 +64,9 @@
   metaBrowser = [[NSNetServiceBrowser alloc] init];
   [metaBrowser setDelegate:self];
   [metaBrowser searchForServicesOfType:@"_services._dns-sd._udp." inDomain:@""];
+  
+  // set up serviceURLs dictionary
+  self.serviceURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ServiceURLs" ofType:@"plist"]];
   
   // in a couple of seconds, report if we have no wifi
   [self performSelector:@selector(checkWifi) withObject:nil afterDelay:5.0];
@@ -267,6 +271,7 @@
   self.serviceBrowsers = nil;
   self.hosts = nil;
   self.serviceTypes = nil;
+  self.serviceURLs = nil;
   [super dealloc];
 }
 

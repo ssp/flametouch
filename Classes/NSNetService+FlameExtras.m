@@ -30,6 +30,7 @@
 */
 
 #import "NSNetService+FlameExtras.h"
+#import "FlameTouchAppDelegate.h"
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
@@ -143,28 +144,106 @@
   NSString * URLString = nil;
   NSString * myType = [self type];
   
-  if ( [myType isEqualToString:@"_urlbookmark._tcp."] ) {
+  id protocol = [((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).serviceURLs objectForKey:myType];
+  
+  if (protocol != nil) {
+    /* 
+     There could be several protocols for a service type. Choose the one to use as follows:
+     1. Use the first service type that can be opened by an application if possible or
+     2. Use the first service type in the list.
+    */
+    NSArray * protocols = nil;
+    if ([protocol isKindOfClass:[NSArray class]]) {
+      protocols = protocol;
+    }
+    else if ([protocol isKindOfClass:[NSString class]]) {
+      protocols = [NSArray arrayWithObject:protocol];
+    }
+    
+    NSString * protocolName = nil;
+    NSInteger defaultPort = 0;
+    for (NSString * myProtocol in protocols) {
+      NSArray * protocolAndPort = [myProtocol componentsSeparatedByString:@":"];
+      NSString * myProtocol;
+      NSInteger myPort = 0;
+      myProtocol = [protocolAndPort objectAtIndex:0];
+      if ( [protocolAndPort count] > 1 ) {
+        myPort = [[protocolAndPort objectAtIndex:1] integerValue];
+      }
+      NSURL * URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://localhost", myProtocol]];
+      if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+        protocolName = myProtocol;
+        defaultPort = myPort;
+        break;
+      }
+    }
+    if (protocolName == nil) {
+      NSArray * protocolAndPort = [[protocols objectAtIndex:0] componentsSeparatedByString:@":"];
+      protocolName = [protocolAndPort objectAtIndex:0];
+      if ( [protocolAndPort count] > 1 ) {
+        defaultPort = [[protocolAndPort objectAtIndex:1] integerValue];
+      }
+    }
+    
+        
+    /* Create URL with:
+     1. protocol name
+     2. user name and password if available
+     3. host name if possible, otherwise use IP address
+     4. port number if it differs from the default port number for the protocol
+     5. path if available
+    */
+    NSDictionary * TXTRecordDict = [NSNetService dictionaryFromTXTRecordData:[self TXTRecordData]];
+
+    NSString * userAndPassword = @"";
+    NSData * TXTData = [TXTRecordDict objectForKey:@"u"];
+    if (TXTData != nil) {
+      NSString * userName = [[[NSString alloc] initWithData:TXTData encoding:NSUTF8StringEncoding] autorelease];
+      NSString * password = nil;
+      if (userName != nil) {
+        TXTData = [TXTRecordDict objectForKey:@"p"];
+        if (TXTData != nil) {
+          password = [[[NSString alloc] initWithData:TXTData encoding:NSUTF8StringEncoding] autorelease];
+        }
+        if (password != nil) {
+          userAndPassword = [NSString stringWithFormat:@"%@:%@@", userName, password];
+        }
+        else {
+          userAndPassword = [NSString stringWithFormat:@"%@@", userName];
+        }
+      }
+    }
+
+    NSString * hostName = [self hostName];
+    if (hostName == nil) {
+      hostName = self.hostIPString;
+    }
+    
+    NSString * portNumber = @"";
+    if ([self port] != defaultPort) {
+      portNumber = [NSString stringWithFormat:@":%i", [self port]];
+    }
+    
+    NSString * path = @"";
+    TXTData = [TXTRecordDict objectForKey:@"path"];
+    if (TXTData != nil) {
+      NSString * thePath = [[[NSString alloc] initWithData:TXTData encoding:NSUTF8StringEncoding] autorelease];
+      if (thePath != nil) {
+        path = [NSString stringWithFormat:@"/%@", thePath];
+      }
+    }
+    
+    URLString = [NSString stringWithFormat:@"%@://%@%@%@%@", protocolName, userAndPassword, hostName, portNumber, path];
+    
+  }
+  else if ( [myType isEqualToString:@"_urlbookmark._tcp."] ) {
     NSDictionary * TXTRecordDict = [NSNetService dictionaryFromTXTRecordData:[self TXTRecordData]];
     NSData * URLData = [TXTRecordDict objectForKey:@"URL"];
     if (URLData != nil) {
       URLString = [[[NSString alloc] initWithData:URLData encoding:NSUTF8StringEncoding] autorelease];
     }
-  } 
-  else if ( [myType isEqualToString:@"_http._tcp."] ) {
-    if ([self port] == 80) {
-      URLString = [NSString stringWithFormat:@"http://%@/", self.hostIPString];
-    } else {
-      URLString = [NSString stringWithFormat:@"http://%@:%i/", self.hostIPString, [self port]];
-    }
-  } 
-  else if ( [myType isEqualToString:@"_ssh._tcp."] ) {
-    if ([self port] == 22) {
-      URLString = [NSString stringWithFormat:@"ssh://%@/", self.hostIPString];
-    } else {
-      URLString = [NSString stringWithFormat:@"ssh://%@:%i/", self.hostIPString, [self port]];
-    }
   }
-  
+    
   NSURL * result = nil;
   if (URLString != nil) {
     result = [NSURL URLWithString:URLString];

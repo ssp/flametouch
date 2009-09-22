@@ -14,6 +14,7 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		6C296B0E1042CF7A00D84978 /* about.css in Resources */ = {isa = PBXBuildFile; fileRef = 6C296B0D1042CF7A00D84978 /* about.css */; };
+		6C2C5CDE1069602900A90A54 /* ServiceURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C2C5CDD1069602900A90A54 /* ServiceURLs.plist */; };
 		6C9CB34C103DBE9400D2FDEA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		6CA160131020BCA700ADCEB0 /* ServiceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA160121020BCA700ADCEB0 /* ServiceType.m */; };
 		6CE234C0103C781200DAE0F3 /* ServiceNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CE234BF103C781200DAE0F3 /* ServiceNames.strings */; };
@@ -46,6 +47,7 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6C296B0D1042CF7A00D84978 /* about.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = about.css; sourceTree = "<group>"; };
+		6C2C5CDD1069602900A90A54 /* ServiceURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ServiceURLs.plist; sourceTree = "<group>"; };
 		6C36437D1040253D00DF2197 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ServiceNames.strings; sourceTree = "<group>"; };
 		6C9CB30D103DB98A00D2FDEA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C9CB33A103DBD3900D2FDEA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = fr; path = fr.lproj/about.html; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				6CE235FD103CAD7400DAE0F3 /* about.html */,
 				6CE235AC103C986600DAE0F3 /* Localizable.strings */,
 				6CE234BF103C781200DAE0F3 /* ServiceNames.strings */,
+				6C2C5CDD1069602900A90A54 /* ServiceURLs.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				6C296B0E1042CF7A00D84978 /* about.css in Resources */,
 				E6F72701104697B500FAE334 /* flame_square.png in Resources */,
 				E6C626191068D21D00847E99 /* LICENSE in Resources */,
+				6C2C5CDE1069602900A90A54 /* ServiceURLs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

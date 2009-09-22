@@ -48,7 +48,9 @@
   NSNetServiceBrowser *metaBrowser;
   NSMutableArray *serviceBrowsers;
   NSMutableArray *hosts;
-	NSMutableArray *serviceTypes;
+  NSMutableArray *serviceTypes;
+  
+  NSDictionary *serviceURLs;
 }
 
 - (void)refreshList;
@@ -59,6 +61,7 @@
 @property (nonatomic, retain) NSMutableArray* hosts;
 @property (nonatomic, retain) NSMutableArray* serviceTypes;
 @property (nonatomic, retain) NSMutableArray* serviceBrowsers;
+@property (nonatomic, retain) NSDictionary* serviceURLs;
 @property NSInteger displayMode;
 @end
 
