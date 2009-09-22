@@ -29,6 +29,7 @@
 		E6761BB60EDB1A9A00E40B14 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6761BB50EDB1A9A00E40B14 /* ServiceViewController.m */; };
 		E6AAAFCE0FF521BF0042220A /* ServiceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AAAFCD0FF521BF0042220A /* ServiceDetailViewController.m */; };
 		E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */; };
+		E6C626191068D21D00847E99 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E6C626181068D21D00847E99 /* LICENSE */; };
 		E6F72701104697B500FAE334 /* flame_square.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F72700104697B500FAE334 /* flame_square.png */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		E6AAAFCC0FF521BF0042220A /* ServiceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailViewController.h; sourceTree = "<group>"; };
 		E6AAAFCD0FF521BF0042220A /* ServiceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailViewController.m; sourceTree = "<group>"; };
 		E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		E6C626181068D21D00847E99 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E6F2B85F1020F7390084D25B /* service_list_builder.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = service_list_builder.rb; sourceTree = "<group>"; };
 		E6F72700104697B500FAE334 /* flame_square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame_square.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E6C626181068D21D00847E99 /* LICENSE */,
 				E6F72700104697B500FAE334 /* flame_square.png */,
 				E6761B710EDB169700E40B14 /* flame_128x128.png */,
 				E6613AF410177E3500EA7A4A /* Default.png */,
@@ -243,6 +246,7 @@
 				6CE235FF103CAD7400DAE0F3 /* about.html in Resources */,
 				6C296B0E1042CF7A00D84978 /* about.css in Resources */,
 				E6F72701104697B500FAE334 /* flame_square.png in Resources */,
+				E6C626191068D21D00847E99 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
