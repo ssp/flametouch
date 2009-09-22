@@ -252,6 +252,12 @@
 }
 
 
+/*
+ Description forthcoming.
+*/
+- (void) bringDownWestCoastNetworkWithDelay: (NSTimeInterval) delay {
+
+}
 
 
 - (void)dealloc {
