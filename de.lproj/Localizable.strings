@@ -4,7 +4,7 @@
 "No WiFi connection" = "Keine Wi-Fi Verbindung";
 
 /* Message of No WiFi Connection error message */
-"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." = "Flame kann ausschließlich Bonjour Dienste lokalen Wi-Fi Netzwerk finden. Ohne eine solche Verbindung wird das Programm nicht nützlich sein.";
+"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful." = "Flame kann ausschließlich Bonjour Dienste im lokalen Wi-Fi Netzwerk finden. Ohne Netzwerkverbindung wird das Programm nicht nützlich sein.";
 
 /* OK Button */
 "OK" = "OK";
