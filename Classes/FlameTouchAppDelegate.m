@@ -110,7 +110,7 @@
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didNotSearch:(NSDictionary *)errorInfo {
-  NSLog(@"Did not search: %@", errorInfo);
+  // NSLog(@"Did not search: %@", errorInfo);
 }
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)netServiceBrowser {
@@ -159,7 +159,7 @@
   }
   // Can't mutate while iterating
   for (Host *host in toRemove) {
-    NSLog(@"No services remaining on host %@, removing", host);
+    // NSLog(@"No services remaining on host %@, removing", host);
     [self.hosts removeObject:host];
   }
   [toRemove release];
@@ -227,7 +227,7 @@
 
 
 - (void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict {
-  NSLog(@"Did not resolve service %@: %@", service, errorDict);
+  //  NSLog(@"Did not resolve service %@: %@", service, errorDict);
   //[service release]; // we retained this before resolving it
 }
 
