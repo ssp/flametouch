@@ -254,6 +254,7 @@
 "_ncsyncserver._tcp." = "Network Clipboard Sync Server";
 "_neoriders._udp." = "NeoRiders Client";
 "_net-assistant._tcp." = "Entfernte Verwaltung (ARD)";
+"_net-assistant._udp." = "Entfernte Verwaltung (ARD)";
 "_net2display._tcp." = "Vesa Net2Display";
 "_netrestore._tcp." = "NetRestore";
 "_newton-dock._tcp." = "Escale";
