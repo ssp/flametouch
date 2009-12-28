@@ -426,7 +426,7 @@
 "_tivo-videos._tcp." = "TiVo Videos";
 "_tomboy._tcp." = "Tomboy";
 "_toothpicserver._tcp." = "ToothPics Dental Office";
-"_touch-able._tcp." = "iTunes, Steuerbar";
+"_touch-able._tcp." = "iTunes, steuerbar";
 "_touch-remote._tcp." = "iPhone/iPod Remote";
 "_tryst._tcp." = "Tryst";
 "_ttp4daemon._tcp." = "TechTool Pro 4 Kopierschutz";
@@ -495,3 +495,4 @@
 "_bbsn._udp." = "BBEdit Lizenz";
 "_home-sharing._tcp." = "iTunes Privatfreigabe";
 "_sleep-proxy._udp." = "Bonjour Sleep Proxy";
+"_papers._tcp." = "Mekentosj Papers";
