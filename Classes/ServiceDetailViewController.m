@@ -5,7 +5,7 @@
   Created by Tom Insam on 26/06/2009.
  
   
-  Copyright (c) 2009 Sven-S. Porst, Tom Insam
+  Copyright (c) 2009-2010 Sven-S. Porst, Tom Insam
   
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,8 @@
 #import "ServiceDetailViewController.h"
 #import "NSNetService+FlameExtras.h"
 #import "FlameTouchAppDelegate.h"
+#import "FTCopyableLabel.h"
+
 
 @implementation ServiceDetailViewController
 
@@ -163,13 +165,14 @@
     [cell.contentView addSubview:cellLabel];
     [cellLabel release];
     
-    cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
+    cellLabel = [[FTCopyableLabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
     cellLabel.font = [UIFont systemFontOfSize:14.0];
-    cellLabel.adjustsFontSizeToFitWidth = YES;
     cellLabel.minimumFontSize = 10.0;
     cellLabel.textAlignment = UITextAlignmentLeft;
-    cellLabel.highlightedTextColor = [UIColor whiteColor];
+    cellLabel.highlightedTextColor = [UIColor blueColor]; // is this the appropriate colour?
     cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    cellLabel.numberOfLines = 0;
+    cellLabel.userInteractionEnabled = YES;
     cellLabel.tag = 2;
     [cell.contentView addSubview:cellLabel];
     [cellLabel release];

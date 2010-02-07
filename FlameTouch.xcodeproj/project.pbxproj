@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		6C0DA43011182D8F0087122A /* FTCopyableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DA42F11182D8F0087122A /* FTCopyableLabel.m */; };
 		6C296B0E1042CF7A00D84978 /* about.css in Resources */ = {isa = PBXBuildFile; fileRef = 6C296B0D1042CF7A00D84978 /* about.css */; };
 		6C2C5CDE1069602900A90A54 /* ServiceURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C2C5CDD1069602900A90A54 /* ServiceURLs.plist */; };
 		6C9CB34C103DBE9400D2FDEA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
@@ -46,6 +47,9 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6C0DA42E11182D8F0087122A /* FTCopyableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCopyableLabel.h; sourceTree = "<group>"; };
+		6C0DA42F11182D8F0087122A /* FTCopyableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCopyableLabel.m; sourceTree = "<group>"; };
+		6C0DA533111AD7CB0087122A /* Ideas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ideas; sourceTree = "<group>"; };
 		6C296B0D1042CF7A00D84978 /* about.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = about.css; sourceTree = "<group>"; };
 		6C2C5CDD1069602900A90A54 /* ServiceURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ServiceURLs.plist; sourceTree = "<group>"; };
 		6C36437D1040253D00DF2197 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ServiceNames.strings; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				E60D15180EDDC2EB0054FB36 /* NSNetService+FlameExtras.m */,
 				E6613C9B10183F2800EA7A4A /* AboutViewController.h */,
 				E6613C9C10183F2800EA7A4A /* AboutViewController.m */,
+				6C0DA42E11182D8F0087122A /* FTCopyableLabel.h */,
+				6C0DA42F11182D8F0087122A /* FTCopyableLabel.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6C0DA533111AD7CB0087122A /* Ideas */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				E6613B9910179C4C00EA7A4A /* Vendor */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -271,6 +278,7 @@
 				E6613BA710179C8100EA7A4A /* Reachability.m in Sources */,
 				E6613C9D10183F2800EA7A4A /* AboutViewController.m in Sources */,
 				6CA160131020BCA700ADCEB0 /* ServiceType.m in Sources */,
+				6C0DA43011182D8F0087122A /* FTCopyableLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
