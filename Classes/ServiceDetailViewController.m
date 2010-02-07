@@ -178,22 +178,22 @@
     [cellLabel release];
   }
   
-	NSString * myLabel = label;
-	NSString * myValue = value;
-	if (nil == myLabel) myLabel = @"";
-	if (nil == myValue) myValue = @"";
-	((UILabel*)[cell viewWithTag:1]).text = myLabel;
-	((UILabel*)[cell viewWithTag:2]).text = myValue;
+  NSString * myLabel = label;
+  NSString * myValue = value;
+  if (nil == myLabel) myLabel = @"";
+  if (nil == myValue) myValue = @"";
+  ((UILabel*)[cell viewWithTag:1]).text = myLabel;
+  ((UILabel*)[cell viewWithTag:2]).text = myValue;
   
   // try to parse the value as an url - if we can, then this cell is
   // clickable. Make it blue. I'd like it underlined as well, but that
   // seems to be lots harder.
-	NSURL *url = [NSURL URLWithString:myValue];
+  NSURL *url = [NSURL URLWithString:myValue];
   if (url && [url scheme] && [url host] && [[UIApplication sharedApplication] canOpenURL:url]) {
     [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   } else {
-		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
+    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
 
