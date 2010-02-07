@@ -411,7 +411,8 @@
 "_tcode._tcp." = "Time Code";
 "_tcu._tcp." = "Tracking Control Unit";
 "_teamlist._tcp." = "ARTIS Team Task";
-"_teleport._udp." = "teleport";
+"_teleport._tcp." = "Teleport Maus- & Tastatursteuerung";
+"_teleport._udp." = "Teleport Maus- & Tastatursteuerung";
 "_telnet._tcp." = "Telnet Entfernte Anmeldung";
 "_tera-mp._tcp." = "Terascala Maintenance";
 "_tf-redeye._tcp." = "ThinkFlood RedEye IR bridge";
@@ -496,3 +497,23 @@
 "_home-sharing._tcp." = "iTunes Privatfreigabe";
 "_sleep-proxy._udp." = "Bonjour Sleep Proxy";
 "_papers._tcp." = "Mekentosj Papers";
+"_textexpander._tcp." = "TextExpander";
+
+"_qflm._tcp." = "Quicken Essentials";
+"_rowmote._tcp." = "Rowmote";
+"_DropCopy._tcp." = "DropCopy";
+"_garagesale._tcp." = "GarageSale";
+"_KeynoteAccess._tcp." = "Keynote Access";
+"_KeynotePairing._tcp." = "Keynote Pairing";
+"_KeynoteRemotePairing._tcp." = "Keynote Remote Pairing";
+"_plexmediasvr._tcp." = "Plex Media Server";
+"_zsync._tcp." = "ZSync";
+"_bigshow._tcp." = "BigShow";
+"_pastebot_sync_client_1._tcp." = "Pastebot";
+"_cciphonethings._tcp." = "Things";
+
+"_todogwa._tcp." = "Appigo Sync"; /* iPhone <-> iCal Bonjour sync for their To Do iPhone app */
+"_istatrmt._tcp." = "iStat für iPhone";
+"_timelog._tcp." = "TimeLog";
+"_friedegg._tcp." = "friedEgg Software"; /* probably friedEgg Touch */
+
