@@ -356,7 +356,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.3;
 			};
 			name = Debug;
 		};
@@ -370,7 +370,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ADBA976D-08DA-4085-96A1-AF5A32394A67";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphonesimulator3.1.3;
 			};
 			name = Release;
 		};
@@ -384,7 +384,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "083A18DD-D7BF-4753-8C1C-483E7785F697";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphonesimulator3.1.3;
 			};
 			name = AdHoc;
 		};
