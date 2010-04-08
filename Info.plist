@@ -28,5 +28,9 @@
 	<string>MainWindow</string>
 	<key>UIPrerenderedIcon</key>
 	<false/>
+	<key>UIRequireDeviceCapabilities</key>
+	<string>wifi</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 </dict>
 </plist>
