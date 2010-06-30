@@ -26,6 +26,10 @@
 */
 "Services" = "Services";
 
+/*
+  Label for About Button (not visible on screen, but used for Accessibility)
+*/
+"About Flame" = "About Flame";
 
 
 
