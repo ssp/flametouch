@@ -76,19 +76,19 @@
 }
 
 -(NSString*) detailsWithCount {
-	NSUInteger serviceCount = self.services.count;
-	NSString * serviceCountString = @"";
+  NSUInteger serviceCount = self.services.count;
+  NSString * serviceCountString = @"";
   if (serviceCount == 0) {
     serviceCountString = NSLocalizedString(@"No Services", @"String indicating that no service is advertised on the Host");
   }
-	if (serviceCount == 1) {
-		serviceCountString = NSLocalizedString(@"1 Service", @"String indicating that single service is advertised on the Host");
-	}
-	else if (serviceCount > 1) {
-		serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i Services", @"String indicating that %i (with %i > 1) services are advertised on Host"), serviceCount];
-	}
-	NSString* details = [NSString stringWithFormat:@"%@ – %@ (%@)", serviceCountString, self.hostname, self.ip];
-	return details;
+  else if (serviceCount == 1) {
+    serviceCountString = NSLocalizedString(@"1 Service", @"String indicating that single service is advertised on the Host");
+  }
+  else if (serviceCount > 1) {
+    serviceCountString = [NSString stringWithFormat:NSLocalizedString(@"%i Services", @"String indicating that %i (with %i > 1) services are advertised on Host"), serviceCount];
+  }
+  NSString* details = [NSString stringWithFormat:@"%@ – %@ (%@)", serviceCountString, self.hostname, self.ip];
+  return details;
 }
 
 -(NSNetService*)serviceAtIndex:(int)i {
