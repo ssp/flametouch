@@ -5,7 +5,7 @@
   Created by Tom Insam on 24/11/2008.
  
   
-  Copyright (c) 2009 Sven-S. Porst, Tom Insam
+  Copyright (c) 2009-2010 Sven-S. Porst, Tom Insam
   
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
