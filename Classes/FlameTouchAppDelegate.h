@@ -40,7 +40,7 @@
 #define SHOWSERVICES 1
 
 
-@interface FlameTouchAppDelegate : NSObject <UIApplicationDelegate> {
+@interface FlameTouchAppDelegate : NSObject <UIApplicationDelegate,NSNetServiceBrowserDelegate,NSNetServiceDelegate> {
   
   UIWindow *window;
   UINavigationController *navigationController;
