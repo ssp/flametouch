@@ -33,6 +33,10 @@
 
 #define LABEL_TAG 1
 
+
+extern NSString * FTNameAndDetailsCellIdentifier;
+
+
 @interface ServiceViewController : UITableViewController {
 }
 

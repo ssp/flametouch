@@ -36,6 +36,9 @@
 #import "ServiceType.h"
 #import "FlameTouchAppDelegate.h"
 
+
+NSString * FTNameAndDetailsCellIdentifier = @"NameAndDetails";
+
 @implementation ServiceViewController
 
 - (id) init {
@@ -88,27 +91,9 @@
 	static NSString *CellIdentifier = @"ServiceCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-		
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, tableView.frame.size.width - 8.0, 25.0)];
-		label.font = [UIFont boldSystemFontOfSize:16.0];
-		label.textAlignment = UITextAlignmentLeft;
-		label.textColor = [UIColor blackColor];
-		label.highlightedTextColor = [UIColor whiteColor];
-		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		label.tag = 1;
-		[cell.contentView addSubview:label];
-		[label release];
-		
-		label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, tableView.frame.size.width - 8.0, 20.0)];
-		label.font = [UIFont systemFontOfSize:12.0];
-		label.textAlignment = UITextAlignmentLeft;
-		label.textColor = [UIColor grayColor];
-		label.highlightedTextColor = [UIColor whiteColor];
-		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		label.tag = 2;
-		[cell.contentView addSubview:label];
-		[label release];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FTNameAndDetailsCellIdentifier] autorelease];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -178,14 +163,11 @@
 */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-	NSString * title;
-  NSString * subtitle;
-  
   NSNetService *service = [self.host serviceAtIndex:indexPath.row];
 	
   if ([service.humanReadableType isEqualToString:service.type]) {
-    title = service.type;
-    subtitle = [NSString stringWithFormat:@"%@ – [%i]", [service name], service.portInfo];
+    cell.textLabel.text = service.type;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ – [%i]", [service name], service.portInfo];
   } 
   else {
 		NSRange firstDot = [service.type rangeOfString:@"." options:NSLiteralSearch];
@@ -194,13 +176,10 @@
 			protocolName = [protocolName substringWithRange:NSMakeRange(1, firstDot.location - 1)];
 		}
     
-    title = service.humanReadableType;
-    subtitle = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
+    cell.textLabel.text = service.humanReadableType;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
   }
 
-  ((UILabel*)[cell viewWithTag:1]).text = title;
-  ((UILabel*)[cell viewWithTag:2]).text = subtitle;
-  
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
   }
@@ -286,12 +265,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-	
 	NSNetService *service = [self.serviceType.services objectAtIndex:indexPath.row];
-	((UILabel*)[cell viewWithTag:1]).text = [service name];
-
-	NSString * details = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
-	((UILabel*)[cell viewWithTag:2]).text = details;
+	
+  cell.textLabel.text = [service name];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
 	
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 

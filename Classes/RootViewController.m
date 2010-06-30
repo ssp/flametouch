@@ -126,40 +126,21 @@
   static NSString *CellIdentifier = @"HostCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, tableView.frame.size.width -8.0, 25.0)];
-    label.font = [UIFont boldSystemFontOfSize:16.0];
-    label.textAlignment = UITextAlignmentLeft;
-    label.textColor = [UIColor blackColor];
-		label.highlightedTextColor = [UIColor whiteColor];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.tag = 1;
-    [cell.contentView addSubview:label];
-    [label release];
-  
-    label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, tableView.frame.size.width -8.0, 20.0)];
-    label.font = [UIFont systemFontOfSize:12.0];
-    label.textAlignment = UITextAlignmentLeft;
-    label.textColor = [UIColor grayColor];
-		label.highlightedTextColor = [UIColor whiteColor];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.tag = 2;
-    [cell.contentView addSubview:label];
-    [label release];
-    
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FTNameAndDetailsCellIdentifier] autorelease];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
   }
   
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (delegate.displayMode == SHOWSERVERS) {
 		Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
-		((UILabel*)[cell viewWithTag:1]).text = [host name];
-		((UILabel*)[cell viewWithTag:2]).text = [host details];
+		cell.textLabel.text = [host name];
+		cell.detailTextLabel.text = [host details];
 	}
 	else {
 		ServiceType * serviceType = (ServiceType*) [delegate.serviceTypes objectAtIndex:indexPath.row];
-		((UILabel*)[cell viewWithTag:1]).text = serviceType.humanReadableType;
-		((UILabel*)[cell viewWithTag:2]).text = [serviceType details];
+		cell.textLabel.text = serviceType.humanReadableType;
+		cell.detailTextLabel.text = [serviceType details];
 	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
