@@ -73,10 +73,10 @@
   ((FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate]).displayMode = selection;
 
 	if (selection == SHOWSERVERS) {
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list")];
+    self.title = NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list");
   }
   else {
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Title of Button to get back to the Services list")];		
+    self.title = NSLocalizedString(@"Services", @"Title of Button to get back to the Services list");
   }
 }
 
