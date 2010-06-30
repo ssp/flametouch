@@ -8,8 +8,11 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>flame_square.png</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>flame_square.png</string>
+		<string>flame_square@2x.png</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>org.jerakeen.flametouch</string>
 	<key>CFBundleInfoDictionaryVersion</key>
