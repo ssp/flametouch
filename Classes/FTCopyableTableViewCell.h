@@ -1,8 +1,8 @@
 /*
- FTCopyableLabel.h
+ FTCopyableTableViewCell.m
  FlameTouch
  
- Created by Sven-S. Porst on 2010-02-02.
+ Created by Sven-S. Porst on 2010-06-30.
  
  
  Copyright (c) 2010 Sven-S. Porst, Tom Insam
@@ -29,23 +29,15 @@
  for support.
 */
 
-/*
- Idea and code starting from that at:
- http://stackoverflow.com/questions/1920541/enable-copy-and-paste-on-uitextfield-without-making-it-editable
- 
- Changes applied to that include:
- 
- 1. label will now not be highlighted once the copy button appears
- 2. highlight will now go away when the user dismisses the copy button
- (1 is a consequence of making 2 work, the original behaviour seems rather bad)
- 3. make copy appear at the location of the touch
-*/
-
-
 #import <UIKit/UIKit.h>
 
-@interface FTCopyableLabel : UILabel {
+
+@interface FTCopyableTableViewCell : UITableViewCell {
 
 }
+
++ (FTCopyableTableViewCell*) cellWithReuseIdentifier: (NSString*) cellIdentifier;  
+
+- (void) showMenu;
 
 @end

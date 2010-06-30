@@ -1,8 +1,8 @@
 /*
- FTCopyableLabel.m
+ FTCopyableTableViewCell.m
  FlameTouch
  
- Created by Sven-S. Porst on 2010-02-02.
+ Created by Sven-S. Porst on 2010-06-30.
  
  
  Copyright (c) 2010 Sven-S. Porst, Tom Insam
@@ -30,13 +30,22 @@
 */
 
 
-#import "FTCopyableLabel.h"
+#import "FTCopyableTableViewCell.h"
 
 
+@implementation FTCopyableTableViewCell
 
-@implementation FTCopyableLabel
++ (FTCopyableTableViewCell *) cellWithReuseIdentifier: (NSString*) cellIdentifier {
+  FTCopyableTableViewCell * cell = [[[FTCopyableTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];  
+  cell.textLabel.adjustsFontSizeToFitWidth = YES;
+  cell.textLabel.minimumFontSize = 10.0;
+          
+  return cell;
+}
 
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+
+/*
+- (BOOL) canPerformAction: (SEL) action withSender: (id) sender {
   if(action == @selector(copy:)) {
     return YES;
   }
@@ -46,15 +55,15 @@
 }
 
 
-- (BOOL)canBecomeFirstResponder {
+- (BOOL) canBecomeFirstResponder {
   return YES;
 }
 
 
-- (void)copy:(id)sender {
-  UIPasteboard *board = [UIPasteboard generalPasteboard];
-  [board setString:self.text];
-  self.highlighted = NO;
+- (void) copy: (id) sender {
+  UIPasteboard * pasteboard = [UIPasteboard generalPasteboard];
+  [pasteboard setString:self.detailTextLabel.text];
+  self.selected = NO;
   [self resignFirstResponder];
 }
 
@@ -62,20 +71,30 @@
 /*
  Highlight while we're touched.
 */
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
   [super touchesBegan:touches withEvent:event];
-  self.highlighted = YES;
+  self.selected = YES;
 }
 
 
+- (void) showMenu {
+  UIMenuController * menuController = [UIMenuController sharedMenuController];
+  [menuController setMenuVisible:NO animated:YES];
+  [self becomeFirstResponder];
+  [menuController update];
+  [menuController setTargetRect:CGRectZero inView:self];
+  [menuController setMenuVisible:YES animated:YES];
+}
+
+/*
 /*
  When touches end, display menu and stop highlighting.
 */
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+/*
+- (void) touchesEnded: (NSSet *) touches withEvent: (UIEvent *) event {
   UIMenuController * menuController = [UIMenuController sharedMenuController];
-
-  CGPoint touchPoint = [[touches anyObject] locationInView:self];
-  CGRect clickRect = CGRectMake(touchPoint.x, touchPoint.y, .0, .0);
+  
+  CGRect clickRect = self.bounds;
   
   if([self isFirstResponder]) {
     [menuController setMenuVisible:NO animated:YES];
@@ -87,9 +106,9 @@
     [menuController setTargetRect:clickRect inView:self];
     [menuController setMenuVisible:YES animated:YES];
   }
-
-  self.highlighted = NO;
+  
+  self.selected = NO;
 }
-
+*/
 
 @end

@@ -32,7 +32,7 @@
 #import "ServiceDetailViewController.h"
 #import "NSNetService+FlameExtras.h"
 #import "FlameTouchAppDelegate.h"
-#import "FTCopyableLabel.h"
+#import "FTCopyableTableViewCell.h"
 
 
 @implementation ServiceDetailViewController
@@ -152,7 +152,8 @@
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+    cell = [FTCopyableTableViewCell cellWithReuseIdentifier: CellIdentifier];  
+/*    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
     
     UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
     cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
@@ -176,24 +177,23 @@
     cellLabel.tag = 2;
     [cell.contentView addSubview:cellLabel];
     [cellLabel release];
+ */
   }
   
-  NSString * myLabel = label;
-  NSString * myValue = value;
-  if (nil == myLabel) myLabel = @"";
-  if (nil == myValue) myValue = @"";
-  ((UILabel*)[cell viewWithTag:1]).text = myLabel;
-  ((UILabel*)[cell viewWithTag:2]).text = myValue;
+  NSString * myLabel = (nil != label) ? label : @"";
+  NSString * myValue = (nil != value) ? value : @"";
+  cell.textLabel.text = myLabel;
+  cell.detailTextLabel.text = myValue;
   
   // try to parse the value as an url - if we can, then this cell is
   // clickable. Make it blue. I'd like it underlined as well, but that
   // seems to be lots harder.
   NSURL *url = [NSURL URLWithString:myValue];
   if (url && [url scheme] && [url host] && [[UIApplication sharedApplication] canOpenURL:url]) {
-    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+    cell.detailTextLabel.textColor = [UIColor blueColor];
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   } else {
-    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
+    cell.detailTextLabel.textColor = [UIColor blackColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
 
