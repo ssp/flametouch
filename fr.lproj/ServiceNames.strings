@@ -119,6 +119,7 @@
 "_facespan._tcp." = "FaceSpan";
 "_fairview._udp." = "Fairview Device Identification";
 "_faxstfx._tcp." = "FAXstf";
+"_fax-ipp._tcp." = "Fax Sharing";
 "_feed-sharing._tcp." = "NetNewsWire 2.0";
 "_fish._tcp." = "Fish";
 "_fix._tcp." = "Financial Information Exchange (FIX)";
