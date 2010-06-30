@@ -123,8 +123,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"HostCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FTNameAndDetailsCellIdentifier];
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FTNameAndDetailsCellIdentifier] autorelease];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
