@@ -52,36 +52,6 @@
   self.TXTRecordKeys = [[TXTRecordDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
   self.TXTRecordValues = [TXTRecordDict objectsForKeys:self.TXTRecordKeys notFoundMarker:@""];
   self.hasOpenServiceButton = (self.service.openableExternalURL != nil);
-/*
-  UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, 100.0)];
-  
-  // header cell to contain word-wrapped version of full text description
-  // of the service. This is here because it's the only place you'll otherwise
-  // see the full description, as most of them are quite long.
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 5.0, self.tableView.frame.size.width - 20, 100.0)];
-  label.font = [UIFont systemFontOfSize:14.0];
-  label.textAlignment = UITextAlignmentLeft;
-  label.textColor = [UIColor blackColor];
-  label.lineBreakMode = UILineBreakModeWordWrap;
-  label.numberOfLines = 0;
-  label.backgroundColor = [UIColor clearColor];
-  label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-  label.text = self.service.humanReadableType;
-
-  // resize label and header frame to just enclose the text.
-  CGSize maximumLabelSize = CGSizeMake(self.tableView.frame.size.width - 20, 1000);
-  CGSize expectedLabelSize = [label.text sizeWithFont:label.font constrainedToSize:maximumLabelSize lineBreakMode:label.lineBreakMode]; 
-  CGRect newFrame = label.frame;
-  newFrame.size.height = expectedLabelSize.height;
-  label.frame = newFrame;
-  header.frame = newFrame;
-  
-  [header addSubview:label];
-  [label release];
-  
-  self.tableView.tableHeaderView = header;
-  [header release];
-*/  
   
   self.tableView.delegate = self;
 
