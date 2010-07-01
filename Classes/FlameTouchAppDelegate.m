@@ -48,7 +48,8 @@
 @synthesize serviceBrowsers;
 @synthesize serviceURLs;
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+{
   // Start the spinner on a blank app screen to indicate that we're thinking..
   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   
@@ -71,9 +72,11 @@
   // in a couple of seconds, report if we have no wifi
   [self performSelector:@selector(checkWifi) withObject:nil afterDelay:5.0];
   
+	return YES; // happy days are here again
 }
 
--(void)refreshList {
+-(void)refreshList;
+{
 
   // destroy arrays and discovery services
   for (NSNetServiceBrowser* browser in self.serviceBrowsers) {
@@ -100,7 +103,8 @@
 
 }
 
-- (void)checkWifi {
+- (void)checkWifi
+{
   if (![[Reachability sharedReachability] localWiFiConnectionStatus]) {
     NSString * title = NSLocalizedString(@"No WiFi connection", @"Title of No WiFi Connection error message");
     NSString * message = NSLocalizedString(@"We're not connected to a WiFi network here. Flame can only find services on the local network, so without WiFi, it's not going to be very useful.", @"Message of No WiFi Connection error message");
@@ -109,11 +113,14 @@
   }
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didNotSearch:(NSDictionary *)errorInfo {
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didNotSearch:(NSDictionary *)errorInfo;
+{
   // NSLog(@"Did not search: %@", errorInfo);
 }
 
-- (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)netServiceBrowser {
+- (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)netServiceBrowser;
+{
+  // dummy delegate method, we don't care.
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)service moreComing:(BOOL)moreServicesComing {
