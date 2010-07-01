@@ -224,20 +224,10 @@
   static NSString *CellIdentifier = @"ActionCell";
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 1.0, cell.frame.size.width - 40, cell.frame.size.height - 3)];
-    label.font = [UIFont boldSystemFontOfSize:14.0];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor blackColor];
-    label.highlightedTextColor = [UIColor whiteColor];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.tag = 1;
-    [cell.contentView addSubview:label];
-    [label release];
-
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    cell.textLabel.textAlignment = UITextAlignmentCenter;
   }
-  ((UILabel*)[cell viewWithTag:1]).text = NSLocalizedString(@"Open Service", @"Label of button to open the relevant service on Service Details page");
+  cell.textLabel.text = NSLocalizedString(@"Open Service", @"Label of button to open the relevant service on Service Details page");
   return cell;
 }
 
