@@ -18,9 +18,7 @@
 		6C9CB34C103DBE9400D2FDEA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		6CA160131020BCA700ADCEB0 /* ServiceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA160121020BCA700ADCEB0 /* ServiceType.m */; };
 		6CCD4F0411DC8020005A08CD /* Icon_57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4F0311DC8020005A08CD /* Icon_57@2x.png */; };
-		6CCD4F0911DC802F005A08CD /* iPhone-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4F0611DC802F005A08CD /* iPhone-Landscape@2x.png */; };
 		6CCD4F0A11DC802F005A08CD /* iPhone-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4F0711DC802F005A08CD /* iPhone-Portrait@2x.png */; };
-		6CCD4F1811DC810F005A08CD /* iPhone-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4F1711DC810F005A08CD /* iPhone-Landscape.png */; };
 		6CE234C0103C781200DAE0F3 /* ServiceNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CE234BF103C781200DAE0F3 /* ServiceNames.strings */; };
 		6CE235AE103C986600DAE0F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CE235AC103C986600DAE0F3 /* Localizable.strings */; };
 		6CE235FF103CAD7400DAE0F3 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CE235FD103CAD7400DAE0F3 /* about.html */; };
@@ -65,9 +63,7 @@
 		6CA160111020BCA700ADCEB0 /* ServiceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceType.h; sourceTree = "<group>"; };
 		6CA160121020BCA700ADCEB0 /* ServiceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceType.m; sourceTree = "<group>"; };
 		6CCD4F0311DC8020005A08CD /* Icon_57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_57@2x.png"; sourceTree = "<group>"; };
-		6CCD4F0611DC802F005A08CD /* iPhone-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone-Landscape@2x.png"; path = "Resources-iPhone/iPhone-Landscape@2x.png"; sourceTree = "<group>"; };
 		6CCD4F0711DC802F005A08CD /* iPhone-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone-Portrait@2x.png"; path = "Resources-iPhone/iPhone-Portrait@2x.png"; sourceTree = "<group>"; };
-		6CCD4F1711DC810F005A08CD /* iPhone-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone-Landscape.png"; path = "Resources-iPhone/iPhone-Landscape.png"; sourceTree = "<group>"; };
 		6CE234C1103C782400DAE0F3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ServiceNames.strings; sourceTree = "<group>"; };
 		6CE234C2103C782700DAE0F3 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ServiceNames.strings; sourceTree = "<group>"; };
 		6CE235AD103C986600DAE0F3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -218,8 +214,6 @@
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				E6613AF410177E3500EA7A4A /* iPhone-Portrait.png */,
 				6CCD4F0711DC802F005A08CD /* iPhone-Portrait@2x.png */,
-				6CCD4F1711DC810F005A08CD /* iPhone-Landscape.png */,
-				6CCD4F0611DC802F005A08CD /* iPhone-Landscape@2x.png */,
 			);
 			name = "Resources-iPhone";
 			sourceTree = "<group>";
@@ -311,8 +305,6 @@
 				E6AC9312117734D900E60301 /* MainWindow-iPad.xib in Resources */,
 				E6613AF510177E3500EA7A4A /* iPhone-Portrait.png in Resources */,
 				6CCD4F0A11DC802F005A08CD /* iPhone-Portrait@2x.png in Resources */,
-				6CCD4F1811DC810F005A08CD /* iPhone-Landscape.png in Resources */,
-				6CCD4F0911DC802F005A08CD /* iPhone-Landscape@2x.png in Resources */,
 				E67D11AA11DBB75500F6234B /* iPad-Portrait.png in Resources */,
 				E67D11AB11DBB75500F6234B /* iPad-Landscape.png in Resources */,
 				E67D120811DBC5A500F6234B /* flame_128x128.png in Resources */,
