@@ -17,6 +17,9 @@
 		6C2C5CDE1069602900A90A54 /* ServiceURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C2C5CDD1069602900A90A54 /* ServiceURLs.plist */; };
 		6C9CB34C103DBE9400D2FDEA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		6CA160131020BCA700ADCEB0 /* ServiceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA160121020BCA700ADCEB0 /* ServiceType.m */; };
+		6CCD4C2811DB52FE005A08CD /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4C2711DB52FE005A08CD /* Default-Portrait@2x.png */; };
+		6CCD4C2E11DB53F4005A08CD /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4C2D11DB53F4005A08CD /* Default-Landscape@2x.png */; };
+		6CCD4C5A11DB563B005A08CD /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4C5911DB563B005A08CD /* Default-Landscape.png */; };
 		6CCD4C6711DB58CA005A08CD /* flame_square@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD4C6611DB58CA005A08CD /* flame_square@2x.png */; };
 		6CE234C0103C781200DAE0F3 /* ServiceNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CE234BF103C781200DAE0F3 /* ServiceNames.strings */; };
 		6CE235AE103C986600DAE0F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CE235AC103C986600DAE0F3 /* Localizable.strings */; };
@@ -55,6 +58,9 @@
 		6C9CB33A103DBD3900D2FDEA /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = fr; path = fr.lproj/about.html; sourceTree = "<group>"; };
 		6CA160111020BCA700ADCEB0 /* ServiceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceType.h; sourceTree = "<group>"; };
 		6CA160121020BCA700ADCEB0 /* ServiceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceType.m; sourceTree = "<group>"; };
+		6CCD4C2711DB52FE005A08CD /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x.png"; sourceTree = "<group>"; };
+		6CCD4C2D11DB53F4005A08CD /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		6CCD4C5911DB563B005A08CD /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		6CCD4C6611DB58CA005A08CD /* flame_square@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flame_square@2x.png"; sourceTree = "<group>"; };
 		6CE234C1103C782400DAE0F3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ServiceNames.strings; sourceTree = "<group>"; };
 		6CE234C2103C782700DAE0F3 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ServiceNames.strings; sourceTree = "<group>"; };
@@ -162,6 +168,9 @@
 				6CCD4C6611DB58CA005A08CD /* flame_square@2x.png */,
 				E6761B710EDB169700E40B14 /* flame_128x128.png */,
 				E6613AF410177E3500EA7A4A /* Default.png */,
+				6CCD4C5911DB563B005A08CD /* Default-Landscape.png */,
+				6CCD4C2711DB52FE005A08CD /* Default-Portrait@2x.png */,
+				6CCD4C2D11DB53F4005A08CD /* Default-Landscape@2x.png */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -249,6 +258,9 @@
 				E6761B720EDB169700E40B14 /* flame_128x128.png in Resources */,
 				E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */,
 				E6613AF510177E3500EA7A4A /* Default.png in Resources */,
+				6CCD4C5A11DB563B005A08CD /* Default-Landscape.png in Resources */,
+				6CCD4C2811DB52FE005A08CD /* Default-Portrait@2x.png in Resources */,
+				6CCD4C2E11DB53F4005A08CD /* Default-Landscape@2x.png in Resources */,
 				6CE234C0103C781200DAE0F3 /* ServiceNames.strings in Resources */,
 				6CE235AE103C986600DAE0F3 /* Localizable.strings in Resources */,
 				6CE235FF103CAD7400DAE0F3 /* about.html in Resources */,
