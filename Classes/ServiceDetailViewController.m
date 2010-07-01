@@ -263,13 +263,14 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if ((self.hasOpenServiceButton && indexPath.section == 2) || (!self.hasOpenServiceButton && indexPath.section == 1)) {
     // Pressed one of the TXT Record cells
     NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
     if (value != nil) {
       NSURL *url = [NSURL URLWithString:value];
       if (url && [url scheme] && [url host]) {
+        [tableView cellForRowAtIndexPath:indexPath].selected = NO;
         [[UIApplication sharedApplication] openURL:url];
       }      
     }
@@ -277,6 +278,7 @@
     // Pressed the Open Service cell 
     // NSLog(@"Opening URL %@", self.service.externalURL);
     // in a couple of seconds, report if we have no wifi
+    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
     [[UIApplication sharedApplication] openURL:self.service.externalURL];
   }
 
