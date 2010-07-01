@@ -51,7 +51,7 @@
 "Type" = "Type";
 
 /* Service Details: Label for human readable description */
-"Description" = "Description";
+"Description" = "Service";
 
 /* Label of button to open the relevant service on Service Details page */
 "Open Service" = "Open Service";

@@ -181,12 +181,15 @@
 	NSString *value = nil;
 
 	if (row == 0) {
-		label = NSLocalizedString(@"Host", @"Service Details: Label for host name");
-		value = self.service.hostnamePlus;
+		label = NSLocalizedString(@"Description", @"Service Details: Label for human readable description");
+		value = self.service.humanReadableType;
 	} else if (row == 1) {
 		label = NSLocalizedString(@"Name", @"Service Details: Name of the service");
 		value = [self.service name];
 	} else if (row == 2) {
+		label = NSLocalizedString(@"Type", @"Service Details: Label for type");
+		value = self.service.type;
+	} else if (row == 3) {
     if ([self.service.protocolType isEqualToString:@"TCP"]) {
       label = NSLocalizedString(@"Port", @"Service Details: Label for port number");
     }
@@ -194,12 +197,9 @@
       label = [NSString stringWithFormat:NSLocalizedString(@"%@ Port", @"Service Details: Label for port number. %@ indicates the protocol type, e.g. UDP."), self.service.protocolType];
     }
 		value = [NSString stringWithFormat:@"%i", [self.service port]];
-	} else if (row == 3) {
-		label = NSLocalizedString(@"Type", @"Service Details: Label for type");
-		value = self.service.type;
 	} else if (row == 4) {
-		label = NSLocalizedString(@"Description", @"Service Details: Label for human readable description");
-		value = self.service.humanReadableType;
+		label = NSLocalizedString(@"Host", @"Service Details: Label for host name");
+		value = self.service.hostnamePlus;
 	} 
 
 	UITableViewCell * cell = [self propertyCellWithLabel: label andValue: value];

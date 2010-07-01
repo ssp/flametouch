@@ -52,7 +52,7 @@
 "Type" = "Art";
 
 /* Service Details: Label for human readable description */
-"Description" = "Beschreibung";
+"Description" = "Dienst";
 
 /* Label of button to open the relevant service on Service Details page */
 "Open Service" = "Dienst öffnen";
