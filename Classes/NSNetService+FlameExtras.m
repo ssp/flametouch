@@ -80,15 +80,16 @@
 
 
 -(NSString*) hostIPString {
-  NSData *address = ((NSData*)[[self addresses] objectAtIndex:0]);
-  // I've seen this be nil. But I can't reproduce any more..
-  if (address) {
-    struct sockaddr_in* sock = (struct sockaddr_in*)[address bytes];
-    NSString *ip = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
-    return ip;
-  } else {
-    return @"-";
+  NSString * result = @"-";
+  if ( [[self addresses] count] > 0 ) {
+    NSData *address = ((NSData*)[[self addresses] objectAtIndex:0]);
+	// I've seen this be nil. But I can't reproduce any more..
+    if (address) {
+      struct sockaddr_in* sock = (struct sockaddr_in*)[address bytes];
+      result = [NSString stringWithFormat:@"%s", inet_ntoa(sock->sin_addr)];
+	}
   }
+  return result;
 }
 
 

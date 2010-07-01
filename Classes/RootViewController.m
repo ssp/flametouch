@@ -5,7 +5,7 @@
   Created by Tom Insam on 24/11/2008.
  
   
-  Copyright (c) 2009 Sven-S. Porst, Tom Insam
+  Copyright (c) 2009-2010 Sven-S. Porst, Tom Insam
   
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -38,29 +38,41 @@
 
 @implementation RootViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
+
+- (id) awakeFromNib {
+  self = [super initWithStyle:UITableViewStylePlain];
+
+  if (self) {
+    UIBarButtonItem *refreshButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList)] autorelease];
+    self.navigationItem.leftBarButtonItem = refreshButton;
+
+    UIButton * myAboutButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    myAboutButton.frame = CGRectMake(0.0,0.0,20.0,20.0);
+    [myAboutButton addTarget:self action:@selector(showAboutPane) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * aboutButton = [[[UIBarButtonItem alloc] initWithCustomView:myAboutButton] autorelease];
+    [myAboutButton setTitle:NSLocalizedString(@"About Flame", @"Label for About Button (not visible on screen, but used for Accessibility)") forState:0];
+    self.navigationItem.rightBarButtonItem = aboutButton;
+
+    NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Hosts", @"Title of Segmented Control item for selecting the Hosts list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
+    UISegmentedControl * segmentedControl = [[[UISegmentedControl alloc] initWithItems:segmentedControlItems] autorelease];
+    [segmentedControl addTarget:self action:@selector(changeDisplayMode:) forControlEvents:UIControlEventValueChanged];
+    segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    segmentedControl.selectedSegmentIndex = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode;
+    self.navigationItem.titleView = segmentedControl;
+
+    CGRect searchBarRect = CGRectMake(0, 0, 100, 44);
+    UISearchBar * searchBar = [[[UISearchBar alloc] initWithFrame:searchBarRect] autorelease];
+    searchBar.delegate = self;
+    searchBar.showsCancelButton = YES;
+    self.tableView.tableHeaderView = searchBar;
+    [self.tableView setContentOffset:CGPointMake(0, 44)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
+  }
+  
+  return self;
 }
 
--(void)viewDidAppear:(BOOL)animated {
-  UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList)];
-  [self.navigationItem setLeftBarButtonItem:refreshButton];
-  [refreshButton release];
-
-  UIButton * myAboutButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-  myAboutButton.frame = CGRectMake(0.0,0.0,20.0,20.0);
-  [myAboutButton addTarget:self action:@selector(showAboutPane) forControlEvents:UIControlEventTouchUpInside];
-  UIBarButtonItem * aboutButton = [[[UIBarButtonItem alloc] initWithCustomView:myAboutButton] autorelease];
-  [self.navigationItem setRightBarButtonItem:aboutButton];
-
-  NSArray * segmentedControlItems = [NSArray arrayWithObjects:NSLocalizedString(@"Hosts", @"Title of Segmented Control item for selecting the Hosts list"), NSLocalizedString(@"Services", @"Title of Segmented Control item for selecting the Service list"), nil];
-  UISegmentedControl * segmentedControl = [[[UISegmentedControl alloc] initWithItems:segmentedControlItems] autorelease];
-  [segmentedControl addTarget:self action:@selector(changeDisplayMode:) forControlEvents:UIControlEventValueChanged];
-  segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-  segmentedControl.selectedSegmentIndex = ((FlameTouchAppDelegate*)[[UIApplication sharedApplication] delegate]).displayMode;
-  self.navigationItem.titleView = segmentedControl;
-}
 
 
 /*
@@ -73,10 +85,10 @@
   ((FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate]).displayMode = selection;
 
 	if (selection == SHOWSERVERS) {
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list")];
+    self.title = NSLocalizedString(@"Hosts", @"Title of Button to get back to the Hosts list");
   }
   else {
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Services", @"Title of Button to get back to the Services list")];		
+    self.title = NSLocalizedString(@"Services", @"Title of Button to get back to the Services list");
   }
 }
 
@@ -90,16 +102,44 @@
 -(void)refreshList {
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
   [delegate refreshList];
+  [self runFilter];
 }
 
 -(void) newServices:(id)whatever {
+  [self runFilter];
   [self.tableView reloadData];
 }
+
+
+/*
+ Update our filtered copies of the services and host arrays.
+*/
+- (void) runFilter {
+  NSString * filterText = ((UISearchBar *)self.tableView.tableHeaderView).text;
+  if ( !filterText || [filterText isEqualToString:@""] ) {
+    self.filteredHosts = nil;
+    self.filteredServiceTypes = nil;
+  }
+  else {
+    FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", filterText];
+    self.filteredHosts = [delegate.hosts filteredArrayUsingPredicate:predicate];
+    predicate = [NSPredicate predicateWithFormat:@"(humanReadableType CONTAINS[cd] %@) or (type CONTAINS[cd] %@)", filterText, filterText];
+    self.filteredServiceTypes = [delegate.serviceTypes filteredArrayUsingPredicate:predicate];    
+  }
+  
+  [self.tableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
   // Release anything that's not essential, such as cached data
 }
+
+
+
 
 #pragma mark Table view methods
 
@@ -108,36 +148,37 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSInteger result; 
-
-	if (delegate.displayMode == SHOWSERVERS) {
-		result = [delegate.hosts count];
+  FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
+  NSInteger result;
+	
+  if (delegate.displayMode == SHOWSERVERS) {
+		result = [self.filteredHosts count];
 	}
 	else {
-		result = [delegate.serviceTypes count];
+		result = [self.filteredServiceTypes count];
 	}
 
 	return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"HostCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FTNameAndDetailsCellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FTNameAndDetailsCellIdentifier] autorelease];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
   }
   
   FlameTouchAppDelegate *delegate = (FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (delegate.displayMode == SHOWSERVERS) {
-		Host *host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
-    cell.textLabel.text = [host name];
-    cell.detailTextLabel.text = [host details];
+		Host *host = (Host*)[self.filteredHosts objectAtIndex:indexPath.row];
+		cell.textLabel.text = [host name];
+		cell.detailTextLabel.text = [host details];
 	}
 	else {
-		ServiceType * serviceType = (ServiceType*) [delegate.serviceTypes objectAtIndex:indexPath.row];
-    cell.textLabel.text = serviceType.humanReadableType;
-    cell.detailTextLabel.text = [serviceType details];
+		ServiceType * serviceType = (ServiceType*) [self.filteredServiceTypes objectAtIndex:indexPath.row];
+		cell.textLabel.text = serviceType.humanReadableType;
+		cell.detailTextLabel.text = [serviceType details];
 	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
@@ -150,11 +191,11 @@
   
   ServiceViewController * dlc = nil;
 	if (delegate.displayMode == SHOWSERVERS) {
-		Host * host = (Host*)[delegate.hosts objectAtIndex:indexPath.row];
+		Host * host = (Host*)[self.filteredHosts objectAtIndex:indexPath.row];
 		dlc = [[ServiceByHostViewController alloc] initWithHost:host];
 	}
 	else {
-		ServiceType * serviceType = [delegate.serviceTypes objectAtIndex:indexPath.row];
+		ServiceType * serviceType = [self.filteredServiceTypes objectAtIndex:indexPath.row];
 		dlc = [[ServiceByTypeViewController alloc] initWithServiceType: serviceType];
 	}
 
@@ -163,9 +204,83 @@
 }
 
 
+
+
+
+#pragma mark UISearchBarDelegate
+
+
+- (void) searchBar: (UISearchBar *) searchBar textDidChange: (NSString *) searchText {
+  [self runFilter];
+}
+
+
+
+- (void) searchBarCancelButtonClicked: (UISearchBar *) searchBar {
+  ((UISearchBar*)self.tableView.tableHeaderView).text = @"";
+  [((UISearchBar*)self.tableView.tableHeaderView) resignFirstResponder];
+  [self.tableView setContentOffset:CGPointMake(0, 44) animated: YES];
+}
+
+
+
+
+
+
+#pragma mark Accessors
+
+
+@dynamic filteredHosts;
+@dynamic filteredServiceTypes;
+
+- (NSArray *) filteredHosts {
+  NSArray * result = filteredHosts;
+  if (!result) {
+    result = ((FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate]).hosts;
+  }
+  return result;
+}
+
+- (void) setFilteredHosts: (NSArray *) newFilteredHosts {
+  if ( newFilteredHosts != filteredHosts) {
+    [filteredHosts release];
+    filteredHosts = [newFilteredHosts retain];
+  }
+}
+
+
+- (NSArray *) filteredServiceTypes {
+  NSArray * result = filteredServiceTypes;
+  if (!result) {
+    result = ((FlameTouchAppDelegate *)[[UIApplication sharedApplication] delegate]).serviceTypes;
+  }
+  return result;
+}
+
+- (void) setFilteredServiceTypes: (NSArray *) newFilteredServiceTypes {
+  if ( newFilteredServiceTypes != filteredServiceTypes) {
+    [filteredServiceTypes release];
+    filteredServiceTypes = [newFilteredServiceTypes retain];
+  }
+}
+
+
+
+
+
+#pragma mark Override
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   return YES; 
 }
+
+
+- (void) dealloc {
+  [filteredHosts release];
+  [filteredServiceTypes release];
+}
+
 
 @end
 

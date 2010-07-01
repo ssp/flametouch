@@ -5,7 +5,7 @@
   Created by Tom Insam on 24/11/2008.
  
   
-  Copyright (c) 2009 Sven-S. Porst, Tom Insam
+  Copyright (c) 2009-2010 Sven-S. Porst, Tom Insam
   
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,9 @@
 #import "Host.h"
 #import "ServiceType.h"
 #import "FlameTouchAppDelegate.h"
+
+
+NSString * FTNameAndDetailsCellIdentifier = @"NameAndDetails";
 
 @implementation ServiceViewController
 
@@ -85,10 +88,11 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"ServiceCell";
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FTNameAndDetailsCellIdentifier];
 	if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FTNameAndDetailsCellIdentifier] autorelease];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -158,14 +162,11 @@
 */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-	NSString * title;
-  NSString * subtitle;
-  
   NSNetService *service = [self.host serviceAtIndex:indexPath.row];
 	
   if ([service.humanReadableType isEqualToString:service.type]) {
-    title = service.type;
-    subtitle = [NSString stringWithFormat:@"%@ – [%i]", [service name], service.portInfo];
+    cell.textLabel.text = service.type;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ – [%i]", [service name], service.portInfo];
   } 
   else {
 		NSRange firstDot = [service.type rangeOfString:@"." options:NSLiteralSearch];
@@ -174,13 +175,9 @@
 			protocolName = [protocolName substringWithRange:NSMakeRange(1, firstDot.location - 1)];
 		}
     
-    title = service.humanReadableType;
-    subtitle = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
+    cell.textLabel.text = service.humanReadableType;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
   }
-  
-  cell.textLabel.text = title;
-  cell.detailTextLabel.text = subtitle;
-  
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
   }
@@ -266,12 +263,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-	
 	NSNetService *service = [self.serviceType.services objectAtIndex:indexPath.row];
+	
   cell.textLabel.text = [service name];
-
-	NSString * details = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
-  cell.detailTextLabel.text = details;
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
 	
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 

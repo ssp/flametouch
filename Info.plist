@@ -5,19 +5,24 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon_72.png</string>
+		<string>Icon_57@2x.png</string>
 		<string>Icon_57.png</string>
 		<string>Icon_50.png</string>
 		<string>Icon_29.png</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
+		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>UILaunchImageFile</key>
+	<string>iPhone</string>
+	<key>UILaunchImageFile~ipad</key>
+	<string>iPad</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
@@ -33,7 +38,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -42,5 +47,9 @@
 	<string>MainWindow-iPad</string>
 	<key>UIPrerenderedIcon</key>
 	<false/>
+	<key>UIRequireDeviceCapabilities</key>
+	<string>wifi</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 </dict>
 </plist>

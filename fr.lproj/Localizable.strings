@@ -9,6 +9,10 @@
 /* OK Button */
 "OK" = "OK";
 
+/* Label for About Button (not visible on screen, but used for Accessibility) */
+"About Flame" = "À propos de Flame";
+
+
 /* 
   Title of Segmented Control item for selecting the Hosts list 
   Title of Button to get back to the Hosts list from Services list
@@ -37,7 +41,7 @@
 "Type" = "Type";
 
 /* Service Details: Label for human readable description */
-"Description" = "Description";
+"Description" = "Service";
 
 /* Label of button to open the relevant service on Service Details page */
 "Open Service" = "Ouvrir le service";
