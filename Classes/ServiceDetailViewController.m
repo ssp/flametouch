@@ -32,7 +32,6 @@
 #import "ServiceDetailViewController.h"
 #import "NSNetService+FlameExtras.h"
 #import "FlameTouchAppDelegate.h"
-#import "FTCopyableTableViewCell.h"
 
 
 @implementation ServiceDetailViewController
@@ -152,32 +151,10 @@
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
   if (cell == nil) {
-    cell = [FTCopyableTableViewCell cellWithReuseIdentifier: CellIdentifier];  
-/*    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    
-    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
-    cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
-    cellLabel.adjustsFontSizeToFitWidth = YES;
-    cellLabel.minimumFontSize = 10.0;
-    cellLabel.textAlignment = UITextAlignmentRight;
-    cellLabel.textColor = [UIColor grayColor];
-    cellLabel.highlightedTextColor = [UIColor whiteColor];
-    cellLabel.tag = 1;
-    [cell.contentView addSubview:cellLabel];
-    [cellLabel release];
-    
-    cellLabel = [[FTCopyableLabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
-    cellLabel.font = [UIFont systemFontOfSize:14.0];
-    cellLabel.minimumFontSize = 10.0;
-    cellLabel.textAlignment = UITextAlignmentLeft;
-    cellLabel.highlightedTextColor = [UIColor blueColor]; // is this the appropriate colour?
-    cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    cellLabel.numberOfLines = 0;
-    cellLabel.userInteractionEnabled = YES;
-    cellLabel.tag = 2;
-    [cell.contentView addSubview:cellLabel];
-    [cellLabel release];
- */
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];  
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.minimumFontSize = 10.0;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   }
   
   NSString * myLabel = (nil != label) ? label : @"";
@@ -191,10 +168,8 @@
   NSURL *url = [NSURL URLWithString:myValue];
   if (url && [url scheme] && [url host] && [[UIApplication sharedApplication] canOpenURL:url]) {
     cell.detailTextLabel.textColor = [UIColor blueColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   } else {
     cell.detailTextLabel.textColor = [UIColor blackColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
 
   return cell;
@@ -281,7 +256,37 @@
     [tableView cellForRowAtIndexPath:indexPath].selected = NO;
     [[UIApplication sharedApplication] openURL:self.service.externalURL];
   }
+}
 
+
+
+/*
+ Offer Copy menu item on everything but the Open Service button.
+*/ 
+- (BOOL) tableView:(UITableView*)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath*)indexPath withSender:(id)sender {
+  BOOL result = NO;
+  
+  if (action == @selector(copy:)) {
+    result = YES;
+    if (self.hasOpenServiceButton && indexPath.section == 1) {
+      result = NO;
+    }
+  }
+  
+  return result;
+}
+
+- (BOOL) tableView:(UITableView*)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath*)indexPath {
+  return YES;
+}
+
+
+- (void) tableView:(UITableView*)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath*)indexPath withSender:(id)sender {
+  if (action == @selector(copy:)) {
+    UIPasteboard * pasteboard = [UIPasteboard generalPasteboard];
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    [pasteboard setString: cell.detailTextLabel.text];
+  }
 }
 
 
