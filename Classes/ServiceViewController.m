@@ -88,27 +88,7 @@
 	static NSString *CellIdentifier = @"ServiceCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-		
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 0.0, tableView.frame.size.width - 8.0, 25.0)];
-		label.font = [UIFont boldSystemFontOfSize:16.0];
-		label.textAlignment = UITextAlignmentLeft;
-		label.textColor = [UIColor blackColor];
-		label.highlightedTextColor = [UIColor whiteColor];
-		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		label.tag = 1;
-		[cell.contentView addSubview:label];
-		[label release];
-		
-		label = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 22.0, tableView.frame.size.width - 8.0, 20.0)];
-		label.font = [UIFont systemFontOfSize:12.0];
-		label.textAlignment = UITextAlignmentLeft;
-		label.textColor = [UIColor grayColor];
-		label.highlightedTextColor = [UIColor whiteColor];
-		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		label.tag = 2;
-		[cell.contentView addSubview:label];
-		[label release];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -197,9 +177,9 @@
     title = service.humanReadableType;
     subtitle = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
   }
-
-  ((UILabel*)[cell viewWithTag:1]).text = title;
-  ((UILabel*)[cell viewWithTag:2]).text = subtitle;
+  
+  cell.textLabel.text = title;
+  cell.detailTextLabel.text = subtitle;
   
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
@@ -288,10 +268,10 @@
 	UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 	
 	NSNetService *service = [self.serviceType.services objectAtIndex:indexPath.row];
-	((UILabel*)[cell viewWithTag:1]).text = [service name];
+  cell.textLabel.text = [service name];
 
 	NSString * details = [NSString stringWithFormat:@"%@:%@", service.hostnamePlus, service.portInfo];
-	((UILabel*)[cell viewWithTag:2]).text = details;
+  cell.detailTextLabel.text = details;
 	
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 

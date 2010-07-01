@@ -147,50 +147,29 @@
 
 -(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value {
   static NSString *CellIdentifier = @"PropertyCell";
+
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    
-    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 1.0, 90.0, cell.frame.size.height - 3)];
-    cellLabel.font = [UIFont boldSystemFontOfSize:14.0];
-    cellLabel.adjustsFontSizeToFitWidth = YES;
-    cellLabel.minimumFontSize = 10.0;
-    cellLabel.textAlignment = UITextAlignmentRight;
-    cellLabel.textColor = [UIColor grayColor];
-    cellLabel.highlightedTextColor = [UIColor whiteColor];
-    cellLabel.tag = 1;
-    [cell.contentView addSubview:cellLabel];
-    [cellLabel release];
-    
-    cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(103.0, 1.0, cell.frame.size.width - 133.0, cell.frame.size.height - 3.0)];
-    cellLabel.font = [UIFont systemFontOfSize:14.0];
-    cellLabel.adjustsFontSizeToFitWidth = YES;
-    cellLabel.minimumFontSize = 10.0;
-    cellLabel.textAlignment = UITextAlignmentLeft;
-    cellLabel.highlightedTextColor = [UIColor whiteColor];
-    cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    cellLabel.tag = 2;
-    [cell.contentView addSubview:cellLabel];
-    [cellLabel release];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
   }
   
 	NSString * myLabel = label;
 	NSString * myValue = value;
 	if (nil == myLabel) myLabel = @"";
 	if (nil == myValue) myValue = @"";
-	((UILabel*)[cell viewWithTag:1]).text = myLabel;
-	((UILabel*)[cell viewWithTag:2]).text = myValue;
+  cell.textLabel.text = myLabel;
+  cell.detailTextLabel.text = myValue;
   
   // try to parse the value as an url - if we can, then this cell is
   // clickable. Make it blue. I'd like it underlined as well, but that
   // seems to be lots harder.
 	NSURL *url = [NSURL URLWithString:myValue];
   if (url && [url scheme] && [url host] && [[UIApplication sharedApplication] canOpenURL:url]) {
-    [ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blueColor] ];
+    cell.textColor = [UIColor blueColor];
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   } else {
-		[ ((UILabel*)[cell viewWithTag:2]) setTextColor:[UIColor blackColor] ];
+    cell.textColor = [UIColor blackColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
 
