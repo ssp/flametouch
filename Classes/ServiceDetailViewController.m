@@ -116,6 +116,39 @@
 }
 
 
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+  
+  // Number of pixels of screen width not used for the data cell (i.e. for margins and labels). I can't figure this out automatically as the cell seems to have width 0 at this stage, so I measured it in the simulator (table width: 320, cell width 205).
+  const CGFloat columnDelta = 115;
+  // We need a maximum height, but it shouldn't impose a restriction on the text that is displayed because of the byte length restrictions in the TXTRecord.
+  const CGFloat maximumHeight = 2048;
+  
+  CGSize maxSize = CGSizeMake(tableView.bounds.size.width - columnDelta, maximumHeight);
+  
+  // Our (system set-up) labels use a 15px bold font which doesn't seem to be a standard system font size.
+  static const CGFloat FTTextLabelFontSize = 15;
+  UIFont * myFont = [UIFont boldSystemFontOfSize:FTTextLabelFontSize];
+  CGSize wantedSize = [cell.detailTextLabel.text sizeWithFont:myFont constrainedToSize:maxSize];
+  
+  // Standard iPhone table cells are 44 pixels tall.
+  const CGFloat minimumHeight = 44;
+  // The standard padding seems to be 13 pixels at the top and bottom. Making the height 44 pixels at the standard font size.
+  const CGFloat padding = 26;
+    
+  return MAX(wantedSize.height + padding, minimumHeight);
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSLog(@"string: %@ - width: %f", cell.detailTextLabel.text, cell.detailTextLabel.bounds.size.width);
+  NSLog(@"fontSize: %f", cell.detailTextLabel.font.pointSize);
+}
+
+
+
+
 -(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value {
   static NSString *CellIdentifier = @"PropertyCell";
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -124,6 +157,7 @@
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];  
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
     cell.textLabel.minimumFontSize = 10.0;
+    cell.detailTextLabel.numberOfLines  = 0;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
   }
   
