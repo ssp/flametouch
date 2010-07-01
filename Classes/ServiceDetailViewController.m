@@ -68,6 +68,26 @@
 }
 
 
+
+- (void)dealloc {
+  self.host = nil;
+  self.service = nil;
+  self.TXTRecordKeys = nil;
+  self.TXTRecordValues = nil;
+  [super dealloc];
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+  return YES;
+}
+
+
+
+
+
+#pragma mark UITableViewDataSource
+
 /*
  Split up table in three parts:
  1. General information in 3 or 4 rows: Host, Port, Type[, Human Readable Type]
@@ -101,6 +121,7 @@
 }
 
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell * cell = nil;
 	
@@ -115,6 +136,10 @@
 	return cell;
 }
 
+
+
+
+#pragma mark UITableViewDelegate
 
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,13 +166,31 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSLog(@"string: %@ - width: %f", cell.detailTextLabel.text, cell.detailTextLabel.bounds.size.width);
-  NSLog(@"fontSize: %f", cell.detailTextLabel.font.pointSize);
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ((self.hasOpenServiceButton && indexPath.section == 2) || (!self.hasOpenServiceButton && indexPath.section == 1)) {
+    // Pressed one of the TXT Record cells
+    NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
+    if (value != nil) {
+      NSURL *url = [NSURL URLWithString:value];
+      if (url && [url scheme] && [url host]) {
+        [tableView cellForRowAtIndexPath:indexPath].selected = NO;
+        [[UIApplication sharedApplication] openURL:url];
+      }
+    }
+  } else if (self.hasOpenServiceButton && indexPath.section == 1) {
+    // Pressed the Open Service cell
+    // NSLog(@"Opening URL %@", self.service.externalURL);
+    // in a couple of seconds, report if we have no wifi
+    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
+    [[UIApplication sharedApplication] openURL:self.service.externalURL];
+  }
 }
 
 
 
+
+#pragma mark Cell Creation
 
 -(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value {
   static NSString *CellIdentifier = @"PropertyCell";
@@ -165,7 +208,7 @@
   NSString * myValue = (nil != value) ? value : @"";
   cell.textLabel.text = myLabel;
   cell.detailTextLabel.text = myValue;
-  
+      
   // try to parse the value as an url - if we can, then this cell is
   // clickable. Make it blue. I'd like it underlined as well, but that
   // seems to be lots harder.
@@ -178,6 +221,7 @@
 
   return cell;
 }
+
 
 
 -(UITableViewCell*) standardPropertyCellForRow: (int) row {
@@ -211,6 +255,7 @@
 }
 
 
+
 -(UITableViewCell*) TXTRecordPropertyCellForRow: (int) row {
 	NSString * label = [self.TXTRecordKeys objectAtIndex:row];
 	NSString * value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:row] encoding:NSUTF8StringEncoding] autorelease];
@@ -218,6 +263,7 @@
 	UITableViewCell * cell = [self propertyCellWithLabel: label andValue: value];
 	return cell;
 }
+
 
 
 -(UITableViewCell *)actionCellForRow:(int)row {
@@ -232,28 +278,8 @@
 }
 
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ((self.hasOpenServiceButton && indexPath.section == 2) || (!self.hasOpenServiceButton && indexPath.section == 1)) {
-    // Pressed one of the TXT Record cells
-    NSString *value = [[[NSString alloc] initWithData:[self.TXTRecordValues objectAtIndex:indexPath.row] encoding:NSUTF8StringEncoding] autorelease];
-    if (value != nil) {
-      NSURL *url = [NSURL URLWithString:value];
-      if (url && [url scheme] && [url host]) {
-        [tableView cellForRowAtIndexPath:indexPath].selected = NO;
-        [[UIApplication sharedApplication] openURL:url];
-      }      
-    }
-  } else if (self.hasOpenServiceButton && indexPath.section == 1) {
-    // Pressed the Open Service cell 
-    // NSLog(@"Opening URL %@", self.service.externalURL);
-    // in a couple of seconds, report if we have no wifi
-    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
-    [[UIApplication sharedApplication] openURL:self.service.externalURL];
-  }
-}
 
-
-
+#pragma mark Copy Table Cells
 /*
  Offer Copy menu item on everything but the Open Service button.
 */ 
@@ -281,20 +307,6 @@
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     [pasteboard setString: cell.detailTextLabel.text];
   }
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-  return YES; 
-}
-
-
-- (void)dealloc {
-  self.host = nil;
-  self.service = nil;
-  self.TXTRecordKeys = nil;
-  self.TXTRecordValues = nil;
-  [super dealloc];
 }
 
 
