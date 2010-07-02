@@ -178,7 +178,6 @@ NSString * FTNameAndDetailsCellIdentifier = @"NameAndDetails";
     cell.textLabel.text = service.humanReadableType;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ – [%@:%@]", [service name], service.portInfo, protocolName];
   }
-
   if (service.openableExternalURL == nil) {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
   }

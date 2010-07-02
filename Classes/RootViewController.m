@@ -39,7 +39,7 @@
 @implementation RootViewController
 
 
-- (id) awakeFromNib {
+- (void) awakeFromNib {
   self = [super initWithStyle:UITableViewStylePlain];
 
   if (self) {
@@ -69,8 +69,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newServices:) name:@"newServices" object:nil ];
   }
-  
-  return self;
+
 }
 
 
@@ -279,6 +278,7 @@
 - (void) dealloc {
   [filteredHosts release];
   [filteredServiceTypes release];
+  [super dealloc];
 }
 
 

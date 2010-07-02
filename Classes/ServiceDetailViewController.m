@@ -130,7 +130,7 @@
 	} else if (indexPath.section == 1 && self.hasOpenServiceButton) {
 		cell = [self actionCellForRow:indexPath.row];
   } else {
-		cell =  [self TXTRecordPropertyCellForRow:indexPath.row];  
+		cell = [self TXTRecordPropertyCellForRow:indexPath.row];  
   }
 	
 	return cell;
@@ -218,6 +218,7 @@
 
 -(UITableViewCell *)propertyCellWithLabel:(NSString*) label andValue:(NSString*) value {
   static NSString *CellIdentifier = @"PropertyCell";
+
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
   if (cell == nil) {
