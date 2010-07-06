@@ -39,11 +39,15 @@
 
 @implementation RootViewController
 
+@synthesize displayThingy;
+
 
 - (void) awakeFromNib {
   self = [super initWithStyle:UITableViewStylePlain];
 
   if (self) {
+    self.displayThingy = nil;
+    
     UIBarButtonItem *refreshButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList)] autorelease];
     self.navigationItem.leftBarButtonItem = refreshButton;
 
@@ -97,7 +101,11 @@
 
 -(void)showAboutPane {
   AboutViewController *avc = [[AboutViewController alloc] init];
-  [self.navigationController pushViewController:avc animated:TRUE];
+  if (self.displayThingy) {
+    [self.displayThingy setViewController:avc];
+  } else {
+    [self.navigationController pushViewController:avc animated:TRUE];
+  }
   [avc release];
 }
 
@@ -201,7 +209,12 @@
 		dlc = [[ServiceByTypeViewController alloc] initWithServiceType: serviceType];
 	}
 
-	[self.navigationController pushViewController:dlc animated:TRUE];
+  if (self.displayThingy) {
+    [self.displayThingy setViewController:dlc];
+  } else {
+    [self.navigationController pushViewController:dlc animated:TRUE];
+  }
+
   [dlc release];
 }
 

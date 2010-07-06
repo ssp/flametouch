@@ -34,11 +34,12 @@
 @interface RootViewController : UITableViewController <UISearchBarDelegate> {
   NSArray * filteredHosts;
   NSArray * filteredServiceTypes;
+  id displayThingy;
 }
 
 @property (retain) NSArray * filteredHosts;
 @property (retain) NSArray * filteredServiceTypes;
-
+@property (retain) id displayThingy;
 
 - (void) runFilter;
 

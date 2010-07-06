@@ -36,7 +36,7 @@
 // socket resolving/nasty C-level things
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
+#include "RootSplitViewController.h"
 
 
 @implementation FlameTouchAppDelegate
@@ -58,7 +58,13 @@
   self.serviceTypes = [[[NSMutableArray alloc] initWithCapacity: 20] autorelease];
 
   // Configure and show the window
-  [window addSubview:[navigationController view]];
+  
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    RootSplitViewController* split = [[RootSplitViewController alloc] initWithLeftPane:navigationController];
+    [window addSubview:split.view];
+  } else {
+    [window addSubview:[navigationController view]];
+  }
   [window makeKeyAndVisible];
   
   // meta-discovery

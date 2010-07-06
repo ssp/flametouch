@@ -41,6 +41,7 @@
 		E6AC9312117734D900E60301 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AC9311117734D900E60301 /* MainWindow-iPad.xib */; };
 		E6BBD9B60FF4DAB400077E5E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */; };
 		E6C626191068D21D00847E99 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E6C626181068D21D00847E99 /* LICENSE */; };
+		E6D94F9911E2620000095982 /* RootSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D94F9811E2620000095982 /* RootSplitViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,8 @@
 		E6AC9311117734D900E60301 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		E6BBD9B50FF4DAB400077E5E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		E6C626181068D21D00847E99 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E6D94F9711E2620000095982 /* RootSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootSplitViewController.h; sourceTree = "<group>"; };
+		E6D94F9811E2620000095982 /* RootSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootSplitViewController.m; sourceTree = "<group>"; };
 		E6F2B85F1020F7390084D25B /* service_list_builder.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = service_list_builder.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +128,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* FlameTouchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlameTouchAppDelegate.m */,
+				E6D94F9711E2620000095982 /* RootSplitViewController.h */,
+				E6D94F9811E2620000095982 /* RootSplitViewController.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				E6761BB40EDB1A9A00E40B14 /* ServiceViewController.h */,
@@ -343,6 +348,7 @@
 				E6613C9D10183F2800EA7A4A /* AboutViewController.m in Sources */,
 				6CA160131020BCA700ADCEB0 /* ServiceType.m in Sources */,
 				E667F0DC11DE3BED007EBBA6 /* CustomTableCell.m in Sources */,
+				E6D94F9911E2620000095982 /* RootSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
