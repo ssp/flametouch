@@ -518,6 +518,10 @@
 "_timelog._tcp." = "TimeLog";
 "_friedegg._tcp." = "friedEgg Software"; /* probably friedEgg Touch */
 
+"_airvideoserver._tcp." = "AirVideo Server";
+"_apple-mobdev._tcp." = "iOS WiFi Synchronisation";
+"_udisks-ssh._tcp." = "udisks TCP Bridge";
+
 /* 
 Service types not listed on dns-sd org and which I couldn't figure out.
 Seen at NSConference 2010 in Reading
@@ -526,4 +530,8 @@ Seen at NSConference 2010 in Reading
 "_rsagent._tcp." = "rsagent – a Windows virus?"; 
 "_scan-target._tcp." = "scan-target";
 "_aicheck._tcp." = "aicheck – tempting to think it's Illustrator related, I don't have current versions, though";
+"_atc._tcp." = "";
+"_ubd._tcp." = "";
+"_synksharing._tcp." = "";
+"_zuul1000205._udp." = "";
 */

@@ -520,3 +520,6 @@
 "_timelog._tcp." = "TimeLog";
 "_friedegg._tcp." = "friedEgg Software"; /* probably friedEgg Touch */
 
+"_airvideoserver._tcp." = "Serveur AirVideo";
+"_apple-mobdev._tcp." = "Synchronisation WiFi iOS";
+"_udisks-ssh._tcp." = "udisks TCP Bridge";
